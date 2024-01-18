@@ -5,10 +5,12 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
+import musicStreaming._global.event.SignUpCompleted;
 import musicStreaming._global.security.JwtTokenService;
 
 import musicStreaming.domain.User;
 import musicStreaming.domain.UserRepository;
+
 import musicStreaming.user.reqDtos.SignInReqDto;
 import musicStreaming.user.reqDtos.SignUpReqDto;
 
@@ -26,9 +28,13 @@ public class UserService {
                     .email(signUpReqDto.getEmail())
                     .password(this.passwordEncoder.encode(signUpReqDto.getPassword()))
                     .name(signUpReqDto.getName())
+                    .role("User")
                     .build()
             );
 
+        SignUpCompleted signUpCompleted = new SignUpCompleted(savedUser);
+        signUpCompleted.publishAfterCommit();
+        
         return savedUser;
     }
 

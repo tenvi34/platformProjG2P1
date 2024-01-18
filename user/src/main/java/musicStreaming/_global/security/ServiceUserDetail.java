@@ -14,12 +14,14 @@ public class ServiceUserDetail implements UserDetails {
     private String email;
     private String password;
     private String name;
+    private String role;
 
     public ServiceUserDetail(User user) {
         this.id = user.getId();
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.name = user.getName();
+        this.role = user.getRole();
     }
 
 

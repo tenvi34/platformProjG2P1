@@ -1,7 +1,5 @@
 package musicStreaming._global.security;
 
-import static java.util.stream.Collectors.joining;
-
 import java.time.Instant;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -9,7 +7,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 import org.springframework.security.oauth2.jwt.JwtEncoder;
 import org.springframework.security.oauth2.jwt.JwtEncoderParameters;
@@ -43,9 +40,7 @@ public class JwtTokenService {
                     .subject(serviceUserDetail.getId().toString())
                     .claim("email", serviceUserDetail.getEmail())
                     .claim("name", serviceUserDetail.getName())
-                    .claim("roles", authentication.getAuthorities().stream()
-                                            .map(GrantedAuthority::getAuthority)
-                                            .collect(joining(" ")))
+                    .claim("role", serviceUserDetail.getRole())
                     .build()
             );
             return this.jwtEncoder.encode(jwtParameters).getTokenValue();
