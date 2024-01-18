@@ -86,8 +86,8 @@ public class SanityCheckController {
     
     // 게이트웨이 JWT 인증시에 관련 정보를 얻을 수 있는지 테스트해보기 위해서
     @GetMapping("/authenticationCheck")
-    public ResponseEntity<AuthenticationCheckResDto> authenticationCheck(@RequestHeader("User-Id") Long userId) {
-        AuthenticationCheckResDto authenticationCheckResDto = new AuthenticationCheckResDto(userId);
+    public ResponseEntity<AuthenticationCheckResDto> authenticationCheck(@RequestHeader("User-Id") Long userId, @RequestHeader("User-Role") String userRole) {
+        AuthenticationCheckResDto authenticationCheckResDto = new AuthenticationCheckResDto(userId, userRole);
         CustomLogger.debug(CustomLoggerType.ENTER_EXIT, "", String.format("{authenticationCheckResDto: %s}", authenticationCheckResDto.toString()));
         return ResponseEntity.ok(authenticationCheckResDto);
     }
