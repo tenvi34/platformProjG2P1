@@ -2,6 +2,7 @@
 user: 회원가입/로그인을 위해서 사용됨
 music: 음악 정보 관리
 file: 음악 파일 관리
+playlist: 음악 플레이 리스트 관리
 gateway: 단일 진입점 제공, 사용자 인증 및 권한 확인, 접근 통제를 위해서 사용됨
 
 
@@ -9,6 +10,7 @@ gateway: 단일 진입점 제공, 사용자 인증 및 권한 확인, 접근 통
 user: 8082
 music: 8083
 file: 8084
+playlist: 8085
 gateway: 8088
 
 
@@ -16,6 +18,7 @@ gateway: 8088
 user: 8080 > 8082
 music: 8080 > 8083
 file: 8080 > 8084
+playlist: 8080 > 8085
 gateway: 8088 > 8088
 
 
@@ -23,4 +26,5 @@ gateway: 8088 > 8088
 user: 8080 > user(sinsung6722/music-streaming-user:v1)
 music: 8080 > music
 file: 8080 > file
+playlist: 8080 > playlist
 gateway: 8088 > gateway(sinsung6722/music-streaming-gateway:v1)
