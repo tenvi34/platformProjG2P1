@@ -1,0 +1,1 @@
+bash.exe ./sanityCheck/commandCheck/echo.sh
