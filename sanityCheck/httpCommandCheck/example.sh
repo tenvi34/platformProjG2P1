@@ -1,1 +1,1 @@
-http http://example.com
+http -v GET http://example.com
