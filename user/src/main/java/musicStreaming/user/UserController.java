@@ -4,6 +4,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +18,7 @@ import musicStreaming._global.logger.CustomLoggerType;
 
 import musicStreaming.user.reqDtos.SignInReqDto;
 import musicStreaming.user.reqDtos.SignUpReqDto;
+import musicStreaming.user.reqDtos.UpdateNameReqDto;
 import musicStreaming.user.resDtos.SignUpResDto;
 import musicStreaming.user.service.UserService;
 
@@ -61,6 +63,23 @@ public class UserController {
         } catch(Exception e) {
             CustomLogger.error(e, "", String.format("{signInReqDtoForToken: %s}", signInReqDtoForToken.toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }
+    }
+
+    
+    @PutMapping("/updateName")
+    public ResponseEntity<Void> updateName(@RequestHeader("User-Id") Long userId, @RequestBody UpdateNameReqDto updateNameReqDto) {
+        try {
+
+            CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{updateNameReqDto: %s}", updateNameReqDto.toString()));
+
+            this.userService.updateName(userId, updateNameReqDto);
+
+            return ResponseEntity.status(HttpStatus.OK).build();
+
+        } catch(Exception e) {
+            CustomLogger.error(e, "", String.format("{updateNameReqDto: %s}", updateNameReqDto.toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 }

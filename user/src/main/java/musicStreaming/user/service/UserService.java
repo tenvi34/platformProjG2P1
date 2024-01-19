@@ -3,16 +3,19 @@ package musicStreaming.user.service;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 import musicStreaming._global.event.SignUpCompleted;
+import musicStreaming._global.event.UserNameUpdated;
 import musicStreaming._global.security.JwtTokenService;
 
 import musicStreaming.domain.User;
 import musicStreaming.domain.UserRepository;
-
+import musicStreaming.user.UserNotFoundException;
 import musicStreaming.user.reqDtos.SignInReqDto;
 import musicStreaming.user.reqDtos.SignUpReqDto;
+import musicStreaming.user.reqDtos.UpdateNameReqDto;
 
 @Service
 @RequiredArgsConstructor
@@ -40,5 +43,17 @@ public class UserService {
 
     public String tokenBySignIn(SignInReqDto signInReqDto) {
         return this.jwtTokenService.tokenValue(signInReqDto);
+    }
+
+
+    public void updateName(@NonNull Long userId, UpdateNameReqDto updateNameReqDto) {
+        User userToUpdate = this.userRepository.findById(userId)
+                                .orElseThrow(() -> new UserNotFoundException());
+        
+        userToUpdate.setName(updateNameReqDto.getName());
+        User savedUser = this.userRepository.save(userToUpdate);
+
+        
+        (new UserNameUpdated(savedUser)).publishAfterCommit();
     }
 }
