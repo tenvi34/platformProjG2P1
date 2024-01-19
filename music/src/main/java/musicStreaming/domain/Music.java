@@ -51,10 +51,10 @@ public class Music {
     private Date updatedDate;
 
     public static MusicRepository repository() {
-        MusicRepository fileRepository = MusicApplication.applicationContext.getBean(
+        MusicRepository musicRepository = MusicApplication.applicationContext.getBean(
             MusicRepository.class
         );
-        return fileRepository;
+        return musicRepository;
     }
 
 
