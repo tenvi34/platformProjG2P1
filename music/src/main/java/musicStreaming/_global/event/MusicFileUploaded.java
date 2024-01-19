@@ -1,6 +1,7 @@
 package musicStreaming._global.event;
 
 import musicStreaming._global.infra.AbstractEvent;
+import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadedReqDto;
 
 import java.util.Date;
 
@@ -19,6 +20,16 @@ public class MusicFileUploaded extends AbstractEvent {
     private Date createdDate;
     private Date updatedDate;
     private Integer totalSeconds;
+
+    public MusicFileUploaded(MockMusicFileUploadedReqDto mockData) {
+        super();
+        this.id = mockData.getId();
+        this.createrId = mockData.getCreaterId();
+        this.path = mockData.getPath();
+        this.createdDate = mockData.getCreatedDate();
+        this.updatedDate = mockData.getUpdatedDate();
+        this.totalSeconds = mockData.getTotalSeconds();
+    }
 
     public MusicFileUploaded() {
         super();

@@ -1,6 +1,7 @@
 package musicStreaming._global.event;
 
 import musicStreaming._global.infra.AbstractEvent;
+import musicStreaming.sanityCheck.reqDtos.MockMusicFileDeletedReqDto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,6 +15,12 @@ public class MusicFileDeleted extends AbstractEvent {
     private Long id;
     private Long musicId;
 
+    public MusicFileDeleted(MockMusicFileDeletedReqDto mockData) {
+        super();
+        this.id = mockData.getId();
+        this.musicId = mockData.getMusicId();
+    }
+    
     public MusicFileDeleted() {
         super();
     }

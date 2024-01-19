@@ -18,8 +18,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import musicStreaming.MusicApplication;
 
+import musicStreaming._global.event.MusicFileDeleted;
+import musicStreaming._global.event.MusicFileUploadFailed;
+import musicStreaming._global.event.MusicFileUploaded;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
@@ -117,5 +121,21 @@ public class Music {
             String.format("%s is deleted by using JPA", this.getClass().getSimpleName()),
             String.format("{%s: %s}", this.getClass().getSimpleName(), this.toString())
         );
+    }
+
+
+    // 음악 파일이 업로드되었을 경우, 관련 파일 정보를 음악 정보에 반영시키기 위해서
+    public static void updateFileId(MusicFileUploaded musicFileUploaded) {
+        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: updateFileId");
+    }
+
+    // 음악 파일이 업로드에 실패 했을 경우, 음악 정보를 지우고, 관련 이벤트를 발생시키기 위해서
+    public static void deleteMusicByFail(MusicFileUploadFailed musicFileUploadFailed) {
+        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: deleteMusicByFail");
+    }
+
+    // 음악 파일이 삭제되었을 경우, 최종적으로 관련 음악 정보를 삭제시키고, 관련 이벤트를 발생시키기 위해서
+    public static void deleteMusic(MusicFileDeleted musicFileDeleted) {
+        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: deleteMusic");
     }
 }
