@@ -20,6 +20,7 @@ public class MusicFileUploaded extends AbstractEvent {
     private Date createdDate;
     private Date updatedDate;
     private Integer totalSeconds;
+    private String dataUrlCode;
 
     public MusicFileUploaded(MockMusicFileUploadedReqDto mockData) {
         super();
@@ -29,6 +30,7 @@ public class MusicFileUploaded extends AbstractEvent {
         this.createdDate = mockData.getCreatedDate();
         this.updatedDate = mockData.getUpdatedDate();
         this.totalSeconds = mockData.getTotalSeconds();
+        this.dataUrlCode = mockData.getDataUrlCode();
     }
 
     public MusicFileUploaded() {

@@ -12,4 +12,5 @@ public class MockMusicFileUploadedReqDto {
     private Date createdDate;
     private Date updatedDate;
     private Integer totalSeconds;
+    private String dataUrlCode;
 }

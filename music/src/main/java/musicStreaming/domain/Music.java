@@ -125,6 +125,7 @@ public class Music {
 
 
     // 음악 파일이 업로드되었을 경우, 관련 파일 정보를 음악 정보에 반영시키기 위해서
+    // 또한, Music 서비스에 임시로 저장되었던 DataUrlCode 파일을 삭제시키기 위해서
     public static void updateFileId(MusicFileUploaded musicFileUploaded) {
         CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: updateFileId");
     }
