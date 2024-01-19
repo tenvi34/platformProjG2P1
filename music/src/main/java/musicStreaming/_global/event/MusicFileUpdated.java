@@ -1,7 +1,7 @@
 package musicStreaming._global.event;
 
 import musicStreaming._global.infra.AbstractEvent;
-import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadedReqDto;
+import musicStreaming.sanityCheck.reqDtos.MockMusicFileUpdatedReqDto;
 
 import java.util.Date;
 
@@ -9,11 +9,11 @@ import lombok.Data;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 
-// 음악파일이 업로드되었음을 알리는 이벤트
+// 음악파일이 업데이트되었음을 알리는 이벤트
 @Data
 @ToString
 @EqualsAndHashCode(callSuper=false)
-public class MusicFileUploaded extends AbstractEvent {
+public class MusicFileUpdated extends AbstractEvent {
     private Long id;
     private Long createrId;
     private Long musicId;
@@ -23,7 +23,8 @@ public class MusicFileUploaded extends AbstractEvent {
     private Integer totalSeconds;
     private String dataUrlCode;
 
-    public MusicFileUploaded(MockMusicFileUploadedReqDto mockData) {
+
+    public MusicFileUpdated(MockMusicFileUpdatedReqDto mockData) {
         super();
         this.id = mockData.getId();
         this.createrId = mockData.getCreaterId();
@@ -35,7 +36,7 @@ public class MusicFileUploaded extends AbstractEvent {
         this.dataUrlCode = mockData.getDataUrlCode();
     }
 
-    public MusicFileUploaded() {
+    public MusicFileUpdated() {
         super();
     }
 }

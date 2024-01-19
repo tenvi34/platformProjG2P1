@@ -19,6 +19,7 @@ import musicStreaming._global.logger.CustomLoggerType;
 import musicStreaming.sanityCheck.exceptions.DivByZeroException;
 import musicStreaming.sanityCheck.reqDtos.LogsReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileDeletedReqDto;
+import musicStreaming.sanityCheck.reqDtos.MockMusicFileUpdatedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadFailedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadedReqDto;
 import musicStreaming.sanityCheck.resDtos.AuthenticationCheckResDto;
@@ -111,6 +112,14 @@ public class SanityCheckController {
     public void mockMusicFileUploadFailed(@RequestBody MockMusicFileUploadFailedReqDto mockData) {
         CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{mockData: %s}", mockData.toString()));
         this.sanityCheckService.mockMusicFileUploadFailed(mockData);
+        CustomLogger.debug(CustomLoggerType.EXIT);
+    }
+
+    // Policy 테스트용으로 MusicFileUpdated 이벤트를 강제로 발생시키기 위해서
+    @PostMapping("/mock/MusicFileUpdated")
+    public void mockMusicFileUpdated(@RequestBody MockMusicFileUpdatedReqDto mockData) {
+        CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{mockData: %s}", mockData.toString()));
+        this.sanityCheckService.mockMusicFileUpdated(mockData);
         CustomLogger.debug(CustomLoggerType.EXIT);
     }
 

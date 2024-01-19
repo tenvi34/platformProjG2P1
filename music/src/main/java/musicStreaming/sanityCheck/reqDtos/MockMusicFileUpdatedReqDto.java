@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class MockMusicFileUploadedReqDto {
+public class MockMusicFileUpdatedReqDto {
     private Long id;
     private Long createrId;
     private Long musicId;
