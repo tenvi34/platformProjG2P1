@@ -14,18 +14,22 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import lombok.RequiredArgsConstructor;
 import musicStreaming._global.externalSystemProxy.ExternalSystemProxyService;
 import musicStreaming._global.externalSystemProxy.reqDtos.EchoWithJsonReqDto;
+import musicStreaming._global.externalSystemProxy.reqDtos.GetDataUrlReqDto;
 import musicStreaming._global.externalSystemProxy.resDtos.EchoWithJsonResDto;
+import musicStreaming._global.externalSystemProxy.resDtos.GetDataUrlResDto;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
 import musicStreaming.sanityCheck.exceptions.DivByZeroException;
 import musicStreaming.sanityCheck.reqDtos.EchoWithJsonByRequestReqDto;
+import musicStreaming.sanityCheck.reqDtos.GetDataUrlSanityCheckReqDto;
 import musicStreaming.sanityCheck.reqDtos.LogsReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileDeleteRequestedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUpdateRequestedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadRequestedReqDto;
 import musicStreaming.sanityCheck.resDtos.AuthenticationCheckResDto;
 import musicStreaming.sanityCheck.resDtos.EchoWithJsonByRequestResDto;
+import musicStreaming.sanityCheck.resDtos.GetDataUrlSanityCheckResDto;
 import musicStreaming.sanityCheck.resDtos.LogsResDto;
 
 @RestController
@@ -110,6 +114,27 @@ public class SanityCheckController {
 
         } catch(Exception e) {
             CustomLogger.error(e, "", String.format("{echoWithJsonByRequestReqDto: %s}", echoWithJsonByRequestReqDto.toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }    
+    }
+
+    // Music 서비스의 getDataUrl 엔드포인트가 제대로 작동하는지 확인해보기 위해서
+    @PutMapping("/getDataUrlSanityCheck")
+    public ResponseEntity<GetDataUrlSanityCheckResDto> getDataUrlSanityCheck(@RequestBody GetDataUrlSanityCheckReqDto getDataUrlSanityCheckReqDto) {
+        try {
+
+            CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{getDataUrlSanityCheckReqDto: %s}", getDataUrlSanityCheckReqDto.toString()));
+            
+            GetDataUrlReqDto getDataUrlReqDto = new GetDataUrlReqDto(getDataUrlSanityCheckReqDto.getDataUrlCode());
+            GetDataUrlResDto getDataUrlResDto = externalSystemProxyService.getDataUrl(getDataUrlReqDto);
+            GetDataUrlSanityCheckResDto getDataUrlSanityCheckResDto = new GetDataUrlSanityCheckResDto(getDataUrlResDto.getDataUrl());
+
+            CustomLogger.debug(CustomLoggerType.EXIT, "", String.format("{getDataUrlSanityCheckResDto: %s}", getDataUrlSanityCheckResDto.toString()));
+
+            return ResponseEntity.ok(getDataUrlSanityCheckResDto);
+
+        } catch(Exception e) {
+            CustomLogger.error(e, "", String.format("{getDataUrlSanityCheckReqDto: %s}", getDataUrlSanityCheckReqDto.toString()));
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }    
     }

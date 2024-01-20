@@ -10,8 +10,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import musicStreaming._global.externalSystemProxy.reqDtos.EchoWithJsonReqDto;
 import musicStreaming._global.externalSystemProxy.reqDtos.ExternalSystemProxyReqDto;
+import musicStreaming._global.externalSystemProxy.reqDtos.GetDataUrlReqDto;
 import musicStreaming._global.externalSystemProxy.resDtos.EchoWithJsonResDto;
 import musicStreaming._global.externalSystemProxy.resDtos.ExternalSystemProxyResDto;
+import musicStreaming._global.externalSystemProxy.resDtos.GetDataUrlResDto;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
@@ -29,6 +31,12 @@ public class ExternalSystemProxyService {
     public EchoWithJsonResDto echoWithJson(EchoWithJsonReqDto echoWithJsonReqDto) throws Exception {
         return this.jsonCommunication("/sanityCheck/echoWithJson", echoWithJsonReqDto, EchoWithJsonResDto.class);
     }
+
+    // 주어진 DataUrlCode에 해당하는 DataUrl을 반환하기 위해서
+    public GetDataUrlResDto getDataUrl(GetDataUrlReqDto getDataUrlReqDto) throws Exception {
+        return this.jsonCommunication("/musics/getDataUrl", getDataUrlReqDto, GetDataUrlResDto.class);
+    }
+
 
     // ExternalSystem과 JSON을 기반으로 한 일관성 있는 통신을 위해서
     public <S extends ExternalSystemProxyReqDto, R extends ExternalSystemProxyResDto> R jsonCommunication(String requestPath, S reqDto, Class<R> resType) throws Exception {
