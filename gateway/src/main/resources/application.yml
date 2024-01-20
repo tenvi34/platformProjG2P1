@@ -117,6 +117,23 @@ spring:
             - RewritePath=/api/comment/(?<segment>.*), /${segment}
             - AuthorizationHeaderFilter
 
+
+        - id: collectedDataNoAuth
+          uri: http://localhost:8087
+          predicates:
+            - Path=/api/collectedData/sanityCheck,/api/collectedData/users,/api/collectedData/musics,/api/collectedData/files,/api/collectedData/playLists,/api/collectedData/playListMusics,/api/collectedData/comments
+            - Method=GET
+          filters:
+            - RewritePath=/api/collectedData/(?<segment>.*), /${segment}
+
+        - id: collectedDataRequireAuth
+          uri: http://localhost:8087
+          predicates:
+            - Path=/api/collectedData/**
+          filters:
+            - RewritePath=/api/collectedData/(?<segment>.*), /${segment}
+            - AuthorizationHeaderFilter
+
 ---
 
 spring:
@@ -200,6 +217,24 @@ spring:
           filters:
             - RewritePath=/api/comment/(?<segment>.*), /${segment}
             - AuthorizationHeaderFilter
+
+
+        - id: collectedDataNoAuth
+          uri: http://host.docker.internal:8087
+          predicates:
+            - Path=/api/collectedData/sanityCheck,/api/collectedData/users,/api/collectedData/musics,/api/collectedData/files,/api/collectedData/playLists,/api/collectedData/playListMusics,/api/collectedData/comments
+            - Method=GET
+          filters:
+            - RewritePath=/api/collectedData/(?<segment>.*), /${segment}
+
+        - id: collectedDataRequireAuth
+          uri: http://host.docker.internal:8087
+          predicates:
+            - Path=/api/collectedData/**
+          filters:
+            - RewritePath=/api/collectedData/(?<segment>.*), /${segment}
+            - AuthorizationHeaderFilter
+
 ---
 
 spring:
@@ -282,4 +317,21 @@ spring:
             - Path=/api/comment/**
           filters:
             - RewritePath=/api/comment/(?<segment>.*), /${segment}
+            - AuthorizationHeaderFilter
+
+
+        - id: collectedDataNoAuth
+          uri: http://collected-data:8080
+          predicates:
+            - Path=/api/collectedData/sanityCheck,/api/collectedData/users,/api/collectedData/musics,/api/collectedData/files,/api/collectedData/playLists,/api/collectedData/playListMusics,/api/collectedData/comments
+            - Method=GET
+          filters:
+            - RewritePath=/api/collectedData/(?<segment>.*), /${segment}
+
+        - id: collectedDataRequireAuth
+          uri: http://collected-data:8080
+          predicates:
+            - Path=/api/collectedData/**
+          filters:
+            - RewritePath=/api/collectedData/(?<segment>.*), /${segment}
             - AuthorizationHeaderFilter
