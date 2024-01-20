@@ -11,3 +11,8 @@ tmp
 
 # Frontend
 frontend/node_modules
+
+# Mock
+**/__pycache__
+**/.flaskenv
+**/venv
