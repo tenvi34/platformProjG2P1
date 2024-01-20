@@ -4,7 +4,7 @@ from flask import Flask
 from ._global.logger import LoggingConfig
 
 from .sanityCheck import SanityCheckController
-
+from .music import MusicController
 
 dirPathsToCreate = ["./logs"]
 
@@ -18,5 +18,6 @@ def create_app():
     LoggingConfig.setupLoggingConfig()
 
     app.register_blueprint(SanityCheckController.bp)
+    app.register_blueprint(MusicController.bp)
 
     return app
