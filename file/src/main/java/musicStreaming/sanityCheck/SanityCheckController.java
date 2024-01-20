@@ -12,16 +12,20 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import lombok.RequiredArgsConstructor;
-
+import musicStreaming._global.externalSystemProxy.ExternalSystemProxyService;
+import musicStreaming._global.externalSystemProxy.reqDtos.EchoWithJsonReqDto;
+import musicStreaming._global.externalSystemProxy.resDtos.EchoWithJsonResDto;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
 import musicStreaming.sanityCheck.exceptions.DivByZeroException;
+import musicStreaming.sanityCheck.reqDtos.EchoWithJsonByRequestReqDto;
 import musicStreaming.sanityCheck.reqDtos.LogsReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileDeleteRequestedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUpdateRequestedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadRequestedReqDto;
 import musicStreaming.sanityCheck.resDtos.AuthenticationCheckResDto;
+import musicStreaming.sanityCheck.resDtos.EchoWithJsonByRequestResDto;
 import musicStreaming.sanityCheck.resDtos.LogsResDto;
 
 @RestController
@@ -29,6 +33,7 @@ import musicStreaming.sanityCheck.resDtos.LogsResDto;
 @RequestMapping("/sanityCheck")
 public class SanityCheckController {
     private final SanityCheckService sanityCheckService;
+    private final ExternalSystemProxyService externalSystemProxyService;
     private boolean isNormalSanityCheck = true;
 
     // 정상적인 통신 여부를 단순하게 확인해보기 위해서
@@ -85,6 +90,27 @@ public class SanityCheckController {
         } catch(Exception e) {
             CustomLogger.error(e, "Div By Zero Check Message", String.format("{returnNum: %s}", "Undefined"));
             throw new DivByZeroException();
+        }    
+    }
+
+    // Music 서비스와의 상호 통신이 정상적으로 이뤄지는지 확인해보기 위해서
+    @PutMapping("/echoWithJsonByRequest")
+    public ResponseEntity<EchoWithJsonByRequestResDto> echoWithJsonByRequest(@RequestBody EchoWithJsonByRequestReqDto echoWithJsonByRequestReqDto) {
+        try {
+
+            CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{echoWithJsonByRequestReqDto: %s}", echoWithJsonByRequestReqDto.toString()));
+            
+            EchoWithJsonReqDto echoWithJsonReqDto = new EchoWithJsonReqDto(echoWithJsonByRequestReqDto.getMessage());
+            EchoWithJsonResDto echoWithJsonResDto = externalSystemProxyService.echoWithJson(echoWithJsonReqDto);
+            EchoWithJsonByRequestResDto echoWithJsonByRequestResDto = new EchoWithJsonByRequestResDto(echoWithJsonResDto.getMessage());
+
+            CustomLogger.debug(CustomLoggerType.EXIT, "", String.format("{echoWithJsonByRequestResDto: %s}", echoWithJsonByRequestResDto.toString()));
+
+            return ResponseEntity.ok(echoWithJsonByRequestResDto);
+
+        } catch(Exception e) {
+            CustomLogger.error(e, "", String.format("{echoWithJsonByRequestReqDto: %s}", echoWithJsonByRequestReqDto.toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
         }    
     }
 
