@@ -13,6 +13,6 @@ COPY requirements.txt requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
 
-EXPOSE 8086
+EXPOSE 8083
 
 ENTRYPOINT python -m flask run --host=0.0.0.0
