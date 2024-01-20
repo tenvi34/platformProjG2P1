@@ -10,5 +10,5 @@ class GetDataUrlReqDto:
 
 
     @property
-    def dataUrl(self) -> str :
+    def dataUrlCode(self) -> str :
         return self.__dataUrlCode
