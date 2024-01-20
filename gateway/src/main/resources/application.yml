@@ -134,6 +134,12 @@ spring:
             - RewritePath=/api/collectedData/(?<segment>.*), /${segment}
             - AuthorizationHeaderFilter
 
+
+        - id: frontend
+          uri: http://localhost:3000
+          predicates:
+            - Path=/**
+
 ---
 
 spring:
@@ -235,6 +241,12 @@ spring:
             - RewritePath=/api/collectedData/(?<segment>.*), /${segment}
             - AuthorizationHeaderFilter
 
+
+        - id: frontend
+          uri: http://host.docker.internal:3000
+          predicates:
+            - Path=/**
+
 ---
 
 spring:
@@ -335,3 +347,9 @@ spring:
           filters:
             - RewritePath=/api/collectedData/(?<segment>.*), /${segment}
             - AuthorizationHeaderFilter
+
+
+        - id: frontend
+          uri: http://frontend:3000
+          predicates:
+            - Path=/**

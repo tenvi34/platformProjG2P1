@@ -6,6 +6,7 @@ playList: 음악 플레이 리스트 관리
 comment: 음악 코멘트 관리
 collectedData: CQRS를 제공하기 위한 ReadModel
 gateway: 단일 진입점 제공, 사용자 인증 및 권한 확인, 접근 통제를 위해서 사용됨
+frontend: 유저 인터페이스
 
 
 * Host(로컬상에서 실행)
@@ -16,6 +17,7 @@ playList: 8085
 comment: 8086
 collectedData: 8087
 gateway: 8088
+frontend: 3000
 
 
 * Docker(로컬상에서 도커이미지로 실행)
@@ -26,6 +28,7 @@ playList: 8080 > 8085
 comment: 8080 > 8086
 collectedData: 8080 > 8087
 gateway: 8088 > 8088
+frontend: 3000 > 3000
 
 
 * Kubernates(EKS와 같은 환경에서 실행)
@@ -36,3 +39,4 @@ playList: 8080 > play-list
 comment: 8080 > comment
 collectedData: 8080 > collected-data
 gateway: 8088 > gateway(sinsung6722/music-streaming-gateway:v1)
+frontend: 3000 > frontend
