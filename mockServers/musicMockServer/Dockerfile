@@ -6,6 +6,7 @@ WORKDIR /root
 RUN apt update
 
 
+COPY sampleDatas/ sampleDatas/
 COPY app/ app/
 COPY envs/development.env .flaskenv
 

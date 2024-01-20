@@ -53,7 +53,11 @@ public class ExternalSystemProxyService {
                 .retrieve()
                 .bodyToMono(String.class)
                 .block();
-            CustomLogger.debug(CustomLoggerType.EFFECT, "Read results from external system", String.format("{resultRawText: %s}", resultRawText));
+
+            if(resultRawText.length() <= 100)
+                CustomLogger.debug(CustomLoggerType.EFFECT, "Read results from external system", String.format("{resultRawText: %s}", resultRawText));
+            else
+                CustomLogger.debug(CustomLoggerType.EFFECT, "Read results from external system", String.format("{resultRawTextLength: %s}", resultRawText.length()));
 
             ObjectMapper mapper = new ObjectMapper();
             R resDto = mapper.readValue(resultRawText, resType);

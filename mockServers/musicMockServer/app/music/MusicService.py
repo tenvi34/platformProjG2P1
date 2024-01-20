@@ -20,6 +20,6 @@ def getDataUrl(getDataUrlReqDto:GetDataUrlReqDto) -> GetDataUrlResDto :
 
     sampleDataUrl = ""
     with open(targetSamplePath, "r") as file:
-        sampleDataUrl = file.readlines()
+        sampleDataUrl = "".join(file.readlines())
 
     return GetDataUrlResDto(sampleDataUrl)
