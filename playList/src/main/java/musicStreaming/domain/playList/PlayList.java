@@ -19,7 +19,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import musicStreaming.PlayListApplication;
-
+import musicStreaming._global.event.PlayListMusicCreated;
+import musicStreaming._global.event.PlayListMusicDeleted;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
@@ -111,5 +112,16 @@ public class PlayList {
             String.format("%s is deleted by using JPA", this.getClass().getSimpleName()),
             String.format("{%s: %s}", this.getClass().getSimpleName(), this.toString())
         );
+    }
+
+
+    // 플레이 리스트에 음악이 추가되었을 경우, 음악 개수를 증가시키기 위해서
+    public static void increaseMusicCount(PlayListMusicCreated playListMusicCreated) {
+        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: increaseMusicCount");
+    }
+
+    // 플레이 리스트에 음악이 삭제되었을 경우, 음악 개수를 감소시키기 위해서
+    public static void decreaseMusicCount(PlayListMusicDeleted playListMusicDeleted) {
+        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: decreaseMusicCount");
     }
 }

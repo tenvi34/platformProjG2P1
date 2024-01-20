@@ -3,6 +3,7 @@ package musicStreaming._global.event;
 import musicStreaming._global.infra.AbstractEvent;
 
 import musicStreaming.domain.playListMusic.PlayListMusic;
+import musicStreaming.sanityCheck.reqDtos.MockPlayListMusicCreatedReqDto;
 
 import java.util.Date;
 
@@ -25,6 +26,17 @@ public class PlayListMusicCreated extends AbstractEvent {
 
     public PlayListMusicCreated(PlayListMusic aggregate) {
         super(aggregate);
+    }
+
+    public PlayListMusicCreated(MockPlayListMusicCreatedReqDto mockData) {
+        super();
+        this.id = mockData.getId();
+        this.playListId = mockData.getPlayListId();
+        this.musicId = mockData.getMusicId();
+        this.createrId = mockData.getCreaterId();
+        this.title = mockData.getTitle();
+        this.createdDate = mockData.getCreatedDate();
+        this.updatedDate = mockData.getUpdatedDate();
     }
 
     public PlayListMusicCreated() {

@@ -6,7 +6,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import lombok.RequiredArgsConstructor;
@@ -16,6 +18,10 @@ import musicStreaming._global.logger.CustomLoggerType;
 
 import musicStreaming.sanityCheck.exceptions.DivByZeroException;
 import musicStreaming.sanityCheck.reqDtos.LogsReqDto;
+import musicStreaming.sanityCheck.reqDtos.MockMusicDeletedReqDto;
+import musicStreaming.sanityCheck.reqDtos.MockPlayListDeletedReqDto;
+import musicStreaming.sanityCheck.reqDtos.MockPlayListMusicCreatedReqDto;
+import musicStreaming.sanityCheck.reqDtos.MockPlayListMusicDeletedReqDto;
 import musicStreaming.sanityCheck.resDtos.AuthenticationCheckResDto;
 import musicStreaming.sanityCheck.resDtos.LogsResDto;
 
@@ -90,5 +96,39 @@ public class SanityCheckController {
         AuthenticationCheckResDto authenticationCheckResDto = new AuthenticationCheckResDto(userId);
         CustomLogger.debug(CustomLoggerType.ENTER_EXIT, "", String.format("{authenticationCheckResDto: %s}", authenticationCheckResDto.toString()));
         return ResponseEntity.ok(authenticationCheckResDto);
+    }
+
+
+
+    // Policy 테스트용으로 PlayListMusicCreated 이벤트를 강제로 발생시키기 위해서
+    @PostMapping("/mock/PlayListMusicCreated")
+    public void mockPlayListMusicCreated(@RequestBody MockPlayListMusicCreatedReqDto mockData) {
+        CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{mockData: %s}", mockData.toString()));
+        this.sanityCheckService.mockPlayListMusicCreated(mockData);
+        CustomLogger.debug(CustomLoggerType.EXIT);
+    }
+
+    // Policy 테스트용으로 PlayListMusicDeleted 이벤트를 강제로 발생시키기 위해서
+    @PostMapping("/mock/PlayListMusicDeleted")
+    public void mockPlayListMusicDeleted(@RequestBody MockPlayListMusicDeletedReqDto mockData) {
+        CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{mockData: %s}", mockData.toString()));
+        this.sanityCheckService.mockPlayListMusicDeleted(mockData);
+        CustomLogger.debug(CustomLoggerType.EXIT);
+    }
+
+    // Policy 테스트용으로 PlayListDeleted 이벤트를 강제로 발생시키기 위해서
+    @PostMapping("/mock/PlayListDeleted")
+    public void mockPlayListDeleted(@RequestBody MockPlayListDeletedReqDto mockData) {
+        CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{mockData: %s}", mockData.toString()));
+        this.sanityCheckService.mockPlayListDeleted(mockData);
+        CustomLogger.debug(CustomLoggerType.EXIT);
+    }
+
+    // Policy 테스트용으로 MusicDeleted 이벤트를 강제로 발생시키기 위해서
+    @PostMapping("/mock/MusicDeleted")
+    public void mockMusicDeleted(@RequestBody MockMusicDeletedReqDto mockData) {
+        CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{mockData: %s}", mockData.toString()));
+        this.sanityCheckService.mockMusicDeleted(mockData);
+        CustomLogger.debug(CustomLoggerType.EXIT);
     }
 }

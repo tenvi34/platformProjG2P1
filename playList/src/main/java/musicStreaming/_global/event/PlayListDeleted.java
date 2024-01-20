@@ -3,6 +3,7 @@ package musicStreaming._global.event;
 import musicStreaming._global.infra.AbstractEvent;
 
 import musicStreaming.domain.playList.PlayList;
+import musicStreaming.sanityCheck.reqDtos.MockPlayListDeletedReqDto;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -17,6 +18,11 @@ public class PlayListDeleted extends AbstractEvent {
 
     public PlayListDeleted(PlayList aggregate) {
         super(aggregate);
+    }
+
+    public PlayListDeleted(MockPlayListDeletedReqDto mockData) {
+        super();
+        this.id = mockData.getId();
     }
 
     public PlayListDeleted() {

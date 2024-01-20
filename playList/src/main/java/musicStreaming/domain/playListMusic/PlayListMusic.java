@@ -18,8 +18,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import musicStreaming.PlayListApplication;
 
+import musicStreaming._global.event.MusicDeleted;
+import musicStreaming._global.event.PlayListDeleted;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
@@ -114,4 +117,15 @@ public class PlayListMusic {
             String.format("{%s: %s}", this.getClass().getSimpleName(), this.toString())
         );
     }
+
+
+    // 플레이 리스트가 삭제되었을 경우, 관련된 플레이 리스트 음악들을 삭제시키기 위해서
+    public static void deletePlayListMusic(PlayListDeleted playListDeleted) {
+        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: deletePlayListMusic(PlayListDeleted)");
+    }
+
+    // 음악 정보가 삭제되었을 경우, 플레이 리스트에서 해당하는 음악을 삭제시키기 위해서서
+    public static void deletePlayListMusic(MusicDeleted musicDeleted) {
+        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: deletePlayListMusic(MusicDeleted)");
+    }  
 }
