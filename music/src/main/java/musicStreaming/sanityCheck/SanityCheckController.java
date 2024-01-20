@@ -17,12 +17,14 @@ import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
 import musicStreaming.sanityCheck.exceptions.DivByZeroException;
+import musicStreaming.sanityCheck.reqDtos.EchoWithJsonReqDto;
 import musicStreaming.sanityCheck.reqDtos.LogsReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileDeletedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUpdatedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadFailedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadedReqDto;
 import musicStreaming.sanityCheck.resDtos.AuthenticationCheckResDto;
+import musicStreaming.sanityCheck.resDtos.EchoWithJsonResDto;
 import musicStreaming.sanityCheck.resDtos.LogsResDto;
 
 @RestController
@@ -88,6 +90,24 @@ public class SanityCheckController {
             throw new DivByZeroException();
         }    
     }
+
+    // File 서비스와의 상호 통신이 정상적으로 이뤄지는지 확인해보기 위해서
+    @PutMapping("/echoWithJson")
+    public ResponseEntity<EchoWithJsonResDto> echoWithJson(@RequestBody EchoWithJsonReqDto echoWithJsonReqDto) {
+        try {
+
+            CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{echoWithJsonReqDto: %s}", echoWithJsonReqDto.toString()));
+            EchoWithJsonResDto echoWithJsonResDto = new EchoWithJsonResDto(echoWithJsonReqDto.getMessage());
+            CustomLogger.debug(CustomLoggerType.EXIT, "", String.format("{echoWithJsonResDto: %s}", echoWithJsonResDto.toString()));
+
+            return ResponseEntity.ok(echoWithJsonResDto);
+
+        } catch(Exception e) {
+            CustomLogger.error(e, "", String.format("{echoWithJsonReqDto: %s}", echoWithJsonReqDto.toString()));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+        }    
+    }
+
 
     
     // 게이트웨이 JWT 인증시에 관련 정보를 얻을 수 있는지 테스트해보기 위해서
