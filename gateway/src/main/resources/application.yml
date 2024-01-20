@@ -70,7 +70,7 @@ spring:
         - id: musicNoAuth
           uri: http://localhost:8083
           predicates:
-            - Path=/api/music/musics,/api/music/sanityCheck
+            - Path=/api/music/sanityCheck
             - Method=GET
           filters:
             - RewritePath=/api/music/(?<segment>.*), /${segment}
@@ -87,7 +87,7 @@ spring:
         - id: playListNoAuth
           uri: http://localhost:8085
           predicates:
-            - Path=/api/playList/playLists,/api/playList/playListMusics,/api/playList/sanityCheck
+            - Path=/api/playList/sanityCheck
             - Method=GET
           filters:
             - RewritePath=/api/playList/(?<segment>.*), /${segment}
@@ -137,7 +137,7 @@ spring:
         - id: musicNoAuth
           uri: http://host.docker.internal:8083
           predicates:
-            - Path=/api/music/musics,/api/music/sanityCheck
+            - Path=/api/music/sanityCheck
             - Method=GET
           filters:
             - RewritePath=/api/music/(?<segment>.*), /${segment}
@@ -154,7 +154,7 @@ spring:
         - id: playListNoAuth
           uri: http://host.docker.internal:8085
           predicates:
-            - Path=/api/playList/playLists,/api/playList/playListMusics,/api/playList/sanityCheck
+            - Path=/api/playList/sanityCheck
             - Method=GET
           filters:
             - RewritePath=/api/playList/(?<segment>.*), /${segment}
@@ -204,7 +204,7 @@ spring:
         - id: musicNoAuth
           uri: http://music:8080
           predicates:
-            - Path=/api/music/musics,/api/music/sanityCheck
+            - Path=/api/music/sanityCheck
             - Method=GET
           filters:
             - RewritePath=/api/music/(?<segment>.*), /${segment}
@@ -221,7 +221,7 @@ spring:
         - id: playListNoAuth
           uri: http://play-list:8080
           predicates:
-            - Path=/api/playList/playLists,/api/playList/playListMusics,/api/playList/sanityCheck
+            - Path=/api/playList/sanityCheck
             - Method=GET
           filters:
             - RewritePath=/api/playList/(?<segment>.*), /${segment}
