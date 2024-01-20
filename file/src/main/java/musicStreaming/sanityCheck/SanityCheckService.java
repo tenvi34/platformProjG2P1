@@ -10,10 +10,16 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
+import musicStreaming._global.event.MusicFileDeleteRequested;
+import musicStreaming._global.event.MusicFileUpdateRequested;
+import musicStreaming._global.event.MusicFileUploadRequested;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
 import musicStreaming.sanityCheck.reqDtos.LogsReqDto;
+import musicStreaming.sanityCheck.reqDtos.MockMusicFileDeleteRequestedReqDto;
+import musicStreaming.sanityCheck.reqDtos.MockMusicFileUpdateRequestedReqDto;
+import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadRequestedReqDto;
 import musicStreaming.sanityCheck.resDtos.LogsResDto;
 
 @Service
@@ -46,5 +52,21 @@ public class SanityCheckService {
             }
 
             return new LogsResDto(logs.subList(Math.max(logs.size()-logsReqDto.getLineLength(), 0), logs.size()));
+    }
+
+
+    // Policy 테스트용으로 MusicFileUploadRequested 이벤트를 강제로 발생시키기 위해서
+    public void mockMusicFileUploadRequested(MockMusicFileUploadRequestedReqDto mockData) {
+        (new MusicFileUploadRequested(mockData)).publish();
+    }
+
+    // Policy 테스트용으로 MusicFileUpdateRequested 이벤트를 강제로 발생시키기 위해서
+    public void mockMusicFileUpdateRequested(MockMusicFileUpdateRequestedReqDto mockData) {
+        (new MusicFileUpdateRequested(mockData)).publish();
+    }
+
+    // Policy 테스트용으로 MusicFileDeleteRequested 이벤트를 강제로 발생시키기 위해서
+    public void mockMusicFileDeleteRequested(MockMusicFileDeleteRequestedReqDto mockData) {
+        (new MusicFileDeleteRequested(mockData)).publish();
     }
 }
