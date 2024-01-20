@@ -82,6 +82,24 @@ spring:
           filters:
             - RewritePath=/api/music/(?<segment>.*), /${segment}
             - AuthorizationHeaderFilter
+
+
+        - id: playListNoAuth
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/playList/playLists,/api/playList/playListMusics,/api/playList/sanityCheck
+            - Method=GET
+          filters:
+            - RewritePath=/api/playList/(?<segment>.*), /${segment}
+
+        - id: playListRequireAuth
+          uri: http://localhost:8085
+          predicates:
+            - Path=/api/playList/**
+          filters:
+            - RewritePath=/api/playList/(?<segment>.*), /${segment}
+            - AuthorizationHeaderFilter
+
 ---
 
 spring:
@@ -132,6 +150,23 @@ spring:
             - RewritePath=/api/music/(?<segment>.*), /${segment}
             - AuthorizationHeaderFilter
 
+
+        - id: playListNoAuth
+          uri: http://host.docker.internal:8085
+          predicates:
+            - Path=/api/playList/playLists,/api/playList/playListMusics,/api/playList/sanityCheck
+            - Method=GET
+          filters:
+            - RewritePath=/api/playList/(?<segment>.*), /${segment}
+
+        - id: playListRequireAuth
+          uri: http://host.docker.internal:8085
+          predicates:
+            - Path=/api/playList/**
+          filters:
+            - RewritePath=/api/playList/(?<segment>.*), /${segment}
+            - AuthorizationHeaderFilter
+
 ---
 
 spring:
@@ -180,4 +215,21 @@ spring:
             - Path=/api/music/**
           filters:
             - RewritePath=/api/music/(?<segment>.*), /${segment}
+            - AuthorizationHeaderFilter
+
+
+        - id: playListNoAuth
+          uri: http://play-list:8080
+          predicates:
+            - Path=/api/playList/playLists,/api/playList/playListMusics,/api/playList/sanityCheck
+            - Method=GET
+          filters:
+            - RewritePath=/api/playList/(?<segment>.*), /${segment}
+
+        - id: playListRequireAuth
+          uri: http://play-list:8080
+          predicates:
+            - Path=/api/playList/**
+          filters:
+            - RewritePath=/api/playList/(?<segment>.*), /${segment}
             - AuthorizationHeaderFilter

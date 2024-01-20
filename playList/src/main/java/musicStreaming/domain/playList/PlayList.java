@@ -18,7 +18,10 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import musicStreaming.PlayListApplication;
+
+import musicStreaming._global.event.PlayListDeleted;
 import musicStreaming._global.event.PlayListMusicCreated;
 import musicStreaming._global.event.PlayListMusicDeleted;
 import musicStreaming._global.logger.CustomLogger;
@@ -112,6 +115,8 @@ public class PlayList {
             String.format("%s is deleted by using JPA", this.getClass().getSimpleName()),
             String.format("{%s: %s}", this.getClass().getSimpleName(), this.toString())
         );
+
+        (new PlayListDeleted(this)).publishAfterCommit();
     }
 
 

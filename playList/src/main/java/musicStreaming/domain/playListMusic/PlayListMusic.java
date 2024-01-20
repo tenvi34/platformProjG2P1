@@ -23,6 +23,7 @@ import musicStreaming.PlayListApplication;
 
 import musicStreaming._global.event.MusicDeleted;
 import musicStreaming._global.event.PlayListDeleted;
+import musicStreaming._global.event.PlayListMusicDeleted;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
@@ -116,6 +117,8 @@ public class PlayListMusic {
             String.format("%s is deleted by using JPA", this.getClass().getSimpleName()),
             String.format("{%s: %s}", this.getClass().getSimpleName(), this.toString())
         );
+
+        (new PlayListMusicDeleted(this)).publishAfterCommit();
     }
 
 
