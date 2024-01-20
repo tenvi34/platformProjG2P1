@@ -34,7 +34,7 @@ collectedData: 8080 > 8087
 gateway: 8088 > 8088
 frontend: 3000 > 3000
 
-musicMockServer: 8083 > 8083
+musicMockServer: 8083 > 8083(sinsung6722/music-streaming-music-mock:v1)
 
 
 * Kubernates(EKS와 같은 환경에서 실행)
