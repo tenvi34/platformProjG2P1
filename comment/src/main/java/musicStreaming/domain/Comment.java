@@ -18,8 +18,11 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import musicStreaming.CommentApplication;
 
+import musicStreaming._global.event.CommentDeleted;
+import musicStreaming._global.event.MusicDeleted;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
@@ -111,5 +114,13 @@ public class Comment {
             String.format("%s is deleted by using JPA", this.getClass().getSimpleName()),
             String.format("{%s: %s}", this.getClass().getSimpleName(), this.toString())
         );
+
+        (new CommentDeleted(this)).publishAfterCommit();
     }
+
+
+    // 음악 정보가 삭제되었을 경우, 연관된 코멘트 정보들을 삭제시키기 위해서
+    public static void deleteComment(MusicDeleted musicDeleted) {
+        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: deleteComment(MusicDeleted)");
+    }  
 }

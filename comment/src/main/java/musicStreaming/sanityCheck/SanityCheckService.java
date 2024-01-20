@@ -9,11 +9,12 @@ import java.util.Scanner;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
-
+import musicStreaming._global.event.MusicDeleted;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
 import musicStreaming.sanityCheck.reqDtos.LogsReqDto;
+import musicStreaming.sanityCheck.reqDtos.MockMusicDeletedReqDto;
 import musicStreaming.sanityCheck.resDtos.LogsResDto;
 
 @Service
@@ -46,5 +47,11 @@ public class SanityCheckService {
             }
 
             return new LogsResDto(logs.subList(Math.max(logs.size()-logsReqDto.getLineLength(), 0), logs.size()));
+    }
+
+
+    // Policy 테스트용으로 MusicDeleted 이벤트를 강제로 발생시키기 위해서
+    public void mockMusicDeleted(MockMusicDeletedReqDto mockData) {
+        (new MusicDeleted(mockData)).publish();
     }
 }
