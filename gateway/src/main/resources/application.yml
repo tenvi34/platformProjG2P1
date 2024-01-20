@@ -100,6 +100,23 @@ spring:
             - RewritePath=/api/playList/(?<segment>.*), /${segment}
             - AuthorizationHeaderFilter
 
+
+        - id: commentNoAuth
+          uri: http://localhost:8086
+          predicates:
+            - Path=/api/comment/sanityCheck
+            - Method=GET
+          filters:
+            - RewritePath=/api/comment/(?<segment>.*), /${segment}
+
+        - id: commentRequireAuth
+          uri: http://localhost:8086
+          predicates:
+            - Path=/api/comment/**
+          filters:
+            - RewritePath=/api/comment/(?<segment>.*), /${segment}
+            - AuthorizationHeaderFilter
+
 ---
 
 spring:
@@ -167,6 +184,22 @@ spring:
             - RewritePath=/api/playList/(?<segment>.*), /${segment}
             - AuthorizationHeaderFilter
 
+
+        - id: commentNoAuth
+          uri: http://host.docker.internal:8086
+          predicates:
+            - Path=/api/comment/sanityCheck
+            - Method=GET
+          filters:
+            - RewritePath=/api/comment/(?<segment>.*), /${segment}
+
+        - id: commentRequireAuth
+          uri: http://host.docker.internal:8086
+          predicates:
+            - Path=/api/comment/**
+          filters:
+            - RewritePath=/api/comment/(?<segment>.*), /${segment}
+            - AuthorizationHeaderFilter
 ---
 
 spring:
@@ -232,4 +265,21 @@ spring:
             - Path=/api/playList/**
           filters:
             - RewritePath=/api/playList/(?<segment>.*), /${segment}
+            - AuthorizationHeaderFilter
+
+
+        - id: commentNoAuth
+          uri: http://comment:8080
+          predicates:
+            - Path=/api/comment/sanityCheck
+            - Method=GET
+          filters:
+            - RewritePath=/api/comment/(?<segment>.*), /${segment}
+
+        - id: commentRequireAuth
+          uri: http://comment:8080
+          predicates:
+            - Path=/api/comment/**
+          filters:
+            - RewritePath=/api/comment/(?<segment>.*), /${segment}
             - AuthorizationHeaderFilter
