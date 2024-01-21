@@ -24,8 +24,14 @@ import musicStreaming.FileApplication;
 import musicStreaming._global.event.MusicFileDeleteRequested;
 import musicStreaming._global.event.MusicFileUpdateRequested;
 import musicStreaming._global.event.MusicFileUploadRequested;
+import musicStreaming._global.externalSystemProxy.ExternalSystemProxyService;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
+import musicStreaming._global.resources.ResourcesService;
+
+import musicStreaming.domain.FileTasks.DeleteMusicFileTask;
+import musicStreaming.domain.FileTasks.UpdateMusicFileTask;
+import musicStreaming.domain.FileTasks.UploadMusicFileTask;
 
 @Data
 @Builder
@@ -51,6 +57,20 @@ public class File {
             FileRepository.class
         );
         return fileRepository;
+    }
+
+    public static ResourcesService resourcesService() {
+        ResourcesService resourcesService = FileApplication.applicationContext.getBean(
+            ResourcesService.class
+        );
+        return resourcesService;
+    }
+
+    public static ExternalSystemProxyService externalSystemProxyService() {
+        ExternalSystemProxyService externalSystemProxyService = FileApplication.applicationContext.getBean(
+            ExternalSystemProxyService.class
+        );
+        return externalSystemProxyService;
     }
 
 
@@ -118,16 +138,16 @@ public class File {
 
     // 관련 음악 파일 DATA URL을 요청해서 얻고, 디코딩 후, 파일을 저장시키기 위해서
     public static void uploadMusicFile(MusicFileUploadRequested musicFileUploadRequested) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: uploadMusicFile");
+        UploadMusicFileTask.uploadMusicFileTask(musicFileUploadRequested, File.repository(), File.resourcesService(), File.externalSystemProxyService());
     }
 
     // 이미 존재하는 파일 정보를 갱신하면서 관련 음악 파일 DATA URL을 요청해서 얻고, 디코딩 후, 파일을 저장시키기 위해서
     public static void updateMusicFile(MusicFileUpdateRequested musicFileUpdateRequested) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: updateMusicFile");
+        UpdateMusicFileTask.updateMusicFileTask(musicFileUpdateRequested, File.repository(), File.resourcesService(), File.externalSystemProxyService());
     }
 
     // 요청된 음악 파일을 삭제시키기 위해서
     public static void deleteMusicFile(MusicFileDeleteRequested musicFileDeleteRequested) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: deleteMusicFile");
+        DeleteMusicFileTask.deleteMusicFileTask(musicFileDeleteRequested, File.repository(), File.resourcesService());
     }
 }

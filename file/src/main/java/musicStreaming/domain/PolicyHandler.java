@@ -7,8 +7,11 @@ import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 import musicStreaming._global.config.kafka.KafkaProcessor;
+import musicStreaming._global.event.MusicFileDeleteFailed;
 import musicStreaming._global.event.MusicFileDeleteRequested;
+import musicStreaming._global.event.MusicFileUpdateFailed;
 import musicStreaming._global.event.MusicFileUpdateRequested;
+import musicStreaming._global.event.MusicFileUploadFailed;
 import musicStreaming._global.event.MusicFileUploadRequested;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
@@ -36,6 +39,10 @@ public class PolicyHandler {
 
         } catch(Exception e) {
             CustomLogger.error(e, "", String.format("{%s: %s}", musicFileUploadRequested.getClass().getSimpleName(), musicFileUploadRequested.toString()));
+            
+            MusicFileUploadFailed musicFileUploadFailed = new MusicFileUploadFailed();
+            musicFileUploadFailed.setMusicId(musicFileUploadRequested.getId());
+            musicFileUploadFailed.publishAfterCommit();
         }
     }
 
@@ -56,6 +63,11 @@ public class PolicyHandler {
 
         } catch(Exception e) {
             CustomLogger.error(e, "", String.format("{%s: %s}", musicFileUpdateRequested.getClass().getSimpleName(), musicFileUpdateRequested.toString()));
+        
+            MusicFileUpdateFailed musicFileUpdateFailed = new MusicFileUpdateFailed();
+            musicFileUpdateFailed.setId(musicFileUpdateRequested.getFileId());
+            musicFileUpdateFailed.setMusicId(musicFileUpdateRequested.getId());
+            musicFileUpdateFailed.publishAfterCommit();
         }
     }
 
@@ -76,6 +88,11 @@ public class PolicyHandler {
 
         } catch(Exception e) {
             CustomLogger.error(e, "", String.format("{%s: %s}", musicFileDeleteRequested.getClass().getSimpleName(), musicFileDeleteRequested.toString()));
+        
+            MusicFileDeleteFailed musicFileDeleteFailed = new MusicFileDeleteFailed();
+            musicFileDeleteFailed.setId(musicFileDeleteRequested.getFileId());
+            musicFileDeleteFailed.setMusicId(musicFileDeleteRequested.getId());
+            musicFileDeleteFailed.publishAfterCommit();
         }
     }
 }
