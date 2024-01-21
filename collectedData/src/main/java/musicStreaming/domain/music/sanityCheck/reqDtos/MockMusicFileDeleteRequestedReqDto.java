@@ -9,6 +9,6 @@ import lombok.ToString;
 @ToString
 public class MockMusicFileDeleteRequestedReqDto {
     private Long id;
-    private String fileId;
+    private Long fileId;
     private Date updatedDate;
 }

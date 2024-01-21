@@ -16,7 +16,7 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper=false)
 public class MusicFileDeleteRequested extends AbstractEvent {
     private Long id;
-    private String fileId;
+    private Long fileId;
     private Date updatedDate;
 
     public MusicFileDeleteRequested(MockMusicFileDeleteRequestedReqDto mockData) {

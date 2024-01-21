@@ -7,7 +7,7 @@ import lombok.Data;
 @Data
 public class MockMusicFileUpdateRequestedReqDto {
     private Long id;
-    private String dataUrlCode;
-    private String fileId;
+    private Long fileId;
     private Date updatedDate;
+    private String dataUrlCode;
 }

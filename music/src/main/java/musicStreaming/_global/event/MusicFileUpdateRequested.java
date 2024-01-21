@@ -16,9 +16,9 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper=false)
 public class MusicFileUpdateRequested extends AbstractEvent {
     private Long id;
-    private String dataUrlCode;
-    private String fileId;
+    private Long fileId;
     private Date updatedDate;
+    private String dataUrlCode;
 
     public MusicFileUpdateRequested(Music aggregate, String dataUrlCode) {
         super(aggregate);
