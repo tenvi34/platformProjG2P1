@@ -26,6 +26,8 @@ import musicStreaming._global.event.PlayListDeleted;
 import musicStreaming._global.event.PlayListMusicDeleted;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
+import musicStreaming.domain.playListMusic.PlayListMusicTasks.DeletePlayListMusicByMusicDeletedTask;
+import musicStreaming.domain.playListMusic.PlayListMusicTasks.DeletePlayListMusicByPlayListDeletedTask;
 
 @Data
 @Builder
@@ -124,11 +126,15 @@ public class PlayListMusic {
 
     // 플레이 리스트가 삭제되었을 경우, 관련된 플레이 리스트 음악들을 삭제시키기 위해서
     public static void deletePlayListMusic(PlayListDeleted playListDeleted) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: deletePlayListMusic(PlayListDeleted)");
+        DeletePlayListMusicByPlayListDeletedTask.deletePlayListMusicByPlayListDeletedTask(
+            playListDeleted, PlayListMusic.repository()
+        );
     }
 
     // 음악 정보가 삭제되었을 경우, 플레이 리스트에서 해당하는 음악을 삭제시키기 위해서서
     public static void deletePlayListMusic(MusicDeleted musicDeleted) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: deletePlayListMusic(MusicDeleted)");
+        DeletePlayListMusicByMusicDeletedTask.deletePlayListMusicByMusicDeletedTask(
+            musicDeleted, PlayListMusic.repository()
+        );
     }  
 }
