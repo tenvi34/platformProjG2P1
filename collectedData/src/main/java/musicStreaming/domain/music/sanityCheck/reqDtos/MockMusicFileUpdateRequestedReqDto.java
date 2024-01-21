@@ -9,6 +9,7 @@ import lombok.ToString;
 @ToString
 public class MockMusicFileUpdateRequestedReqDto {
     private Long id;
+    private String dataUrlCode;
     private String fileId;
     private Date updatedDate;
 }

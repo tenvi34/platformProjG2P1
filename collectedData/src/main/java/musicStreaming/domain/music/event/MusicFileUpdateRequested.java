@@ -16,12 +16,14 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper=false)
 public class MusicFileUpdateRequested extends AbstractEvent {
     private Long id;
+    private String dataUrlCode;
     private String fileId;
     private Date updatedDate;
 
     public MusicFileUpdateRequested(MockMusicFileUpdateRequestedReqDto mockData) {
         super();
         this.id = mockData.getId();
+        this.dataUrlCode = mockData.getDataUrlCode();
         this.fileId = mockData.getFileId();
         this.updatedDate = mockData.getUpdatedDate();
     }
