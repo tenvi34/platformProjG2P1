@@ -1,4 +1,4 @@
-package musicStreaming._global.resourceConfig;
+package musicStreaming._global.resources;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;

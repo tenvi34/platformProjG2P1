@@ -19,18 +19,21 @@ import musicStreaming._global.externalSystemProxy.resDtos.EchoWithJsonResDto;
 import musicStreaming._global.externalSystemProxy.resDtos.GetDataUrlResDto;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
-
+import musicStreaming._global.resources.ResourcesService;
 import musicStreaming.sanityCheck.exceptions.DivByZeroException;
+import musicStreaming.sanityCheck.reqDtos.DeleteFileReqDto;
 import musicStreaming.sanityCheck.reqDtos.EchoWithJsonByRequestReqDto;
 import musicStreaming.sanityCheck.reqDtos.GetDataUrlSanityCheckReqDto;
 import musicStreaming.sanityCheck.reqDtos.LogsReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileDeleteRequestedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUpdateRequestedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadRequestedReqDto;
+import musicStreaming.sanityCheck.reqDtos.WriteMp3FileFromDataUrlReqDto;
 import musicStreaming.sanityCheck.resDtos.AuthenticationCheckResDto;
 import musicStreaming.sanityCheck.resDtos.EchoWithJsonByRequestResDto;
 import musicStreaming.sanityCheck.resDtos.GetDataUrlSanityCheckResDto;
 import musicStreaming.sanityCheck.resDtos.LogsResDto;
+import musicStreaming.sanityCheck.resDtos.WriteMp3FileFromDataUrlResDto;
 
 @RestController
 @RequiredArgsConstructor
@@ -38,6 +41,7 @@ import musicStreaming.sanityCheck.resDtos.LogsResDto;
 public class SanityCheckController {
     private final SanityCheckService sanityCheckService;
     private final ExternalSystemProxyService externalSystemProxyService;
+    private final ResourcesService resourcesService;
     private boolean isNormalSanityCheck = true;
 
     // 정상적인 통신 여부를 단순하게 확인해보기 위해서
@@ -171,5 +175,22 @@ public class SanityCheckController {
         CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{mockData: %s}", mockData.toString()));
         this.sanityCheckService.mockMusicFileDeleteRequested(mockData);
         CustomLogger.debug(CustomLoggerType.EXIT);
+    }
+
+
+    // ResourcesService.writeMp3FileFromDataUrl SanityCheck 용도로 사용됨
+    @PutMapping("/writeMp3FileFromDataUrl")
+    public WriteMp3FileFromDataUrlResDto writeMp3FileFromDataUrl(@RequestBody WriteMp3FileFromDataUrlReqDto writeMp3FileFromDataUrlReqDto) {
+        CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{writeMp3FileFromDataUrlReqDto: %s}", writeMp3FileFromDataUrlReqDto.toString()));
+        WriteMp3FileFromDataUrlResDto writeMp3FileFromDataUrlResDto  = new WriteMp3FileFromDataUrlResDto(resourcesService.writeMp3FileFromDataUrl(writeMp3FileFromDataUrlReqDto.getDataUrl()));
+        CustomLogger.debug(CustomLoggerType.EXIT, "", String.format("{writeMp3FileFromDataUrlResDto: %s}", writeMp3FileFromDataUrlResDto.toString()));
+        return writeMp3FileFromDataUrlResDto;
+    }
+
+    // ResourcesService.deleteFile SanityCheck 용도로 사용됨
+    @PutMapping("/deleteFile")
+    public void deleteFile(@RequestBody DeleteFileReqDto deleteFileReqDto) {
+        CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{deleteFileReqDto: %s}", deleteFileReqDto.toString()));
+        resourcesService.deleteFile(deleteFileReqDto.getFileName());
     }
 }
