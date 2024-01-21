@@ -17,16 +17,19 @@ import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
 import musicStreaming.sanityCheck.exceptions.DivByZeroException;
+import musicStreaming.sanityCheck.reqDtos.DeleteDataUrlFileReqDto;
 import musicStreaming.sanityCheck.reqDtos.EchoWithJsonReqDto;
 import musicStreaming.sanityCheck.reqDtos.LogsReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileDeletedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUpdatedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadFailedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadedReqDto;
+import musicStreaming.sanityCheck.reqDtos.ReadDataUrlFromDataCodeReqDto;
 import musicStreaming.sanityCheck.reqDtos.WriteDataUrlToFileReqDto;
 import musicStreaming.sanityCheck.resDtos.AuthenticationCheckResDto;
 import musicStreaming.sanityCheck.resDtos.EchoWithJsonResDto;
 import musicStreaming.sanityCheck.resDtos.LogsResDto;
+import musicStreaming.sanityCheck.resDtos.ReadDataUrlFromDataCodeResDto;
 import musicStreaming.sanityCheck.resDtos.WriteDataUrlToFileResDto;
 
 @RestController
@@ -155,12 +158,28 @@ public class SanityCheckController {
     }
 
 
-    // DataUrlStorageService SanityCheck 용도로 사용됨
+    // DataUrlStorageService.writeDataUrlToFile SanityCheck 용도로 사용됨
     @PutMapping("/writeDataUrlToFile")
     public WriteDataUrlToFileResDto writeDataUrlToFile(@RequestBody WriteDataUrlToFileReqDto writeDataUrlToFileReqDto) {
         CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{writeDataUrlToFileReqDto: %s}", writeDataUrlToFileReqDto.toString()));
         WriteDataUrlToFileResDto writeDataUrlToFileResDto  = new WriteDataUrlToFileResDto(dataUrlStorageService.writeDataUrlToFile(writeDataUrlToFileReqDto.getDataUrl()));
         CustomLogger.debug(CustomLoggerType.EXIT, "", String.format("{writeDataUrlToFileResDto: %s}", writeDataUrlToFileResDto.toString()));
         return writeDataUrlToFileResDto;
+    }
+
+    // DataUrlStorageService.readDataUrlFromDataCode SanityCheck 용도로 사용됨
+    @PutMapping("/readDataUrlFromDataCode")
+    public ReadDataUrlFromDataCodeResDto readDataUrlFromDataCode(@RequestBody ReadDataUrlFromDataCodeReqDto readDataUrlFromDataCodeReqDto) {
+        CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{readDataUrlFromDataCodeReqDto: %s}", readDataUrlFromDataCodeReqDto.toString()));
+        ReadDataUrlFromDataCodeResDto readDataUrlFromDataCodeResDto  = new ReadDataUrlFromDataCodeResDto(dataUrlStorageService.readDataUrlFromDataCode(readDataUrlFromDataCodeReqDto.getDataUrlCode()));
+        CustomLogger.debug(CustomLoggerType.EXIT, "", String.format("{readDataUrlFromDataCodeResDto: %s}", readDataUrlFromDataCodeResDto.toString()));
+        return readDataUrlFromDataCodeResDto;
+    }
+
+    // DataUrlStorageService.deleteDataUrlFile SanityCheck 용도로 사용됨
+    @PutMapping("/deleteDataUrlFile")
+    public void deleteDataUrlFile(@RequestBody DeleteDataUrlFileReqDto deleteDataUrlFileReqDto) {
+        CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{deleteDataUrlFileReqDto: %s}", deleteDataUrlFileReqDto.toString()));
+        dataUrlStorageService.deleteDataUrlFile(deleteDataUrlFileReqDto.getDataUrlCode());
     }
 }

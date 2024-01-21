@@ -1,8 +1,13 @@
 package musicStreaming._global.dataUrlStorage;
 
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
+import java.io.File;
 import java.io.IOException;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 import java.util.UUID;
 
 import org.springframework.stereotype.Service;
@@ -36,5 +41,36 @@ public class DataUrlStorageService {
         }
 
         return dataUrlCode;
+    }
+
+    // DO)
+    // 데이터 코드로부터 매칭되는 파일에 있는 데이터를 얻기 위해서
+    // EX)
+    // readDataUrlFromDataCode("3fc46480-3818-47d9-abcb-8e3167d0a2ab") -> "data:audio/mpeg;base64,SUQzB..."
+    public String readDataUrlFromDataCode(String dataUrlCode) {
+        String readText = "";
+        try {
+
+            List<String> readTexts = new ArrayList<>();
+            Scanner sc = new Scanner(new File(this.path(dataUrlCode)));
+            while (sc.hasNextLine())
+                readTexts.add(sc.nextLine());
+            sc.close();
+
+            readText = String.join("\n", readTexts);
+
+        } catch(FileNotFoundException ex) {
+            throw new DataUrlIOException(ex.getMessage());
+        }
+        
+        return readText;
+    }
+
+    // DO)
+    // 데이터 코드와 매칭되는 파일을 삭제시키기 위해서
+    // EX)
+    // deleteDataUrlFile("3fc46480-3818-47d9-abcb-8e3167d0a2ab")
+    public void deleteDataUrlFile(String dataUrlCode) {
+        (new File(this.path(dataUrlCode))).delete();
     }
 }
