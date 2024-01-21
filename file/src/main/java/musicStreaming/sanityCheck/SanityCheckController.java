@@ -24,6 +24,7 @@ import musicStreaming.sanityCheck.exceptions.DivByZeroException;
 import musicStreaming.sanityCheck.reqDtos.DeleteFileReqDto;
 import musicStreaming.sanityCheck.reqDtos.EchoWithJsonByRequestReqDto;
 import musicStreaming.sanityCheck.reqDtos.GetDataUrlSanityCheckReqDto;
+import musicStreaming.sanityCheck.reqDtos.GetMp3TotalSecondsReqDto;
 import musicStreaming.sanityCheck.reqDtos.LogsReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileDeleteRequestedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUpdateRequestedReqDto;
@@ -32,6 +33,7 @@ import musicStreaming.sanityCheck.reqDtos.WriteMp3FileFromDataUrlReqDto;
 import musicStreaming.sanityCheck.resDtos.AuthenticationCheckResDto;
 import musicStreaming.sanityCheck.resDtos.EchoWithJsonByRequestResDto;
 import musicStreaming.sanityCheck.resDtos.GetDataUrlSanityCheckResDto;
+import musicStreaming.sanityCheck.resDtos.GetMp3TotalSecondsResDto;
 import musicStreaming.sanityCheck.resDtos.LogsResDto;
 import musicStreaming.sanityCheck.resDtos.WriteMp3FileFromDataUrlResDto;
 
@@ -185,6 +187,15 @@ public class SanityCheckController {
         WriteMp3FileFromDataUrlResDto writeMp3FileFromDataUrlResDto  = new WriteMp3FileFromDataUrlResDto(resourcesService.writeMp3FileFromDataUrl(writeMp3FileFromDataUrlReqDto.getDataUrl()));
         CustomLogger.debug(CustomLoggerType.EXIT, "", String.format("{writeMp3FileFromDataUrlResDto: %s}", writeMp3FileFromDataUrlResDto.toString()));
         return writeMp3FileFromDataUrlResDto;
+    }
+
+    // ResourcesService.getMp3TotalSeconds SanityCheck 용도로 사용됨
+    @PutMapping("/getMp3TotalSeconds")
+    public GetMp3TotalSecondsResDto getMp3TotalSeconds(@RequestBody GetMp3TotalSecondsReqDto getMp3TotalSecondsReqDto) {
+        CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{getMp3TotalSecondsReqDto: %s}", getMp3TotalSecondsReqDto.toString()));
+        GetMp3TotalSecondsResDto getMp3TotalSecondsResDto  = new GetMp3TotalSecondsResDto(resourcesService.getMp3TotalSeconds(getMp3TotalSecondsReqDto.getFileName()));
+        CustomLogger.debug(CustomLoggerType.EXIT, "", String.format("{getMp3TotalSecondsResDto: %s}", getMp3TotalSecondsResDto.toString()));
+        return getMp3TotalSecondsResDto;
     }
 
     // ResourcesService.deleteFile SanityCheck 용도로 사용됨

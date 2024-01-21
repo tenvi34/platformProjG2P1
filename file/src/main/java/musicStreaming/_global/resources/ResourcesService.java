@@ -7,7 +7,13 @@ import java.io.IOException;
 import java.util.Base64;
 import java.util.UUID;
 
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.UnsupportedAudioFileException;
+
 import org.springframework.stereotype.Service;
+
+import javazoom.spi.mpeg.sampled.file.MpegAudioFileReader;
+import musicStreaming._global.resources.exceptions.ResourcesIOException;
 
 
 @Service
@@ -34,10 +40,27 @@ public class ResourcesService {
             fos.close();
 
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new ResourcesIOException(e.getMessage());
         }
 
         return fileName;
+    }
+
+    // DO)
+    // 주어진 mp3 파일의 재생 시간을 초단위로 얻기 위해서
+    // EX)
+    // getMp3TotalSeconds("3fc46480-3818-47d9-abcb-8e3167d0a2ab.mp3") -> 150(150초)
+    public Integer getMp3TotalSeconds(String fileName) {
+        try {
+
+            AudioFileFormat fileFormat = new MpegAudioFileReader().getAudioFileFormat(new File(this.path(fileName)));
+            long microseconds = (long) fileFormat.properties().get("duration");
+            Integer totalSeconds = (int)(microseconds / 1000000);
+            return totalSeconds;
+
+        } catch (UnsupportedAudioFileException | IOException e) {
+            throw new ResourcesIOException(e.getMessage());
+        }
     }
 
     // DO)
