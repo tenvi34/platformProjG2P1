@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import lombok.RequiredArgsConstructor;
-
+import musicStreaming._global.dataUrlStorage.DataUrlStorageService;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
@@ -23,15 +23,18 @@ import musicStreaming.sanityCheck.reqDtos.MockMusicFileDeletedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUpdatedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadFailedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadedReqDto;
+import musicStreaming.sanityCheck.reqDtos.WriteDataUrlToFileReqDto;
 import musicStreaming.sanityCheck.resDtos.AuthenticationCheckResDto;
 import musicStreaming.sanityCheck.resDtos.EchoWithJsonResDto;
 import musicStreaming.sanityCheck.resDtos.LogsResDto;
+import musicStreaming.sanityCheck.resDtos.WriteDataUrlToFileResDto;
 
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/sanityCheck")
 public class SanityCheckController {
     private final SanityCheckService sanityCheckService;
+    private final DataUrlStorageService dataUrlStorageService;
     private boolean isNormalSanityCheck = true;
 
     // 정상적인 통신 여부를 단순하게 확인해보기 위해서
@@ -149,5 +152,15 @@ public class SanityCheckController {
         CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{mockData: %s}", mockData.toString()));
         this.sanityCheckService.mockMusicFileDeleted(mockData);
         CustomLogger.debug(CustomLoggerType.EXIT);
+    }
+
+
+    // DataUrlStorageService SanityCheck 용도로 사용됨
+    @PutMapping("/writeDataUrlToFile")
+    public WriteDataUrlToFileResDto writeDataUrlToFile(@RequestBody WriteDataUrlToFileReqDto writeDataUrlToFileReqDto) {
+        CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{writeDataUrlToFileReqDto: %s}", writeDataUrlToFileReqDto.toString()));
+        WriteDataUrlToFileResDto writeDataUrlToFileResDto  = new WriteDataUrlToFileResDto(dataUrlStorageService.writeDataUrlToFile(writeDataUrlToFileReqDto.getDataUrl()));
+        CustomLogger.debug(CustomLoggerType.EXIT, "", String.format("{writeDataUrlToFileResDto: %s}", writeDataUrlToFileResDto.toString()));
+        return writeDataUrlToFileResDto;
     }
 }
