@@ -30,6 +30,8 @@ import musicStreaming._global.event.MusicFileUploaded;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
+import musicStreaming.domain.MusicTasks.DeleteMusicByFailTask;
+import musicStreaming.domain.MusicTasks.DeleteMusicTask;
 import musicStreaming.domain.MusicTasks.UpdateFileIdTask;
 
 @Data
@@ -139,28 +141,28 @@ public class Music {
 
 
     public static void updateFileId(MusicFileUploaded musicFileUploaded) {
-        Music.updateFileId(musicFileUploaded.getMusicId(), musicFileUploaded.getId(), musicFileUploaded.getDataUrlCode());
+        Music.updateFileId(musicFileUploaded.getMusicId(), musicFileUploaded.getId(), musicFileUploaded.getTotalSeconds(), musicFileUploaded.getDataUrlCode());
     }
 
     public static void updateFileId(MusicFileUpdated musicFileUpdated) {
-        Music.updateFileId(musicFileUpdated.getMusicId(), musicFileUpdated.getId(), musicFileUpdated.getDataUrlCode());
+        Music.updateFileId(musicFileUpdated.getMusicId(), musicFileUpdated.getId(), musicFileUpdated.getTotalSeconds(), musicFileUpdated.getDataUrlCode());
     }
 
     // 음악 파일이 업로드되었을 경우, 관련 파일 정보를 음악 정보에 반영시키기 위해서
     // 또한, Music 서비스에 임시로 저장되었던 DataUrlCode 파일을 삭제시키기 위해서
-    public static void updateFileId(Long musicId, Long fileId, String dataUrlCode) {
-        UpdateFileIdTask.updateFileIdTask(musicId, fileId, dataUrlCode, Music.repository(), Music.dataUrlStorageService());
+    public static void updateFileId(Long musicId, Long fileId, Integer totalSeconds, String dataUrlCode) {
+        UpdateFileIdTask.updateFileIdTask(musicId, fileId, totalSeconds, dataUrlCode, Music.repository(), Music.dataUrlStorageService());
     }
 
 
 
     // 음악 파일이 업로드에 실패 했을 경우, 음악 정보를 지우고, 관련 이벤트를 발생시키기 위해서
     public static void deleteMusicByFail(MusicFileUploadFailed musicFileUploadFailed) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: deleteMusicByFail");
+        DeleteMusicByFailTask.deleteMusicByFailTask(musicFileUploadFailed, Music.repository(), Music.dataUrlStorageService());
     }
 
     // 음악 파일이 삭제되었을 경우, 최종적으로 관련 음악 정보를 삭제시키고, 관련 이벤트를 발생시키기 위해서
     public static void deleteMusic(MusicFileDeleted musicFileDeleted) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: deleteMusic");
+        DeleteMusicTask.deleteMusicTask(musicFileDeleted, Music.repository());
     }
 }
