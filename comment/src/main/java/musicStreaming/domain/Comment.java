@@ -25,6 +25,7 @@ import musicStreaming._global.event.CommentDeleted;
 import musicStreaming._global.event.MusicDeleted;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
+import musicStreaming.domain.CommentTasks.DeleteCommentTask;
 
 @Data
 @Builder
@@ -121,6 +122,6 @@ public class Comment {
 
     // 음악 정보가 삭제되었을 경우, 연관된 코멘트 정보들을 삭제시키기 위해서
     public static void deleteComment(MusicDeleted musicDeleted) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: deleteComment(MusicDeleted)");
+        DeleteCommentTask.deleteCommentTask(musicDeleted, Comment.repository());
     }  
 }
