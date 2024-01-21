@@ -20,6 +20,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import musicStreaming.MusicApplication;
+
+import musicStreaming._global.dataUrlStorage.DataUrlStorageService;
 import musicStreaming._global.event.MusicDeleted;
 import musicStreaming._global.event.MusicFileDeleted;
 import musicStreaming._global.event.MusicFileUpdated;
@@ -27,6 +29,8 @@ import musicStreaming._global.event.MusicFileUploadFailed;
 import musicStreaming._global.event.MusicFileUploaded;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
+
+import musicStreaming.domain.MusicTasks.UpdateFileIdTask;
 
 @Data
 @Builder
@@ -60,6 +64,13 @@ public class Music {
             MusicRepository.class
         );
         return musicRepository;
+    }
+
+    public static DataUrlStorageService dataUrlStorageService() {
+        DataUrlStorageService dataUrlStorageService = MusicApplication.applicationContext.getBean(
+            DataUrlStorageService.class
+        );
+        return dataUrlStorageService;
     }
 
 
@@ -138,7 +149,7 @@ public class Music {
     // 음악 파일이 업로드되었을 경우, 관련 파일 정보를 음악 정보에 반영시키기 위해서
     // 또한, Music 서비스에 임시로 저장되었던 DataUrlCode 파일을 삭제시키기 위해서
     public static void updateFileId(Long musicId, Long fileId, String dataUrlCode) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: updateFileId");
+        UpdateFileIdTask.updateFileIdTask(musicId, fileId, dataUrlCode, Music.repository(), Music.dataUrlStorageService());
     }
 
 
