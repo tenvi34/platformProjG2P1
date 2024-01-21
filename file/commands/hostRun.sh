@@ -2,6 +2,7 @@
 
 rm -rf logs
 rm -rf target
+rm -rf resources
 
 export SPRING_PROFILES_ACTIVE=host
 mvn spring-boot:run

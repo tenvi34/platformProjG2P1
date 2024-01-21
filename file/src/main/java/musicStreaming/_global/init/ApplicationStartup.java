@@ -1,0 +1,17 @@
+package musicStreaming._global.init;
+
+import java.io.File;
+
+import org.springframework.boot.context.event.ApplicationReadyEvent;
+import org.springframework.context.ApplicationListener;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
+    @Override
+    public void onApplicationEvent(final ApplicationReadyEvent event) {
+        File resourcesDir = new File("./resources");
+        if (!resourcesDir.exists()) 
+            resourcesDir.mkdirs();
+    }
+}

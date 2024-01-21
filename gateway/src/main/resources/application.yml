@@ -84,6 +84,14 @@ spring:
             - AuthorizationHeaderFilter
 
 
+        - id: fileResource
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/file/**
+          filters:
+            - RewritePath=/api/file/(?<segment>.*), /resources/${segment}
+
+
         - id: playListNoAuth
           uri: http://localhost:8085
           predicates:
@@ -191,6 +199,14 @@ spring:
             - AuthorizationHeaderFilter
 
 
+        - id: fileResource
+          uri: http://host.docker.internal:8084
+          predicates:
+            - Path=/api/file/**
+          filters:
+            - RewritePath=/api/file/(?<segment>.*), /resources/${segment}
+
+
         - id: playListNoAuth
           uri: http://host.docker.internal:8085
           predicates:
@@ -296,6 +312,14 @@ spring:
           filters:
             - RewritePath=/api/music/(?<segment>.*), /${segment}
             - AuthorizationHeaderFilter
+
+
+        - id: fileResource
+          uri: http://file:8080
+          predicates:
+            - Path=/api/file/**
+          filters:
+            - RewritePath=/api/file/(?<segment>.*), /resources/${segment}
 
 
         - id: playListNoAuth
