@@ -4,11 +4,15 @@ import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
 
-import musicStreaming._global.logger.CustomLogger;
-import musicStreaming._global.logger.CustomLoggerType;
+import musicStreaming._global.dataUrlStorage.DataUrlStorageService;
 
-import musicStreaming.domain.Music;
+import musicStreaming.domain.MusicRepository;
 
+import musicStreaming.music.MusicServiceTasks.CreateMusicTask;
+import musicStreaming.music.MusicServiceTasks.GetDataUrlTask;
+import musicStreaming.music.MusicServiceTasks.LikeMusicTask;
+import musicStreaming.music.MusicServiceTasks.UpdateMusicFileTask;
+import musicStreaming.music.MusicServiceTasks.UpdateMusicInfoTask;
 import musicStreaming.music.reqDtos.CreateMusicReqDto;
 import musicStreaming.music.reqDtos.GetDataUrlReqDto;
 import musicStreaming.music.reqDtos.LikeMusicReqDto;
@@ -23,37 +27,33 @@ import musicStreaming.music.resDtos.UpdateMusicInfoResDto;
 @Service
 @RequiredArgsConstructor
 public class MusicService {
-    // private final MusicRepository musicRepository;
+    private final MusicRepository musicRepository;
+    private final DataUrlStorageService dataUrlStorageService;
 
     // 주어진 DataURL을 저장하고, File 서비스에 업로드 요청을 수행하기 위해서
     public CreateMusicResDto createMusic(CreateMusicReqDto createMusicReqDto, Long userId) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: createMusic");
-        return new CreateMusicResDto(new Music());
+        return CreateMusicTask.createMusicTask(createMusicReqDto, userId, this.musicRepository, this.dataUrlStorageService);
     }
 
     // 주어진 DataUrlCode에 해당하는 DataUrl을 반환하기 위해서
     public GetDataUrlResDto getDataUrl(GetDataUrlReqDto getDataUrlReqDto) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: getDataUrl");
-        return new GetDataUrlResDto("DATA URL");
+        return GetDataUrlTask.getDataUrlTask(getDataUrlReqDto, this.dataUrlStorageService);
     }
 
 
     // 음악 정보를 업데이트시키기 위해서
     public UpdateMusicInfoResDto updateMusicInfo(UpdateMusicInfoReqDto updateMusicInfoReqDto) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: updateMusicInfo");
-        return new UpdateMusicInfoResDto(new Music());
+        return UpdateMusicInfoTask.updateMusicInfoTask(updateMusicInfoReqDto, musicRepository);
     }
 
     // 음악 파일을 업데이트시키기 위해서
     public UpdateMusicFileResDto updateMusicFile(UpdateMusicFileReqDto updateMusicFileReqDto) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: updateMusicFile");
-        return new UpdateMusicFileResDto(new Music());
+        return UpdateMusicFileTask.updateMusicFileTask(updateMusicFileReqDto, musicRepository, dataUrlStorageService);
     }
 
 
-    // 음악 정보를 업데이트시키기 위해서
+    // 좋아요를 눌렀을 경우, 해당하는 음악의 좋아요 개수를 업데이트하기 위해서
     public LikeMusicResDto likeMusic(LikeMusicReqDto createMusicReqDto) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: likeMusic");
-        return new LikeMusicResDto(new Music());
+        return LikeMusicTask.likeMusicTask(createMusicReqDto, musicRepository);
     }
 }
