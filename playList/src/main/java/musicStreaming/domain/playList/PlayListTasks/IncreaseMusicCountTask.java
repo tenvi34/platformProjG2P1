@@ -3,7 +3,7 @@ package musicStreaming.domain.playList.PlayListTasks;
 import musicStreaming._global.event.PlayListMusicCreated;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
-
+import musicStreaming.domain.playList.PlayList;
 import musicStreaming.domain.playList.PlayListRepository;
 
 public class IncreaseMusicCountTask {
@@ -13,5 +13,9 @@ public class IncreaseMusicCountTask {
         CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: increaseMusicCount");
 
         // [1] playListId로 PlayList를 얻어서 musicCount를 1 증가시킵니다.
+        playListRepository.findById(playListMusicCreated.getCreaterId()).ifPresent(musicCount->{
+            musicCount.setMusicCount(musicCount.getMusicCount()+1);
+            playListRepository.save(musicCount);
+        });
     }
 }
