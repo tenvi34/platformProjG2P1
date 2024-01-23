@@ -43,7 +43,7 @@ public class UserViewHandler {
                     .build()
             );
 
-            CustomLogger.debug(CustomLoggerType.EXIT, "", String.format("{savedUser: %s}", savedUser.toString()));
+            CustomLogger.debug(CustomLoggerType.EXIT, "", String.format("{%s: %s}", savedUser.getClass().getSimpleName(), savedUser.toString()));
 
         } catch (Exception e) {
             CustomLogger.error(e, "", String.format("{%s: %s}", signUpCompleted.getClass().getSimpleName(), signUpCompleted.toString()));
@@ -73,7 +73,7 @@ public class UserViewHandler {
             User savedUser = this.userRepository.save(userToUpdate);
 
 
-            CustomLogger.debug(CustomLoggerType.EXIT, "", String.format("{savedUser: %s}", savedUser.toString()));
+            CustomLogger.debug(CustomLoggerType.EXIT, "", String.format("{%s: %s}", savedUser.getClass().getSimpleName(), savedUser.toString()));
 
         } catch (Exception e) {
             CustomLogger.error(e, "", String.format("{%s: %s}", userNameUpdated.getClass().getSimpleName(), userNameUpdated.toString()));
