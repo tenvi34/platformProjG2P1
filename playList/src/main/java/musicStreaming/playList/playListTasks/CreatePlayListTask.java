@@ -17,19 +17,17 @@ public class CreatePlayListTask {
 
         // [1] playListRepository를 이용해서 새로운 Music 데이터를 저장합니다.
         PlayList playList = new PlayList();
-        PlayListCreated playListCreated = new PlayListCreated(playList);
-
-        playList.setId(playListCreated.getId());
-        playList.setCreaterId(playListCreated.getCreaterId());
-        playList.setTitle(playListCreated.getTitle());
-        playList.setMusicCount(playListCreated.getMusicCount());
-        playList.setCreatedDate(playListCreated.getCreatedDate());
+    
+        playList.setCreaterId(userId);
+        playList.setTitle(createPlayListReqDto.getTitle());
+        playList.setMusicCount(0);
         
-        playListRepository.save(playList);
+        PlayList savedPlayList = playListRepository.save(playList);
 
         // [2] PlayListCreated 이벤트를 발생시킵니다.
+        PlayListCreated playListCreated = new PlayListCreated(savedPlayList);
         playListCreated.publishAfterCommit();
 
-        return new CreatePlayListResDto(new PlayList());
+        return new CreatePlayListResDto(savedPlayList);
     }
 }

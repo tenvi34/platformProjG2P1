@@ -18,20 +18,17 @@ public class CreateCommentTask {
 
         // [1] commentRepository를 이용해서 새로운 Comment 데이터를 저장합니다.
         Comment comment = new Comment();
-        CommentCreated commentCreated = new CommentCreated(comment);
 
-        comment.setId(commentCreated.getId());
-        comment.setCreaterId(commentCreated.getCreaterId());
-        comment.setMusicId(commentCreated.getMusicId());
-        comment.setContent(commentCreated.getContent());
-        comment.setCreatedDate(commentCreated.getCreatedDate());
-        comment.setUpdatedDate(commentCreated.getUpdatedDate());
-
-        commentRepository.save(comment);        
+        comment.setCreaterId(userId);
+        comment.setMusicId(createCommentReqDto.getMusicId());
+        comment.setContent(createCommentReqDto.getContent());
+        
+        Comment savedComment = commentRepository.save(comment);
         
         // [2] CommentCreated 이벤트를 발생시킵니다.
+        CommentCreated commentCreated = new CommentCreated(savedComment);
         commentCreated.publishAfterCommit();
 
-        return new CreateCommentResDto(new Comment());
+        return new CreateCommentResDto(savedComment);
     }
 }

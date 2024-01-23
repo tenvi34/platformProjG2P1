@@ -15,7 +15,7 @@ public class DeletePlayListMusicByMusicDeletedTask {
 
         // [1] musicId와 매칭되는 모든 PlayListMusic을 삭제시킵니다.
         playListMusicRepository.findById(musicDeleted.getId()).ifPresent(deletePlayListMusic -> {
-            playListMusicRepository.deleteAll();
+            playListMusicRepository.delete(deletePlayListMusic);
 
             // [2] 각각의 삭제되는 PlayListMusic 마다 PlayListMusicDeleted 이벤트를 발생시킵니다.
             PlayListMusicDeleted playListMusicDeleted = new PlayListMusicDeleted(deletePlayListMusic);
