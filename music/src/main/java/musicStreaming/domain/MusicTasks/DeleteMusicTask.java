@@ -16,21 +16,10 @@ public class DeleteMusicTask {
 
         // [1] musicRepository를 이용해서 주어진 musicId에 해당하는 Music 클래스를 얻습니다.
         musicRepository.findById(musicFileDeleted.getMusicId()).ifPresent(deleteMusic ->{
-            Music music = new Music(
-                deleteMusic.getId(),
-                deleteMusic.getFileId(),
-                deleteMusic.getCreaterId(),
-                deleteMusic.getTitle(),
-                deleteMusic.getCreater(),
-                deleteMusic.getTotalSeconds(),
-                deleteMusic.getLikes(),
-                deleteMusic.getCreatedDate(),
-                deleteMusic.getUpdatedDate()
-            );
+            musicRepository.delete(deleteMusic);
             // [2] 얻어진 Music 클래스을 musicRepository에서 삭제시킵니다.
-            musicRepository.deleteAll();
             // [3] Music 데이터가 최종적으로 삭제되었으므로, MusicDeleted 이벤트를 발행합니다.
-            MusicDeleted musicDeleted = new MusicDeleted(music);
+            MusicDeleted musicDeleted = new MusicDeleted(deleteMusic);
             musicDeleted.publishAfterCommit();
         });
         

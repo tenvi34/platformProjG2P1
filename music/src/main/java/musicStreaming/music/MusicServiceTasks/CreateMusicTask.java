@@ -41,6 +41,6 @@ public class CreateMusicTask {
         // [3] DataUrlCode와 저장한 Music 데이터를 기반으로 MusicFileUploadRequested 이벤트를 발생시킵니다.
         musicFileUploadRequested.publishAfterCommit();
 
-        return new CreateMusicResDto(new Music());
+        return new CreateMusicResDto(music);
     }
 }
