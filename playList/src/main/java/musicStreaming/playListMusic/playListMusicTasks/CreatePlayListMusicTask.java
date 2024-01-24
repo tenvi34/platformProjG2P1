@@ -1,5 +1,8 @@
 package musicStreaming.playListMusic.playListMusicTasks;
 
+import java.util.Date;
+
+import musicStreaming._global.event.PlayListMusicCreated;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
@@ -16,8 +19,18 @@ public class CreatePlayListMusicTask {
         CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: createPlayListMusic");
 
         // [1] playListMusicRepository를 이용해서 새로운 PlayListMusic 데이터를 저장합니다.
-        // [2] PlayListMusicCreated 이벤트를 발생시킵니다.
+        PlayListMusic playListMusic = new PlayListMusic();
 
-        return new CreatePlayListMusicResDto(new PlayListMusic());
+        playListMusic.setPlayListId(createPlayListMusicReqDto.getPlayListId());
+        playListMusic.setMusicId(createPlayListMusicReqDto.getMusicId());
+        playListMusic.setTitle(createPlayListMusicReqDto.getTitle());
+        playListMusic.setCreaterId(userId);
+
+        PlayListMusic playList = playListMusicRepository.save(playListMusic);
+        // [2] PlayListMusicCreated 이벤트를 발생시킵니다.
+        PlayListMusicCreated playListMusicCreated = new PlayListMusicCreated(playList);
+        playListMusicCreated.publishAfterCommit();
+        
+        return new CreatePlayListMusicResDto(playList);
     }
 }

@@ -12,8 +12,8 @@ public class GetDataUrlTask {
     public static GetDataUrlResDto getDataUrlTask(GetDataUrlReqDto getDataUrlReqDto, DataUrlStorageService dataUrlStorageService) {
         CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: getDataUrl");
 
-        // [1] dataUrlStorageService에서 주어진 DataUrlCode로 DataUrl을 얻고, 반환합니다.
-
-        return new GetDataUrlResDto("DATA URL");
+        // [1] dataUrlStorageService에서 주어진 DataUrlCode로 DataUrl을 얻고, 반환합니다. 
+        String DataUrl =  dataUrlStorageService.readDataUrlFromDataCode(getDataUrlReqDto.getDataUrlCode());
+        return new GetDataUrlResDto(DataUrl);
     }
 }
