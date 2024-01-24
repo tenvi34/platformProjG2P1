@@ -1,6 +1,5 @@
 package musicStreaming.domain.MusicTasks;
 
-import musicStreaming._global.event.MusicDeleted;
 import musicStreaming._global.event.MusicFileDeleted;
 
 import musicStreaming.domain.MusicRepository;
@@ -16,7 +15,7 @@ public class DeleteMusicTask {
             musicRepository.delete(musicToDelete);
 
             // [3] Music 데이터가 최종적으로 삭제되었으므로, MusicDeleted 이벤트를 발행합니다.
-            (new MusicDeleted(musicToDelete)).publishAfterCommit();;
+            // Music@PostRemove에서 발생됨
         
         });
         
