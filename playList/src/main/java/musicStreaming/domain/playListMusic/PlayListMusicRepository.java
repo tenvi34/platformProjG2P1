@@ -9,4 +9,5 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 public interface PlayListMusicRepository
     extends PagingAndSortingRepository<PlayListMusic, Long> {
     List<PlayListMusic> findAllByMusicId(Long musicId);
+    List<PlayListMusic> findAllByPlayListId(Long playListId);
 }
