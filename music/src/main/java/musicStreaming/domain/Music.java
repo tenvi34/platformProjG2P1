@@ -78,6 +78,7 @@ public class Music {
 
     @PrePersist
     public void onPrePersist() {
+        this.likes = 0;
         this.createdDate = new Date();
         this.updatedDate = new Date();
 
