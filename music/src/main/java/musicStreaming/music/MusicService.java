@@ -1,5 +1,6 @@
 package musicStreaming.music;
 
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.stereotype.Service;
 
 import lombok.RequiredArgsConstructor;
@@ -29,10 +30,17 @@ import musicStreaming.music.resDtos.UpdateMusicInfoResDto;
 public class MusicService {
     private final MusicRepository musicRepository;
     private final DataUrlStorageService dataUrlStorageService;
+    private final ApplicationEventPublisher eventPublisher;
+
+    public MusicService(MusicRepository musicRepository, ApplicationEventPublisher eventPublisher) {
+        this.musicRepository = musicRepository;
+        this.eventPublisher = eventPublisher;
+    }
 
     // 주어진 DataURL을 저장하고, File 서비스에 업로드 요청을 수행하기 위해서
     public CreateMusicResDto createMusic(CreateMusicReqDto createMusicReqDto, Long userId) {
-        return CreateMusicTask.createMusicTask(createMusicReqDto, userId, this.musicRepository, this.dataUrlStorageService);
+        return CreateMusicTask.createMusicTask(createMusicReqDto, userId, this.musicRepository,
+                this.dataUrlStorageService);
     }
 
     // 주어진 DataUrlCode에 해당하는 DataUrl을 반환하기 위해서
@@ -40,17 +48,19 @@ public class MusicService {
         return GetDataUrlTask.getDataUrlTask(getDataUrlReqDto, this.dataUrlStorageService);
     }
 
-
     // 음악 정보를 업데이트시키기 위해서
     public UpdateMusicInfoResDto updateMusicInfo(UpdateMusicInfoReqDto updateMusicInfoReqDto) {
-        return UpdateMusicInfoTask.updateMusicInfoTask(updateMusicInfoReqDto, musicRepository);
+        // return UpdateMusicInfoTask.updateMusicInfoTask(updateMusicInfoReqDto,
+        // musicRepository);
+        UpdateMusicInfoTask task = new UpdateMusicInfoTask(eventPublisher);
+        return task.updateMusicInfoTask(updateMusicInfoReqDto, musicRepository);
+
     }
 
     // 음악 파일을 업데이트시키기 위해서
     public UpdateMusicFileResDto updateMusicFile(UpdateMusicFileReqDto updateMusicFileReqDto) {
         return UpdateMusicFileTask.updateMusicFileTask(updateMusicFileReqDto, musicRepository, dataUrlStorageService);
     }
-
 
     // 좋아요를 눌렀을 경우, 해당하는 음악의 좋아요 개수를 업데이트하기 위해서
     public LikeMusicResDto likeMusic(LikeMusicReqDto createMusicReqDto) {

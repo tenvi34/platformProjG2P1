@@ -1,11 +1,12 @@
 package musicStreaming.music.MusicServiceTasks;
 
+import org.springframework.context.ApplicationEventPublisher;
+
+import musicStreaming._global.event.MusicInfoUpdated;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
-
 import musicStreaming.domain.Music;
 import musicStreaming.domain.MusicRepository;
-
 import musicStreaming.music.reqDtos.UpdateMusicInfoReqDto;
 import musicStreaming.music.resDtos.UpdateMusicInfoResDto;
 
@@ -16,8 +17,16 @@ public class UpdateMusicInfoTask {
         CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: updateMusicInfo");
 
         // [1] updateMusicInfoReqDto에서 musicId를 얻어서 해당하는 Music 데이터 얻기
+
+        Music music = musicRepository.findById(updateMusicInfoReqDto.getMusicId()).orElse(new Music());
+
         // [2] title을 업데이트하고, 저장하기
-        // [3] MusicInfoUpdated 이벤트 발생시키기 
+        music.setTitle(updateMusicInfoReqDto.getTitle());
+        musicRepository.save(music);
+
+        // [3] MusicInfoUpdated 이벤트 발생시키기
+        MusicInfoUpdated musicInfoUpdated = new MusicInfoUpdated(music);
+        musicInfoUpdated.publishAfterCommit();
 
         return new UpdateMusicInfoResDto(new Music());
     }
