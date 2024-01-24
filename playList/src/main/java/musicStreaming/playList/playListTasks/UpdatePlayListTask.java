@@ -1,5 +1,8 @@
 package musicStreaming.playList.playListTasks;
 
+import java.util.Optional;
+
+import musicStreaming._global.event.PlayListUpdated;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
@@ -16,9 +19,16 @@ public class UpdatePlayListTask {
         CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: updatePlayList");
 
         // [1] playListRepository로 playListId와 매칭되는 PlayList 데이터를 가져옵니다.
-        // [2] PlayList를 수정하고 저장합니다.
-        // [3] PlayListUpdated 이벤트를 발생시킵니다.
+        Optional<PlayList> opPlayList = playListRepository.findById(updatePlayListReqDto.getPlayListId());
+        PlayList updatePlayList = opPlayList.get();
 
-        return new UpdatePlayListResDto(new PlayList());
+        // [2] PlayList를 수정하고 저장합니다.
+        updatePlayList.setTitle(updatePlayListReqDto.getTitle());
+
+        // [3] PlayListUpdated 이벤트를 발생시킵니다.
+        PlayListUpdated playListUpdated = new PlayListUpdated(updatePlayList);
+        playListUpdated.publishAfterCommit();
+
+        return new UpdatePlayListResDto(updatePlayList);
     }
 }
