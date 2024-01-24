@@ -25,6 +25,8 @@ public class UpdatePlayListMusicTask {
         // [2] PlayListMusic를 수정하고 저장합니다.
         updatePlayListMusic.setTitle(updatePlayListMusicReqDto.getTitle());
 
+        playListMusicRepository.save(updatePlayListMusic);
+
         // [3] PlayListMusicUpdated 이벤트를 발생시킵니다.
         PlayListMusicUpdated playListMusicUpdated = new PlayListMusicUpdated(updatePlayListMusic);
         playListMusicUpdated.publishAfterCommit();
