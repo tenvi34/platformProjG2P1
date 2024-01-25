@@ -1,5 +1,6 @@
 package musicStreaming.music.MusicServiceTasks;
 
+import musicStreaming._global.event.MusicLiked;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
 
@@ -15,9 +16,19 @@ public class LikeMusicTask {
             MusicRepository musicRepository) {
         CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: likeMusic");
 
-        // [1] createMusicReqDto에서 musicId를 얻어서 해당하는 Music 데이터 얻기
+        // [1] likeMusicReqDto에서 musicId를 얻어서 해당하는 Music 데이터 얻기
+        Long musicId = createMusicReqDto.getMusicId();
+        Music music = musicRepository.findById(musicId)
+                .orElseThrow(() -> new IllegalArgumentException("No music found with id: " + musicId));
         // [2] likes의 개수를 1 증가시키고, 저장하기
+        music.setLikes(music.getLikes() + 1);
+        musicRepository.save(music);
+
         // [3] MusicLiked 이벤트 발생시키기 
+        MusicLiked musicLiked = new MusicLiked(musicId.toString());
+        musicLiked.setId(musicId);
+        musicLiked.setLikes(music.getLikes());
+        musicLiked.publish();
 
         return new LikeMusicResDto(new Music());
     }

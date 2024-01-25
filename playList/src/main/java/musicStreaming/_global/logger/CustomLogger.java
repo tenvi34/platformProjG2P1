@@ -51,4 +51,9 @@ public class CustomLogger {
         final StackTraceElement[] ste = Thread.currentThread().getStackTrace();
         return String.format("[%s] [%s] %s: %s", ste[3].toString(), e.getClass().getName(), e.getMessage() + " / " + message, params) + "\n" + e.getStackTrace().toString();
     }
+
+    public static void warn(CustomLoggerType effect, String string) {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'warn'");
+    }
 }

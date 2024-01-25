@@ -5,4 +5,6 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(collectionResourceRel = "playLists", path = "playLists")
 public interface PlayListRepository
-    extends PagingAndSortingRepository<PlayList, Long> {}
+    extends PagingAndSortingRepository<PlayList, Long> {
+
+    PlayList findById(String playListId);}

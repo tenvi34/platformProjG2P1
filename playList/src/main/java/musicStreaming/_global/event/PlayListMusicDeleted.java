@@ -29,4 +29,9 @@ public class PlayListMusicDeleted extends AbstractEvent {
     public PlayListMusicDeleted() {
         super();
     }
+
+    public String getPlayListId() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'getPlayListId'");
+    }
 }
