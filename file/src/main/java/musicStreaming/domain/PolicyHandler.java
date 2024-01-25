@@ -68,6 +68,7 @@ public class PolicyHandler {
             MusicFileUpdateFailed musicFileUpdateFailed = new MusicFileUpdateFailed();
             musicFileUpdateFailed.setId(musicFileUpdateRequested.getFileId());
             musicFileUpdateFailed.setMusicId(musicFileUpdateRequested.getId());
+            musicFileUpdateFailed.setDataUrlCode(musicFileUpdateRequested.getDataUrlCode());
             musicFileUpdateFailed.publishAfterCommit();
         }
     }

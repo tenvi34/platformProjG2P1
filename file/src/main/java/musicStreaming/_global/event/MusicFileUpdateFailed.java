@@ -13,10 +13,12 @@ import lombok.ToString;
 public class MusicFileUpdateFailed extends AbstractEvent {
     private Long id;
     private Long musicId;
+    private String dataUrlCode;
 
-    public MusicFileUpdateFailed(File aggregate, Long musicId) {
+    public MusicFileUpdateFailed(File aggregate, Long musicId, String dataUrlCode) {
         super(aggregate);
         this.musicId = musicId;
+        this.dataUrlCode = dataUrlCode;
     }
 
     public MusicFileUpdateFailed() {
