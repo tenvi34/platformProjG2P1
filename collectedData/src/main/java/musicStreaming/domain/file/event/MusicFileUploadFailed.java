@@ -15,11 +15,13 @@ import lombok.ToString;
 public class MusicFileUploadFailed extends AbstractEvent {
     private Long id;
     private Long musicId;
+    private String dataUrlCode;
 
     public MusicFileUploadFailed(MockMusicFileUploadFailedReqDto mockData) {
         super();
         this.id = mockData.getId();
         this.musicId = mockData.getMusicId();
+        this.dataUrlCode = mockData.getDataUrlCode();
     }
 
     public MusicFileUploadFailed() {
