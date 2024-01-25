@@ -198,6 +198,7 @@ spring:
             - RewritePath=/api/music/(?<segment>.*), /${segment}
             - AuthorizationHeaderFilter
 
+
         - id: fileResource
           uri: http://host.docker.internal:8084
           predicates:
