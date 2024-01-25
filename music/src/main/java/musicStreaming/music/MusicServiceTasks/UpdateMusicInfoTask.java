@@ -17,9 +17,9 @@ public class UpdateMusicInfoTask {
             MusicRepository musicRepository) {
 
         // [1] updateMusicInfoReqDto에서 musicId를 얻어서 해당하는 Music 데이터 얻기
-        Optional<Music> optaionalMusic = musicRepository.findById(updateMusicInfoReqDto.getMusicId());
-        if(!optaionalMusic.isPresent()) throw new MusicNotFoundException();
-        Music musicToUpate = optaionalMusic.get();
+        Optional<Music> optionalMusic = musicRepository.findById(updateMusicInfoReqDto.getMusicId());
+        if(!optionalMusic.isPresent()) throw new MusicNotFoundException();
+        Music musicToUpate = optionalMusic.get();
 
         // [2] title을 업데이트하고, 저장하기
         musicToUpate.setTitle(updateMusicInfoReqDto.getTitle());
