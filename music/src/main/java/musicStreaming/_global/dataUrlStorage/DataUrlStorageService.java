@@ -30,7 +30,6 @@ public class DataUrlStorageService {
      * DATA URL을 전달해서 파일을 생성하고, 생성된 파일과 매칭되는 코드를 반환합니다.<p>
      * 영향)<p>
      * 이 함수는 dataUrlStorage 폴더 내부에 파일을 직접 생성시킵니다.<p>
-     * 반환된 코드는 다른 함수에서 읽기나 삭제로 사용할 수 있습니다.<p>
      * @param dataUrl 특정 파일에 대한 데이터를 나타내는 DataUrl
      * @return 쓰여진 파일을 조작하기 위한 DataCode
      */
@@ -61,6 +60,8 @@ public class DataUrlStorageService {
      * 데이터 코드로부터 매칭되는 파일에 있는 데이터를 얻기 위해서<p>
      * 예제)<p>
      * readDataUrlFromDataCode("3fc46480-3818-47d9-abcb-8e3167d0a2ab") -> "data:audio/mpeg;base64,SUQzB..."<p>
+     * 영향)<p>
+     * 이 함수는 dataUrlStorage 폴더 내부의 파일에 접근해서 읽기 연산을 합니다.<p>
      * @param dataUrlCode 접근을 위한 특정 파일과 매칭되는 dataUrlCode
      * @return 특정 데이터에 대한 DataUrl
      */
@@ -96,6 +97,8 @@ public class DataUrlStorageService {
      * 데이터 코드와 매칭되는 파일을 삭제시키기 위해서<p>
      * 예제)<p>
      * deleteDataUrlFile("3fc46480-3818-47d9-abcb-8e3167d0a2ab")<p>
+     * 영향)<p>
+     * 이 함수는 dataUrlStorage 폴더 내부의 파일에 접근해서 삭제 연산을 합니다.<p>
      * @param dataUrlCode 접근을 위한 특정 파일과 매칭되는 dataUrlCode
      */
     public void deleteDataUrlFile(String dataUrlCode) {
