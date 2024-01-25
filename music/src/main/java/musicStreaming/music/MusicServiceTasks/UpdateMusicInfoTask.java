@@ -1,12 +1,13 @@
 package musicStreaming.music.MusicServiceTasks;
 
-import org.springframework.context.ApplicationEventPublisher;
+import java.util.Optional;
 
 import musicStreaming._global.event.MusicInfoUpdated;
-import musicStreaming._global.logger.CustomLogger;
-import musicStreaming._global.logger.CustomLoggerType;
+import musicStreaming._global.exceptions.MusicNotFoundException;
+
 import musicStreaming.domain.Music;
 import musicStreaming.domain.MusicRepository;
+
 import musicStreaming.music.reqDtos.UpdateMusicInfoReqDto;
 import musicStreaming.music.resDtos.UpdateMusicInfoResDto;
 
@@ -14,20 +15,19 @@ public class UpdateMusicInfoTask {
     // 음악 정보를 업데이트시키기 위해서
     public static UpdateMusicInfoResDto updateMusicInfoTask(UpdateMusicInfoReqDto updateMusicInfoReqDto,
             MusicRepository musicRepository) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: updateMusicInfo");
 
         // [1] updateMusicInfoReqDto에서 musicId를 얻어서 해당하는 Music 데이터 얻기
-
-        Music music = musicRepository.findById(updateMusicInfoReqDto.getMusicId()).orElse(new Music());
+        Optional<Music> optaionalMusic = musicRepository.findById(updateMusicInfoReqDto.getMusicId());
+        if(!optaionalMusic.isPresent()) throw new MusicNotFoundException();
+        Music musicToUpate = optaionalMusic.get();
 
         // [2] title을 업데이트하고, 저장하기
-        music.setTitle(updateMusicInfoReqDto.getTitle());
-        musicRepository.save(music);
+        musicToUpate.setTitle(updateMusicInfoReqDto.getTitle());
+        Music savedMusic = musicRepository.save(musicToUpate);
 
         // [3] MusicInfoUpdated 이벤트 발생시키기
-        MusicInfoUpdated musicInfoUpdated = new MusicInfoUpdated(music);
-        musicInfoUpdated.publishAfterCommit();
+        (new MusicInfoUpdated(savedMusic)).publishAfterCommit();
 
-        return new UpdateMusicInfoResDto(new Music());
+        return new UpdateMusicInfoResDto(savedMusic);
     }
 }
