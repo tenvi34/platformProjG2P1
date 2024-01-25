@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import musicStreaming._global.config.kafka.KafkaProcessor;
 import musicStreaming._global.event.MusicFileDeleted;
+import musicStreaming._global.event.MusicFileUpdateFailed;
 import musicStreaming._global.event.MusicFileUpdated;
 import musicStreaming._global.event.MusicFileUploadFailed;
 import musicStreaming._global.event.MusicFileUploaded;
@@ -98,6 +99,26 @@ public class PolicyHandler {
 
         } catch(Exception e) {
             CustomLogger.error(e, "", String.format("{%s: %s}", musicFileDeleted.getClass().getSimpleName(), musicFileDeleted.toString()));
+        }
+    }
+
+    // 음악 파일이 업데이트에 실패 했을 경우, 관련 DataUrl을 삭제시키기 위해서
+    @StreamListener(
+        value = KafkaProcessor.INPUT,
+        condition = "headers['type']=='MusicFileUpdateFailed'"
+    )
+    public void wheneverMusicFileUpdateFailed_DeleteDataUrl(
+        @Payload MusicFileUpdateFailed musicFileUpdateFailed
+    ) {
+        try
+        {
+
+            CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{%s: %s}", musicFileUpdateFailed.getClass().getSimpleName(), musicFileUpdateFailed.toString()));
+            Music.deleteDataUrl(musicFileUpdateFailed);
+            CustomLogger.debug(CustomLoggerType.EXIT);
+
+        } catch(Exception e) {
+            CustomLogger.error(e, "", String.format("{%s: %s}", musicFileUpdateFailed.getClass().getSimpleName(), musicFileUpdateFailed.toString()));
         }
     }
 }

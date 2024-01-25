@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 
 import lombok.RequiredArgsConstructor;
+
 import musicStreaming._global.dataUrlStorage.DataUrlStorageService;
 import musicStreaming._global.logger.CustomLogger;
 import musicStreaming._global.logger.CustomLoggerType;
@@ -21,6 +22,7 @@ import musicStreaming.sanityCheck.reqDtos.DeleteDataUrlFileReqDto;
 import musicStreaming.sanityCheck.reqDtos.EchoWithJsonReqDto;
 import musicStreaming.sanityCheck.reqDtos.LogsReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileDeletedReqDto;
+import musicStreaming.sanityCheck.reqDtos.MockMusicFileUpdateFailedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUpdatedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadFailedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadedReqDto;
@@ -154,6 +156,14 @@ public class SanityCheckController {
     public void mockMusicFileDeleted(@RequestBody MockMusicFileDeletedReqDto mockData) {
         CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{mockData: %s}", mockData.toString()));
         this.sanityCheckService.mockMusicFileDeleted(mockData);
+        CustomLogger.debug(CustomLoggerType.EXIT);
+    }
+
+    // Policy 테스트용으로 MusicFileUpdateFailed 이벤트를 강제로 발생시키기 위해서
+    @PostMapping("/mock/MusicFileUpdateFailed")
+    public void mockMusicFileUpdateFailed(@RequestBody MockMusicFileUpdateFailedReqDto mockData) {
+        CustomLogger.debug(CustomLoggerType.ENTER, "", String.format("{mockData: %s}", mockData.toString()));
+        this.sanityCheckService.mockMusicFileUpdateFailed(mockData);
         CustomLogger.debug(CustomLoggerType.EXIT);
     }
 
