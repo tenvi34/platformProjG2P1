@@ -13,6 +13,9 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import org.springframework.stereotype.Service;
 
 import javazoom.spi.mpeg.sampled.file.MpegAudioFileReader;
+
+import musicStreaming._global.logger.CustomLogger;
+import musicStreaming._global.logger.CustomLoggerType;
 import musicStreaming._global.resources.exceptions.ResourcesIOException;
 
 
@@ -35,11 +38,17 @@ public class ResourcesService {
      */
     public String writeMp3FileFromDataUrl(String dataUrl) {
         String fileName = UUID.randomUUID().toString() + ".mp3";
+        String writeFilePath = this.path(fileName);
 
         byte[] decodedBytes = Base64.getDecoder().decode(dataUrl.split(",")[1]);
         try {
             
-            FileOutputStream fos = new FileOutputStream(this.path(fileName));
+            CustomLogger.debug(
+                CustomLoggerType.EFFECT, 
+                String.format("Try to write decodedBytes to '%s'", writeFilePath),
+                String.format("{decodedBytesLength: %d}", decodedBytes.length)
+            );
+            FileOutputStream fos = new FileOutputStream(writeFilePath);
             fos.write(decodedBytes);
             fos.close();
 
@@ -61,9 +70,12 @@ public class ResourcesService {
      * @return .mp3 파일의 재생시간(초)
      */
     public Integer getMp3TotalSeconds(String fileName) {
+        String readFilePath = this.path(fileName);
+
         try {
 
-            AudioFileFormat fileFormat = new MpegAudioFileReader().getAudioFileFormat(new File(this.path(fileName)));
+            CustomLogger.debug(CustomLoggerType.EFFECT, String.format("Try to read .mp3 file from '%s' to get total secodes", readFilePath));
+            AudioFileFormat fileFormat = new MpegAudioFileReader().getAudioFileFormat(new File(readFilePath));
             long microseconds = (long) fileFormat.properties().get("duration");
             Integer totalSeconds = (int)(microseconds / 1000000);
             return totalSeconds;
@@ -83,6 +95,9 @@ public class ResourcesService {
      * @param fileName 대상이 되는 파일명
      */
     public void deleteFile(String fileName) {
-        (new File(this.path(fileName))).delete();
+        String deleteFilePath = this.path(fileName);
+
+        CustomLogger.debug(CustomLoggerType.EFFECT, String.format("Try to delete file from '%s'", deleteFilePath));
+        (new File(deleteFilePath)).delete();
     }
 }
