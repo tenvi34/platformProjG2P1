@@ -6,4 +6,5 @@ import lombok.Data;
 public class MockMusicFileUploadFailedReqDto {
     private Long id;
     private Long musicId;
+    private String dataUrlCode;
 }
