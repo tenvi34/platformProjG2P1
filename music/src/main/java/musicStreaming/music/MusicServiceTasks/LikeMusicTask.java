@@ -30,6 +30,6 @@ public class LikeMusicTask {
         musicLiked.setLikes(music.getLikes());
         musicLiked.publish();
 
-        return new LikeMusicResDto(new Music());
+        return new LikeMusicResDto(music);
     }
 }
