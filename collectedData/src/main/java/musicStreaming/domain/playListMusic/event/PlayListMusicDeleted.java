@@ -14,10 +14,12 @@ import lombok.ToString;
 @EqualsAndHashCode(callSuper=false)
 public class PlayListMusicDeleted extends AbstractEvent {
     private Long id;
+    private Long playListId;
 
     public PlayListMusicDeleted(MockPlayListMusicDeletedReqDto mockData) {
         super();
         this.id = mockData.getId();
+        this.playListId = mockData.getPlayListId();
     }
 
     public PlayListMusicDeleted() {

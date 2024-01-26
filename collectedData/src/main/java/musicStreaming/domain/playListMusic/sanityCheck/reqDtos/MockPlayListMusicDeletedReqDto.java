@@ -7,4 +7,5 @@ import lombok.ToString;
 @ToString
 public class MockPlayListMusicDeletedReqDto {
     private Long id;
+    private Long playListId;
 }
