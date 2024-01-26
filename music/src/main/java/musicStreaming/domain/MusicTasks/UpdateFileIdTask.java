@@ -22,6 +22,7 @@ public class UpdateFileIdTask {
         musicRepository.save(music);
         // [3] Music 데이터가 최종적으로 생성되었으므로, MusicCreated 이벤트를 발행합니다.
         MusicCreated musicCreated = new MusicCreated();
+        // TODO: 추후 값 세팅 필요
         musicCreated.publish();   
         // [4] dataUrlStorageService를 이용해서 dataUrlCode에 해당하는 파일을 삭제시킵니다.
         dataUrlStorageService.deleteDataUrlFile(dataUrlCode);
