@@ -5,6 +5,4 @@ import org.springframework.data.rest.core.annotation.RepositoryRestResource;
 
 @RepositoryRestResource(collectionResourceRel = "musics", path = "musics")
 public interface MusicRepository
-    extends PagingAndSortingRepository<Music, Long> {
-
-    Music findById(String musicId);}
+    extends PagingAndSortingRepository<Music, Long> {}
