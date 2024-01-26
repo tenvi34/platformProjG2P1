@@ -137,7 +137,7 @@ public class File {
 
 
     // 관련 음악 파일 DATA URL을 요청해서 얻고, 디코딩 후, 파일을 저장시키기 위해서
-    public static void uploadMusicFile(MusicFileUploadRequested musicFileUploadRequested) {
+    public static void uploadMusicFile(MusicFileUploadRequested musicFileUploadRequested) throws Exception {
         UploadMusicFileTask.uploadMusicFileTask(musicFileUploadRequested, File.repository(), File.resourcesService(), File.externalSystemProxyService());
     }
 

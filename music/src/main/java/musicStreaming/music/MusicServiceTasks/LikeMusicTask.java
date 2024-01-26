@@ -25,7 +25,7 @@ public class LikeMusicTask {
         musicRepository.save(music);
 
         // [3] MusicLiked 이벤트 발생시키기 
-        MusicLiked musicLiked = new MusicLiked(musicId.toString());
+        MusicLiked musicLiked = new MusicLiked(music);
         musicLiked.setId(musicId);
         musicLiked.setLikes(music.getLikes());
         musicLiked.publish();
