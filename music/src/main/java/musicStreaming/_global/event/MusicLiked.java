@@ -16,8 +16,8 @@ public class MusicLiked extends AbstractEvent {
     private Long id;
     private Integer likes;
 
-    public MusicLiked(String musicId) {
-        super(musicId);
+    public MusicLiked(Music aggregate) {
+        super(aggregate);
     }
 
     public MusicLiked() {
