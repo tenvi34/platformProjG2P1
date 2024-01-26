@@ -28,6 +28,6 @@ public class UpdateMusicFileTask {
         MusicFileUpdateRequested musicFileUpdateRequested = new MusicFileUpdateRequested(music, dataUrlCode);
         musicFileUpdateRequested.publish();
 
-        return new UpdateMusicFileResDto(new Music());
+        return new UpdateMusicFileResDto(music);
     }
 }
