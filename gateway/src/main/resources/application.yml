@@ -84,6 +84,14 @@ spring:
             - AuthorizationHeaderFilter
 
 
+        - id: fileSanityCheck
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/file/sanityCheck
+            - Method=GET
+          filters:
+            - RewritePath=/api/file/(?<segment>.*), /${segment}
+
         - id: fileResource
           uri: http://localhost:8084
           predicates:
@@ -199,6 +207,14 @@ spring:
             - AuthorizationHeaderFilter
 
 
+        - id: fileSanityCheck
+          uri: http://host.docker.internal:8084
+          predicates:
+            - Path=/api/file/sanityCheck
+            - Method=GET
+          filters:
+            - RewritePath=/api/file/(?<segment>.*), /${segment}
+
         - id: fileResource
           uri: http://host.docker.internal:8084
           predicates:
@@ -313,6 +329,14 @@ spring:
             - RewritePath=/api/music/(?<segment>.*), /${segment}
             - AuthorizationHeaderFilter
 
+
+        - id: fileSanityCheck
+          uri: http://file:8080
+          predicates:
+            - Path=/api/file/sanityCheck
+            - Method=GET
+          filters:
+            - RewritePath=/api/file/(?<segment>.*), /${segment}
 
         - id: fileResource
           uri: http://file:8080
