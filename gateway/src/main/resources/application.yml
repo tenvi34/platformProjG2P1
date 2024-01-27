@@ -103,7 +103,7 @@ spring:
         - id: playListNoAuth
           uri: http://localhost:8085
           predicates:
-            - Path=/api/playList/sanityCheck/logs
+            - Path=/api/playList/sanityCheck,/api/playList/sanityCheck/logs
             - Method=GET
           filters:
             - RewritePath=/api/playList/(?<segment>.*), /${segment}
@@ -226,7 +226,7 @@ spring:
         - id: playListNoAuth
           uri: http://host.docker.internal:8085
           predicates:
-            - Path=/api/playList/sanityCheck/logs
+            - Path=/api/playList/sanityCheck,/api/playList/sanityCheck/logs
             - Method=GET
           filters:
             - RewritePath=/api/playList/(?<segment>.*), /${segment}
@@ -349,7 +349,7 @@ spring:
         - id: playListNoAuth
           uri: http://play-list:8080
           predicates:
-            - Path=/api/playList/sanityCheck/logs
+            - Path=/api/playList/sanityCheck,/api/playList/sanityCheck/logs
             - Method=GET
           filters:
             - RewritePath=/api/playList/(?<segment>.*), /${segment}
