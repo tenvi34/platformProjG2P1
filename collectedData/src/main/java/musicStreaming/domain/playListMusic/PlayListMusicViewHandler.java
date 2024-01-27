@@ -71,8 +71,8 @@ public class PlayListMusicViewHandler {
 
 
             PlayListMusic playListMusicToUpdate = optionalPlayListMusic.get();
-            playListMusicToUpdate.setTitle(playListMusicToUpdate.getTitle());
-            playListMusicToUpdate.setUpdatedDate(playListMusicToUpdate.getUpdatedDate());
+            playListMusicToUpdate.setTitle(playListMusicUpdated.getTitle());
+            playListMusicToUpdate.setUpdatedDate(playListMusicUpdated.getUpdatedDate());
             playListMusicToUpdate.setStatus("PlayListMusicUpdated");
 
             PlayListMusic savedPlayListMusic = this.playListMusicRepository.save(playListMusicToUpdate);
