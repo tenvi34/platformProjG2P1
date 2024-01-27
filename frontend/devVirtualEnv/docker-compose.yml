@@ -23,6 +23,52 @@ services:
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
 
 
+  music-streaming-user:
+    image: sinsung6722/music-streaming-user:v1
+    depends_on:
+      - kafka
+    ports:
+      - "8082:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
+  music-streaming-music:
+    image: sinsung6722/music-streaming-music:v1
+    depends_on:
+      - kafka
+    ports:
+      - "8083:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
+  music-streaming-file:
+    image: sinsung6722/music-streaming-file:v1
+    depends_on:
+      - kafka
+    ports:
+      - "8084:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
+  music-streaming-play-list:
+    image: sinsung6722/music-streaming-play-list:v1
+    depends_on:
+      - kafka
+    ports:
+      - "8085:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
+  music-streaming-comment:
+    image: sinsung6722/music-streaming-comment:v1
+    depends_on:
+      - kafka
+    ports:
+      - "8086:8080"
+    environment:
+      SPRING_PROFILES_ACTIVE: docker
+
+
   music-streaming-collected-data:
     image: sinsung6722/music-streaming-collected-data:v1
     depends_on:
