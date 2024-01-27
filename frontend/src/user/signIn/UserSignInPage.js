@@ -14,8 +14,8 @@ import StyledTextButton from '../../_global/components/button/StyledTextButton';
 import UserProxy from '../../_global/proxy/UserProxy';
   
 const UserSignInPage = () => {
-    const { addAlertPopUp } = useContext(AlertPopupContext);
-    const { registerTokenValue, jwtTokenState } = useContext(JwtTokenContext);
+    const {addAlertPopUp} = useContext(AlertPopupContext);
+    const {registerTokenValue, jwtTokenState} = useContext(JwtTokenContext);
     const navigate = useNavigate();
 
     useEffect(() => {
