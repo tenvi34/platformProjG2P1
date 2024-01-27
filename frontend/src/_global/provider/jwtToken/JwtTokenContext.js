@@ -38,7 +38,7 @@ const JwtTokenProvider = ({ children }) => {
         
         localStorage.setItem("jwtToken", jwtToken);
         dispatch({type: REGISTER_TOKEN_VALUE, payload: {
-            value:jwtToken, id:Number(tokenPayload.sub), email:tokenPayload.email, name:tokenPayload.name, Authorization:`Bearer ${jwtToken}`
+            value:jwtToken, id:Number(tokenPayload.sub), email:tokenPayload.email, name:tokenPayload.name, role:tokenPayload.role, Authorization:`Bearer ${jwtToken}`
         }})
     };
     if((jwtTokenState.jwtToken == null) && (localStorage.getItem("jwtToken") != null))

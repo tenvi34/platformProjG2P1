@@ -1,5 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Container } from "@mui/material";
+
+import { AlertPopupProvider } from "./_global/provider/alertPopUp/AlertPopUpContext";
+import { JwtTokenProvider } from "./_global/provider/jwtToken/JwtTokenContext";
+
 import UserSignInPage from './user/signIn/UserSignInPage';
 import UserSignUpPage from './user/signUp/UserSignUpPage';
 import MusicSearchPage from './music/search/MusicSearchPage';
@@ -10,21 +15,27 @@ import PlayListInfoPage from './playList/info/PlayListInfoPage';
 
 function App() {
   return (
-    <Router>
-      <Routes>
-            <Route path="/" element={<UserSignInPage/>}/>
+    <AlertPopupProvider>
+      <JwtTokenProvider>
+        <Container maxWidth="sm">
+            <Router>
+              <Routes>
+                    <Route path="/" element={<UserSignInPage/>}/>
 
-            <Route path="/user/signIn" element={<UserSignInPage/>}/>
-            <Route path="/user/signUp" element={<UserSignUpPage/>}/>
+                    <Route path="/user/signIn" element={<UserSignInPage/>}/>
+                    <Route path="/user/signUp" element={<UserSignUpPage/>}/>
 
-            <Route path="/music/search" element={<MusicSearchPage/>}/>
-            <Route path="/music/info" element={<MusicInfoPage/>}/>
-            <Route path="/music/manage" element={<MusicManagePage/>}/>
+                    <Route path="/music/search" element={<MusicSearchPage/>}/>
+                    <Route path="/music/info" element={<MusicInfoPage/>}/>
+                    <Route path="/music/manage" element={<MusicManagePage/>}/>
 
-            <Route path="/playList/list" element={<PlayListListPage/>}/>
-            <Route path="/playList/info" element={<PlayListInfoPage/>}/>
-        </Routes>
-    </Router>
+                    <Route path="/playList/list" element={<PlayListListPage/>}/>
+                    <Route path="/playList/info" element={<PlayListInfoPage/>}/>
+                </Routes>
+            </Router>
+          </Container>
+      </JwtTokenProvider>
+    </AlertPopupProvider>
   )
 }
 
