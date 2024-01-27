@@ -1,0 +1,1 @@
+bash.exe .\commands\httpTest\logErrorAll.sh
