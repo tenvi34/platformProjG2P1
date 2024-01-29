@@ -7,7 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 import { JwtTokenContext } from "../../_global/provider/jwtToken/JwtTokenContext";
 
-import MusicPlayer from '../_global/components/MusicPlayer';
+import MusicInfo from '../_global/components/MusicInfo/MusicInfo';
 
 import TopAppBar from '../../_global/components/TopAppBar';
 import IconButton from '../../_global/components/button/IconButton';
@@ -43,7 +43,7 @@ const MusicListPage = () => {
             </TopAppBar>
     
             <Stack spacing={1} sx={{marginTop: 3}}>
-                <MusicPlayer musicId={1}/>
+                <MusicInfo musicId={1}/>
             </Stack>
         </>
     )

@@ -1,54 +1,27 @@
-import React, { useRef, useState } from 'react';
+import React from 'react';
 import { Stack, Card, Box } from '@mui/material';
-import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import LinkIcon from '@mui/icons-material/Link';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
-import PauseIcon from '@mui/icons-material/Pause';
 
-import IconButton from '../../../_global/components/button/IconButton';
-import BoldText from '../../../_global/components/text/BoldText';
-import StyledSlider from '../../../_global/components/slider/StyledSlider';
+import MusicPlayer from './MusicPlayer';
 
-import ReactAudioPlayer from 'react-audio-player';
+import IconButton from '../../../../_global/components/button/IconButton';
 
-const MusicPlayer = ({musicId, sx, ...props}) => {
-    const audioPlayerRef = useRef();
-    const [isPaused, setIsPaused] = useState(true)
+const MusicInfo = ({musicId, sx, ...props}) => {
 
-    const musicUrl = 'http://localhost:8088/api/file/5510a8d0-1b16-4ce6-8622-d1d39f0c3c36.mp3';
-
-    const onPlayButtonClicked = () => {
-        const audioRef = audioPlayerRef.current.audioEl.current;
-
-        if(audioRef.paused) audioRef.play()
-        else audioRef.pause()
-        setIsPaused(audioRef.paused)
-    }
-    
     return (
         <Card variant="outlined" sx={{padding: 1.5, height: 87, cursor: "pointer", ...sx}} {...props}>
             <Stack>
-                <Box>
-                    <IconButton onClick={onPlayButtonClicked} sx={{float: "left"}} buttonSx={{width: "35px", minWidth: "35px", height: "35px", minHeight: "35px"}} textSx={{}}>
-                        {isPaused ? <PlayArrowIcon/> : <PauseIcon/>}
-                    </IconButton>
-
-                    <Box sx={{float: "left", marginLeft: "5px"}}>
-                        <BoldText sx={{color: "lightgray", fontSize: "10px"}}>Test Author</BoldText>
-                        <BoldText>Test Title</BoldText>
-                    </Box>
-
-                    <BoldText sx={{float: "right", color: "lightgray", fontSize: "10px"}}>2022-01-05</BoldText>
-                </Box>
-
-                <Box>
-                    <BoldText sx={{float: "left", fontSize: "10px", paddingTop: "8px"}}>03:00</BoldText>
-                    <StyledSlider sx={{float: "left", width: "85%", marginX: "8px"}} defaultValue={50}></StyledSlider>
-                    <BoldText sx={{float: "left", fontSize: "10px", paddingTop: "8px"}}>05:00</BoldText>
-                </Box>
+                <MusicPlayer
+                    musicUrl={"http://localhost:8088/api/file/5510a8d0-1b16-4ce6-8622-d1d39f0c3c36.mp3"}
+                    musicSecTime={3}
+                    musicTitle={"Test Music Title"}
+                    musicCreater={"Test Music Creater"}
+                    musicCreatedDate={"2022-01-01"}
+                />
 
                 <Box>
                     <IconButton sx={{float: "left"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "10px", paddingBottom: "5px"}}>
@@ -69,14 +42,8 @@ const MusicPlayer = ({musicId, sx, ...props}) => {
                     </IconButton>
                 </Box>
             </Stack>
-
-            <ReactAudioPlayer
-                src={musicUrl}
-                ref={audioPlayerRef}
-                onEnded={()=>{setIsPaused(true)}}
-            />
         </Card>
     )
 }
 
-export default MusicPlayer;
+export default MusicInfo;
