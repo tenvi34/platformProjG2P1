@@ -1,4 +1,5 @@
 import React, { useRef, useState } from 'react';
+import { useNavigate } from "react-router-dom";
 import { Stack, Box } from '@mui/material';
 import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
@@ -10,8 +11,9 @@ import StyledSlider from '../../../../_global/components/slider/StyledSlider';
 
 import TimeTool from '../../../../_global/tool/TimeTool';
 
-const MusicPlayer = ({musicUrl, musicSecTime, musicTitle, musicCreater, musicCreatedDate, ...props}) => {
+const MusicPlayer = ({musicUrl, musicSecTime, musicTitle, musicCreater, musicCreatedDate, navigateUrl, ...props}) => {
     const audioPlayerRef = useRef();
+    const navigate = useNavigate();
     const [isPaused, setIsPaused] = useState(true)
     const [currentTimeSec, setCurrentTimeSec] = useState(0)
 
@@ -33,19 +35,20 @@ const MusicPlayer = ({musicUrl, musicSecTime, musicTitle, musicCreater, musicCre
 
     return (
     <>
-    
         <Stack {...props}>
             <Box>
                 <IconButton onClick={onPlayButtonClicked} sx={{float: "left"}} buttonSx={{width: "35px", minWidth: "35px", height: "35px", minHeight: "35px"}}>
                     {isPaused ? <PlayArrowIcon/> : <PauseIcon/>}
                 </IconButton>
 
-                <Box sx={{float: "left", marginLeft: "5px"}}>
-                    <BoldText sx={{color: "lightgray", fontSize: "10px"}}>{musicCreater}</BoldText>
-                    <BoldText>{musicTitle}</BoldText>
-                </Box>
+                <Box onClick={()=>{navigate(navigateUrl)}} sx={{cursor: "pointer"}}>
+                    <Box sx={{float: "left", marginLeft: "5px"}}>
+                        <BoldText sx={{color: "lightgray", fontSize: "10px"}}>{musicCreater}</BoldText>
+                        <BoldText>{musicTitle}</BoldText>
+                    </Box>
 
-                <BoldText sx={{float: "right", color: "lightgray", fontSize: "10px"}}>{musicCreatedDate}</BoldText>
+                    <BoldText sx={{float: "right", color: "lightgray", fontSize: "10px"}}>{musicCreatedDate}</BoldText>
+                </Box>
             </Box>
 
             <Box>
