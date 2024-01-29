@@ -8,12 +8,12 @@ import AddIcon from '@mui/icons-material/Add';
 import { JwtTokenContext } from "../../_global/provider/jwtToken/JwtTokenContext";
 
 import MusicSearchForm from './MusicSearchForm';
-import MusicInfo from '../../_global/components/MusicInfo/MusicInfo';
 
 import TopAppBar from '../../_global/components/TopAppBar';
 import IconButton from '../../_global/components/button/IconButton';
 import IconNavigationButton from '../../_global/components/button/IconNavigationButton';
 import UserManageButton from '../../_global/components/button/UserManageButton';
+import MusicInfo from '../../_global/components/MusicInfo/MusicInfo';
 
 const MusicListPage = () => {
     const {jwtTokenState, deleteTokenValue} = useContext(JwtTokenContext);
@@ -55,7 +55,7 @@ const MusicListPage = () => {
                 <MusicSearchForm onSubmit={onSubmitSearch}/>
 
                 <Stack sx={{width: "100%"}}>
-                    <MusicInfo sx={{width: "96%", marginTop: "5px"}} musicId={1}/>
+                    <MusicInfo sx={{width: "95.5%", marginTop: "5px"}} musicId={1}/>
                 </Stack>
             </Stack>
         </>
