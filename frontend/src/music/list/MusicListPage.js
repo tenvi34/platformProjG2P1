@@ -7,6 +7,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 import { JwtTokenContext } from "../../_global/provider/jwtToken/JwtTokenContext";
 
+import MusicSearchForm from './MusicSearchForm';
 import MusicInfo from '../_global/components/MusicInfo/MusicInfo';
 
 import TopAppBar from '../../_global/components/TopAppBar';
@@ -30,6 +31,10 @@ const MusicListPage = () => {
     }
 
 
+    const onSubmitSearch = (searchText, searchType) => {
+        console.log(searchText, searchType)
+    }
+
     return (
         <>
             <TopAppBar title="음악 목록">  
@@ -45,9 +50,13 @@ const MusicListPage = () => {
                     <LogoutIcon sx={{fontSize: 35, paddingTop: 0.3, paddingLeft: 0.3}}/>
                 </IconButton>
             </TopAppBar>
-    
-            <Stack spacing={1} sx={{marginTop: 3}}>
-                <MusicInfo musicId={1}/>
+            
+            <Stack sx={{marginTop: 3, alignItems: "center"}}>
+                <MusicSearchForm onSubmit={onSubmitSearch}/>
+
+                <Stack sx={{width: "100%"}}>
+                    <MusicInfo sx={{width: "96%", marginTop: "5px"}} musicId={1}/>
+                </Stack>
             </Stack>
         </>
     )
