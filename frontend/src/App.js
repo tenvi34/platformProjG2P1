@@ -29,10 +29,10 @@ function App() {
                     <Route path="/user/signUp" element={<UserSignUpPage/>}/>
 
                     <Route path="/music/list" element={<MusicListPage/>}/>
-                    <Route path="/music/info" element={<MusicInfoPage/>}/>
+                    <Route path="/music/info/:musicId" element={<MusicInfoPage/>}/>
 
                     <Route path="/playList/list" element={<PlayListListPage/>}/>
-                    <Route path="/playList/info" element={<PlayListInfoPage/>}/>
+                    <Route path="/playList/info/:playListId" element={<PlayListInfoPage/>}/>
                 </Routes>
             </Router>
             <AlertPopUpList/>

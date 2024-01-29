@@ -21,7 +21,7 @@ const MusicInfo = ({musicId, sx, ...props}) => {
                     musicTitle={"Test Music Title"}
                     musicCreater={"Test Music Creater"}
                     musicCreatedDate={"2022-01-01"}
-                    navigateUrl={`/music/info?musidId=${musicId}`}
+                    navigateUrl={`/music/info/${musicId}`}
                 />
 
                 <Box>
