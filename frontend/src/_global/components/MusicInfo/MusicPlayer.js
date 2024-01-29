@@ -5,11 +5,11 @@ import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 import PauseIcon from '@mui/icons-material/Pause';
 import ReactAudioPlayer from 'react-audio-player';
 
-import IconButton from '../../../../_global/components/button/IconButton';
-import BoldText from '../../../../_global/components/text/BoldText';
-import StyledSlider from '../../../../_global/components/slider/StyledSlider';
+import IconButton from '../button/IconButton';
+import BoldText from '../text/BoldText';
+import StyledSlider from '../slider/StyledSlider';
 
-import TimeTool from '../../../../_global/tool/TimeTool';
+import TimeTool from '../../tool/TimeTool';
 
 const MusicPlayer = ({musicUrl, musicSecTime, musicTitle, musicCreater, musicCreatedDate, navigateUrl, ...props}) => {
     const audioPlayerRef = useRef();

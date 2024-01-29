@@ -8,7 +8,7 @@ import AddIcon from '@mui/icons-material/Add';
 import { JwtTokenContext } from "../../_global/provider/jwtToken/JwtTokenContext";
 
 import MusicSearchForm from './MusicSearchForm';
-import MusicInfo from '../_global/components/MusicInfo/MusicInfo';
+import MusicInfo from '../../_global/components/MusicInfo/MusicInfo';
 
 import TopAppBar from '../../_global/components/TopAppBar';
 import IconButton from '../../_global/components/button/IconButton';

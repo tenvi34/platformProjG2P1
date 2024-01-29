@@ -8,7 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 import MusicPlayer from './MusicPlayer';
 
-import IconButton from '../../../../_global/components/button/IconButton';
+import IconButton from '../button/IconButton';
 
 const MusicInfo = ({musicId, sx, ...props}) => {
 
@@ -16,7 +16,7 @@ const MusicInfo = ({musicId, sx, ...props}) => {
         <Card variant="outlined" sx={{padding: 1.5, height: 87, ...sx}} {...props}>
             <Stack>
                 <MusicPlayer
-                    musicUrl={"http://localhost:8088/api/file/5510a8d0-1b16-4ce6-8622-d1d39f0c3c36.mp3"}
+                    musicUrl={"http://localhost:8088/api/file/3dcbc900-cf8f-4a9a-a2da-a87ad091e479.mp3"}
                     musicSecTime={3}
                     musicTitle={"Test Music Title"}
                     musicCreater={"Test Music Creater"}
