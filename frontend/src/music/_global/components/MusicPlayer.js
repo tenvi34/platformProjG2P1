@@ -13,12 +13,14 @@ import StyledSlider from '../../../_global/components/slider/StyledSlider';
 
 import ReactAudioPlayer from 'react-audio-player';
 
-const MusicPlayer = () => {
+const MusicPlayer = ({musicId, sx, ...props}) => {
     // audio source
+    console.log(musicId)
+
     const musicUrl = 'http://localhost:8088/api/file/5510a8d0-1b16-4ce6-8622-d1d39f0c3c36.mp3';
 
     return (
-        <Card variant="outlined" sx={{ padding: 1.5, height: 87, cursor: "pointer" }}>
+        <Card variant="outlined" sx={{padding: 1.5, height: 87, cursor: "pointer", ...sx}} {...props}>
             <Stack>
                 <Box>
                     <IconButton sx={{float: "left"}} buttonSx={{width: "35px", minWidth: "35px", height: "35px", minHeight: "35px"}} textSx={{}}>
@@ -27,7 +29,7 @@ const MusicPlayer = () => {
 
                     <Box sx={{float: "left", marginLeft: "5px"}}>
                         <BoldText sx={{color: "lightgray", fontSize: "10px"}}>Test Author</BoldText>
-                        <BoldText sx={{}}>Test Title</BoldText>
+                        <BoldText>Test Title</BoldText>
                     </Box>
 
                     <BoldText sx={{float: "right", color: "lightgray", fontSize: "10px"}}>2022-01-05</BoldText>

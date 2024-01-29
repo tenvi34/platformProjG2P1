@@ -27,7 +27,7 @@ const MusicListPage = () => {
         console.log(jwtTokenState.jwtToken.role === "Admin")
     }
 
-    
+
     return (
         <>
             <TopAppBar title="음악 목록">
@@ -43,7 +43,7 @@ const MusicListPage = () => {
             </TopAppBar>
     
             <Stack spacing={1} sx={{marginTop: 3}}>
-                <MusicPlayer/>
+                <MusicPlayer musicId={1}/>
             </Stack>
         </>
     )
