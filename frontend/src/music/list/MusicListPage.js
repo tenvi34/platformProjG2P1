@@ -1,17 +1,16 @@
 import React, { useContext, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
+import { Stack } from '@mui/material';
 import LogoutIcon from '@mui/icons-material/Logout';
+import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+import AddIcon from '@mui/icons-material/Add';
 
 import { JwtTokenContext } from "../../_global/provider/jwtToken/JwtTokenContext";
 
+import MusicPlayer from '../_global/components/MusicPlayer';
+
 import TopAppBar from '../../_global/components/TopAppBar';
 import IconButton from '../../_global/components/button/IconButton';
-
-
-import ReactAudioPlayer from 'react-audio-player';
-
-
-
 
 const MusicListPage = () => {
     const {jwtTokenState, deleteTokenValue} = useContext(JwtTokenContext);
@@ -28,22 +27,24 @@ const MusicListPage = () => {
         console.log(jwtTokenState.jwtToken.role === "Admin")
     }
 
-
-    // audio source
-    const musicUrl = 'http://localhost:8088/api/file/5510a8d0-1b16-4ce6-8622-d1d39f0c3c36.mp3';
-
+    
     return (
         <>
-            <TopAppBar title="음악 목록">           
-                <IconButton sx={{marginRight: 1}} onClick={() => {deleteTokenValue();}}>
+            <TopAppBar title="음악 목록">
+                <IconButton sx={{marginRight: "5px"}} onClick={() => {}}>
+                    <AddIcon sx={{fontSize: 35, paddingTop: 0.3, paddingLeft: 0.3}}/>
+                </IconButton>    
+                <IconButton sx={{marginRight: "5px"}} onClick={() => {}}>
+                    <ManageAccountsIcon sx={{fontSize: 35, paddingTop: 0.3, paddingLeft: 0.3}}/>
+                </IconButton>
+                <IconButton onClick={() => {deleteTokenValue();}}>
                     <LogoutIcon sx={{fontSize: 35, paddingTop: 0.3, paddingLeft: 0.3}}/>
                 </IconButton>
             </TopAppBar>
-
-            <ReactAudioPlayer
-                src={musicUrl}
-                controls
-            />
+    
+            <Stack spacing={1} sx={{marginTop: 3}}>
+                <MusicPlayer/>
+            </Stack>
         </>
     )
 }
