@@ -1,15 +1,15 @@
 import React from 'react';
-import NavButton from './IconButton';
+import IconButton from './IconButton';
 import { useNavigate } from 'react-router-dom';
 
-const NavNavigationButtion = ({children, url, sx, ...props}) => {
+const IconNavigationButton = ({children, url, sx, ...props}) => {
     const navigate = useNavigate();
 
     return (
-        <NavButton onClick={() => {navigate(url)}} sx={{...sx}} {...props}>
+        <IconButton onClick={() => {navigate(url)}} sx={{...sx}} {...props}>
             {children}
-        </NavButton>
+        </IconButton>
     );
 }
 
-export default NavNavigationButtion;
+export default IconNavigationButton;

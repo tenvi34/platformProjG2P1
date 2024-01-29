@@ -20,7 +20,7 @@ const UserSignInPage = () => {
 
     useEffect(() => {
         if(jwtTokenState.jwtToken !== null) {
-            navigate("/music/search");
+            navigate("/music/list");
         }
     }, [jwtTokenState.jwtToken, navigate])
 
@@ -43,6 +43,7 @@ const UserSignInPage = () => {
 
             const jwtToken = await UserProxy.signIn(signInInfo.email, signInInfo.password);
             registerTokenValue(jwtToken);
+            addAlertPopUp("로그인이 성공적으로 수행되었습니다.", "success");
 
         } catch(error) {
             addAlertPopUp("로그인 도중에 오류가 발생했습니다!", "error");
@@ -50,6 +51,8 @@ const UserSignInPage = () => {
         }
     }
 
+
+    setTestAutomationCommands(setSignInInfo)
     return (
         <>
             <TopAppBar title="로그인"></TopAppBar>
@@ -86,6 +89,26 @@ const UserSignInPage = () => {
             </Card>
         </>
     )
+}
+
+function setTestAutomationCommands(setSignInInfo) {
+    window.onkeydown = (e) => {
+        if((e.code === "Digit1") && e.altKey)
+        {
+            setSignInInfo({
+                "email": "testemail1@gmail.com",
+                "password": "testpassword1"
+            })
+        }
+
+        if((e.code === "Digit0") && e.altKey)
+        {
+            setSignInInfo({
+                "email": "admin@gmail.com",
+                "password": "admin"
+            })
+        }
+    }
 }
 
 export default UserSignInPage;
