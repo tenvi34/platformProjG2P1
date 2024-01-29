@@ -29,7 +29,10 @@ const MusicSearchForm = ({onSubmit, sx, ...props}) => {
             </Select>
 
             <InputBase sx={{marginLeft: "10px"}} value={searchText} onChange={(e)=>{setSearchText(e.target.value)}}/>
-            <IconButton onClick={handleOnSubmit} buttonSx={{marginLeft: "10px", float:"right", height: "35px", minHeight: "35px", width: "35px", minWidth: "35px"}}>
+            <IconButton onClick={handleOnSubmit} buttonSx={{
+                    marginLeft: "10px", float:"right", height: "35px", minHeight: "35px", width: "35px", minWidth: "35px",
+                    borderRadius: "0px 5px 5px 0px"
+                }}>
                 <SearchIcon/>
             </IconButton>
         </Paper>
