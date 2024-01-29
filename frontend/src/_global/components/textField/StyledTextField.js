@@ -1,5 +1,5 @@
 import { TextField } from '@mui/material';
-import styled from 'styled-components';
+import { styled } from '@mui/system';
 
 const StyledTextField = styled(TextField)({
     "& label.Mui-focused": {
