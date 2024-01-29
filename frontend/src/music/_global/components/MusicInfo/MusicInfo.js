@@ -13,7 +13,7 @@ import IconButton from '../../../../_global/components/button/IconButton';
 const MusicInfo = ({musicId, sx, ...props}) => {
 
     return (
-        <Card variant="outlined" sx={{padding: 1.5, height: 87, cursor: "pointer", ...sx}} {...props}>
+        <Card variant="outlined" sx={{padding: 1.5, height: 87, ...sx}} {...props}>
             <Stack>
                 <MusicPlayer
                     musicUrl={"http://localhost:8088/api/file/5510a8d0-1b16-4ce6-8622-d1d39f0c3c36.mp3"}
