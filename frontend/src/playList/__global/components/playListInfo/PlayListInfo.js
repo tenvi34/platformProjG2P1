@@ -5,14 +5,14 @@ import LinkIcon from '@mui/icons-material/Link';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-import IconButton from '../../../_global/components/button/IconButton';
-import BoldText from '../../../_global/components/text/BoldText';
+import IconButton from '../../../../_global/components/button/IconButton';
+import BoldText from '../../../../_global/components/text/BoldText';
 
 const PlayListInfo = ({playListId, sx, ...props}) => {
     const navigate = useNavigate();
 
     return (
-        <Card sx={{padding: 1.5, ...sx}} {...props}>
+        <Card sx={{padding: 1.5, ...sx}} {...props} variant="outlined">
             <Stack>
                 <Box sx={{cursor: "pointer"}} onClick={()=>{navigate(`/playList/info/${playListId}`)}}>
                     <Box sx={{float: "left"}}>

@@ -6,7 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 import { JwtTokenContext } from "../../_global/provider/jwtToken/JwtTokenContext";
 
-import PlayListInfo from '../__global/components/PlayListInfo';
+import PlayListInfo from '../__global/components/playListInfo/PlayListInfo';
 
 import TopAppBar from '../../_global/components/TopAppBar';
 import IconButton from '../../_global/components/button/IconButton';
@@ -36,7 +36,7 @@ const PlayListListPage = () => {
                 </IconNavigationButton>
             </TopAppBar>
 
-            <Stack sx={{marginTop: 3}} spacing={1}>
+            <Stack sx={{marginTop: "5px"}} spacing={1}>
                 <PlayListInfo playListId={1}/>
             </Stack>
         </>

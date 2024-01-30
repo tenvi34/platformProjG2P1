@@ -9,7 +9,7 @@ import IconButton from '../../../_global/components/button/IconButton';
 const PlayListMusicInfo = ({playListMusicId, onClickTitle, sx, ...props}) => {
 
     return (
-        <Card sx={{padding: 1.5, display: "flex", ...sx}} {...props}>
+        <Card sx={{padding: 1.5, display: "flex", ...sx}} {...props} variant="outlined">
             <Box onClick={() => {onClickTitle(playListMusicId)}} sx={{cursor: "pointer", width: "100%"}}>
                 <BoldText sx={{float: "left", marginTop: "3px"}}>Test Music Title</BoldText>
             </Box>

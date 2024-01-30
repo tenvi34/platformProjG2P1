@@ -6,7 +6,7 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { JwtTokenContext } from "../../_global/provider/jwtToken/JwtTokenContext";
 
 import PlayListMusicInfo from './components/PlayListMusicInfo';
-import PlayListInfo from '../__global/components/PlayListInfo';
+import PlayListInfo from '../__global/components/playListInfo/PlayListInfo';
 
 import TopAppBar from '../../_global/components/TopAppBar';
 import IconNavigationButton from '../../_global/components/button/IconNavigationButton';
