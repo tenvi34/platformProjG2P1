@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Stack, Card, Box } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import LinkIcon from '@mui/icons-material/Link';
 import DeleteIcon from '@mui/icons-material/Delete';
+
+import { AlertPopupContext } from '../../../../_global/provider/alertPopUp/AlertPopUpContext';
+import { JwtTokenContext } from '../../../../_global/provider/jwtToken/JwtTokenContext';
 
 import UpdatePlayListButton from './UpdatePlayListButton';
 
@@ -11,11 +14,23 @@ import BoldText from '../../../../_global/components/text/BoldText';
 import YesNoButton from '../../../../_global/components/button/YesNoButton';
 import ShareLinkButton from '../../../../_global/components/button/ShareLinkButton';
 
+import PlayListProxy from '../../../../_global/proxy/PlayListProxy';
+
 const PlayListInfo = ({playListId, playListTitle, playListMusicCount, playListCreatedDate, sx, ...props}) => {
+    const {addAlertPopUp} = useContext(AlertPopupContext);
+    const {jwtTokenState} = useContext(JwtTokenContext);
     const navigate = useNavigate();
 
-    const onClickUpdatePlayListButton = (title) => {
-        alert(title)
+    const onClickUpdatePlayListButton = async (title) => {
+        try {
+            
+            await PlayListProxy.updatePlayList(playListId, title, jwtTokenState)
+            addAlertPopUp("플레이 리스트 정보를 수정했습니다.", "success");
+      
+        } catch (error) {
+            addAlertPopUp("플레이 리스트 정보들을 수정하는 과정에서 오류가 발생했습니다!", "error");
+            console.error("플레이 리스트 정보들을 수정하는 과정에서 오류가 발생했습니다!", error);
+        }
     }
 
     return (
@@ -42,7 +57,7 @@ const PlayListInfo = ({playListId, playListTitle, playListMusicCount, playListCr
                             <DeleteIcon sx={{width: "15px", height: "15px", float: "left"}}/>
                         </IconButton>
                     </YesNoButton>
-                    <UpdatePlayListButton onClickSaveButton={onClickUpdatePlayListButton}/>
+                    <UpdatePlayListButton onClickSaveButton={onClickUpdatePlayListButton} defaultTitle={playListTitle}/>
                 </Box>
             </Stack>
         </Card>

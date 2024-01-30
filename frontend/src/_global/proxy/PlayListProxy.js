@@ -13,6 +13,19 @@ class PlayListProxy {
         console.log(response)
     }
 
+    static async updatePlayList(playListId, title, jwtTokenState) {
+        console.log(`[EFFECT] updatePlayList : <playListId:${playListId}, title:${title}>`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const reqDto = {
+            "playListId": playListId,
+            "title": title
+        }
+        const response = await axios.put(`http://${window.location.host}/api/playList/playLists/updatePlayList`, reqDto, requestHeader);
+        
+        console.log(response)
+    }
+
 
     static async searchPlayListAllByCreaterId(createrId, jwtTokenState) {
         console.log(`[EFFECT] searchPlayListAllByCreaterId : <createrId:${createrId}>`)
