@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions } from '@mui/material';
+import { TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions, Stack } from '@mui/material';
 
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
@@ -22,18 +22,20 @@ const UserManageButton = ({...props}) => {
     <Dialog open={isDialogOpend} onClose={()=>{setIsDialogOpend(false);}}>
       <DialogTitle sx={{color: "black", fontWeight: "bolder", fontFamily: "BMDfont"}}>사용자 정보 수정</DialogTitle>
       <DialogContent>
+        <Stack>
           <TextField
-              name="userName"
-              label="유저명"
+                name="userName"
+                label="유저명"
 
-              margin="normal"
-              fullWidth
+                margin="normal"
+                fullWidth
 
-              sx={{width: 400}}
-              value={userName}
+                sx={{width: 400}}
+                value={userName}
 
-              onChange={(e)=>{setUserName(e.target.value)}}
-          />
+                onChange={(e)=>{setUserName(e.target.value)}}
+            />
+        </Stack>
       </DialogContent>
 
       <DialogActions>
