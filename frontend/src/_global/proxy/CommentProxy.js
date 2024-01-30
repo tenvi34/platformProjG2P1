@@ -37,6 +37,16 @@ class CommentProxy {
         console.log(response)
         return response.data._embedded.comments
     }
+
+
+    static async deleteCommentByCommentId(commentId, jwtTokenState) {
+        console.log(`[EFFECT] deleteCommentByCommentId : <commentId:${commentId}>`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const response = await axios.delete(`http://${window.location.host}/api/comment/comments/${commentId}`, requestHeader);
+        
+        console.log(response)
+    }
 }
 
 export default CommentProxy

@@ -27,7 +27,19 @@ const CommentInfo = ({commentId, userName, createdDate, content}) => {
 
         } catch (error) {
             addAlertPopUp("댓글을 수정하는 과정에서 오류가 발생했습니다!", "error");
-            console.error("댓글을 수정하는 가져오는 과정에서 오류가 발생했습니다!", error);
+            console.error("댓글을 수정하는 과정에서 오류가 발생했습니다!", error);
+        }
+    }
+
+    const onClickDeleteCommentButton = async () => {
+        try {
+
+            await CommentProxy.deleteCommentByCommentId(commentId, jwtTokenState);
+            addAlertPopUp("댓글을 삭제했습니다.", "success");
+
+        } catch (error) {
+            addAlertPopUp("댓글을 삭제하는 과정에서 오류가 발생했습니다!", "error");
+            console.error("댓글을 삭제하는 과정에서 오류가 발생했습니다!", error);
         }
     }
 
@@ -39,7 +51,7 @@ const CommentInfo = ({commentId, userName, createdDate, content}) => {
                 <BoldText sx={{float: "left", marginX: "5px"}}>·</BoldText>
                 <BoldText sx={{float: "left", color: "lightgray", fontSize: "10px", marginTop: "2px"}}>{createdDate}</BoldText>
 
-                <YesNoButton onClickYes={()=>{alert("YES")}} title="정말로 삭제하시겠습니까?">
+                <YesNoButton onClickYes={onClickDeleteCommentButton} title="정말로 삭제하시겠습니까?">
                     <IconButton sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "20px", minWidth: "20px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
                         <DeleteIcon sx={{width: "15px", height: "15px", float: "left"}}/>
                     </IconButton>
