@@ -5,6 +5,7 @@ import EditIcon from '@mui/icons-material/Edit';
 
 import BoldText from '../../../_global/components/text/BoldText';
 import IconButton from '../../../_global/components/button/IconButton';
+import YesNoButton from '../../../_global/components/button/YesNoButton';
 
 const PlayListMusicInfo = ({playListMusicId, onClickTitle, sx, ...props}) => {
 
@@ -15,9 +16,11 @@ const PlayListMusicInfo = ({playListMusicId, onClickTitle, sx, ...props}) => {
             </Box>
 
             <Box sx={{width: "200px"}}>
-                <IconButton sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
-                    <DeleteIcon sx={{width: "15px", height: "15px", float: "left"}}/>
-                </IconButton>
+                <YesNoButton onClickYes={()=>{alert("YES")}} title="정말로 삭제하시겠습니까?">
+                    <IconButton sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
+                        <DeleteIcon sx={{width: "15px", height: "15px", float: "left"}}/>
+                    </IconButton>
+                </YesNoButton>
                 <IconButton sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
                     <EditIcon sx={{width: "15px", height: "15px", float: "left"}}/>
                 </IconButton>
