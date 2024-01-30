@@ -17,6 +17,7 @@ import YesNoButton from '../button/YesNoButton';
 
 import MusicProxy from '../../proxy/MusicProxy';
 import FileProxy from '../../proxy/FileProxy';
+import PlayListMusicProxy from '../../proxy/PlayListMusicProxy';
 import TimeTool from '../../tool/TimeTool';
 
 const MusicInfo = ({musicId, sx, ...props}) => {
@@ -52,12 +53,20 @@ const MusicInfo = ({musicId, sx, ...props}) => {
 
         } catch (error) {
             addAlertPopUp("좋아요를 누르는 과정에서 오류가 발생했습니다!", "error");
-            console.error("좋아요를 누르는 가져오는 과정에서 오류가 발생했습니다!", error);
+            console.error("좋아요를 누르는 과정에서 오류가 발생했습니다!", error);
         }
     }
 
-    const onClickAddToPlayListButton = (title, playListId) => {
-        alert(title + " / " + playListId);
+    const onClickAddToPlayListButton = async (title, playListId) => {
+        try {
+
+            await PlayListMusicProxy.createPlayListMusic(playListId, musicId, title, jwtTokenState);
+            addAlertPopUp("플레이 리스트에 추가했습니다.", "success");
+
+        } catch (error) {
+            addAlertPopUp("플레이 리스트에 추가하는 과정에서 오류가 발생했습니다!", "error");
+            console.error("플레이 리스트에 추가하는 과정에서 오류가 발생했습니다!", error);
+        }
     }
 
     const onClickMusicUpdateButton = async (title, dataUrl) => {
