@@ -2,10 +2,10 @@ import React from 'react';
 import { Stack, Card, Box } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
 
 import MusicPlayer from './MusicPlayer';
 import AddToPlayListButton from './AddToPlayListButton';
+import MusicUpdateButton from './MusicUpdateButton';
 
 import IconButton from '../button/IconButton';
 import ShareLinkButton from '../button/ShareLinkButton';
@@ -14,6 +14,10 @@ const MusicInfo = ({musicId, sx, ...props}) => {
 
     const onClickAddToPlayListButton = (playListId) => {
         alert(playListId);
+    }
+
+    const onClickMusicUpdateButton = (title) => {
+        alert(title)
     }
 
     return (
@@ -38,9 +42,7 @@ const MusicInfo = ({musicId, sx, ...props}) => {
                     <IconButton sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
                         <DeleteIcon sx={{width: "15px", height: "15px", float: "left"}}/>
                     </IconButton>
-                    <IconButton sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
-                        <EditIcon sx={{width: "15px", height: "15px", float: "left"}}/>
-                    </IconButton>
+                    <MusicUpdateButton onClickSaveButton={onClickMusicUpdateButton}/>
                 </Box>
             </Stack>
         </Card>
