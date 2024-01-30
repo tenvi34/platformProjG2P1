@@ -14,11 +14,11 @@ class PlayListProxy {
     }
 
 
-    static async searchPlayListAll(jwtTokenState) {
-        console.log(`[EFFECT] searchPlayListAll`)
+    static async searchPlayListAllByCreaterId(createrId, jwtTokenState) {
+        console.log(`[EFFECT] searchPlayListAllByCreaterId : <createrId:${createrId}>`)
 
         const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
-        const response = await axios.get(`http://${window.location.host}/api/collectedData/playLists`, requestHeader);
+        const response = await axios.get(`http://${window.location.host}/api/collectedData/playLists/search/findByCreaterId?createrId=${createrId}`, requestHeader);
         
         console.log(response)
         return response.data._embedded.playLists

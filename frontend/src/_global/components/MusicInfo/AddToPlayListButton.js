@@ -30,7 +30,9 @@ const AddToPlayListButton = ({onClickSaveButton, defaultTitleValue, ...props}) =
   const onClickDialogOpenButton = async () => {
     try {
 
-      setPlayListInfos(await PlayListProxy.searchPlayListAll(jwtTokenState))
+      setPlayListInfos((await PlayListProxy.searchPlayListAllByCreaterId(jwtTokenState.jwtToken.id, jwtTokenState)).filter((playListInfo)=>{
+        return playListInfo.status !== "PlayListDeleted"
+      }));
 
       setIsDialogOpend(true);
       setTitle(defaultTitleValue);
