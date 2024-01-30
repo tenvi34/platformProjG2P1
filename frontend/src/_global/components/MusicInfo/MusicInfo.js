@@ -14,8 +14,8 @@ import YesNoButton from '../button/YesNoButton';
 
 const MusicInfo = ({musicId, sx, ...props}) => {
 
-    const onClickAddToPlayListButton = (playListId) => {
-        alert(playListId);
+    const onClickAddToPlayListButton = (title, playListId) => {
+        alert(title + " / " + playListId);
     }
 
 
