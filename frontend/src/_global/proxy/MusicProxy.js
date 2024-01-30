@@ -34,7 +34,26 @@ class MusicProxy {
         
         console.log(response)
         return response.data._embedded.musics
+    }
 
+    static async searchMusicAllByTitle(title, jwtTokenState) {
+        console.log(`[EFFECT] searchMusicAllByTitle : <title:${title}>`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const response = await axios.get(`http://${window.location.host}/api/collectedData/musics/search/findByTitleContainingIgnoreCase?title=${title}`, requestHeader);
+        
+        console.log(response)
+        return response.data._embedded.musics
+    }
+
+    static async searchMusicAllByCreater(creater, jwtTokenState) {
+        console.log(`[EFFECT] searchMusicAllByCreater : <creater:${creater}>`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const response = await axios.get(`http://${window.location.host}/api/collectedData/musics/search/findByCreaterContainingIgnoreCase?creater=${creater}`, requestHeader);
+        
+        console.log(response)
+        return response.data._embedded.musics
     }
 }
 

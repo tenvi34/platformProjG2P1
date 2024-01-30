@@ -45,9 +45,22 @@ const MusicListPage = () => {
     }, [addAlertPopUp, jwtTokenState])
 
 
-
-    const onSubmitSearch = (searchText, searchType) => {
-        console.log(searchText, searchType)
+    const onSubmitSearch = async (searchType, searchText) => {
+        if(searchText.length === 0) {
+            setMusicInfos(await MusicProxy.searchMusicAll(jwtTokenState));
+            return;
+        }
+        
+        switch(searchType) {
+            case "musicTitle":
+                setMusicInfos(await MusicProxy.searchMusicAllByTitle(searchText, jwtTokenState));
+                break;
+            case "musicCreater":
+                setMusicInfos(await MusicProxy.searchMusicAllByCreater(searchText, jwtTokenState));
+                break;
+            default:
+                break;
+        }
     }
 
     
