@@ -15,7 +15,7 @@ const UserManageButton = ({...props}) => {
 
   return (
     <>
-    <IconButton onClick={()=>{setIsDialogOpend(true);}} {...props}>
+    <IconButton onClick={()=>{setUserName("");setIsDialogOpend(true);}} {...props}>
       <ManageAccountsIcon sx={{fontSize: 35, paddingTop: 0.3, paddingLeft: 0.3}}/>
     </IconButton>
 
