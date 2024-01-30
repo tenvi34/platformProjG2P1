@@ -1,8 +1,9 @@
 import React, {useState} from 'react';
-import { TextField, Button, Dialog, DialogTitle, DialogContent, DialogActions, Stack } from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Stack } from '@mui/material';
 
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
 
+import StyledTextField from '../textField/StyledTextField';
 import IconButton from './IconButton';
 
 const UserManageButton = ({...props}) => {
@@ -23,7 +24,7 @@ const UserManageButton = ({...props}) => {
       <DialogTitle sx={{color: "black", fontWeight: "bolder", fontFamily: "BMDfont"}}>사용자 정보 수정</DialogTitle>
       <DialogContent>
         <Stack>
-          <TextField
+          <StyledTextField
                 name="userName"
                 label="유저명"
 
