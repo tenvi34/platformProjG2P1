@@ -8,9 +8,9 @@ import StyledTextField from '../textField/StyledTextField';
 import FileUploadButton from '../button/FileUploadButton';
 import StyledTextButton from '../button/StyledTextButton';
 
-const MusicUpdateButton = ({onClickSaveButton, ...props}) => {
+const MusicUpdateButton = ({onClickSaveButton, defaultTitle, ...props}) => {
   const [isDialogOpend, setIsDialogOpend] = useState(false);
-  const [title, setTitle] = useState("")
+  const [title, setTitle] = useState(defaultTitle)
   const [dataUrl, setDataUrl] = useState("")
 
   const onClickSaveButtonHandle = () => {
@@ -23,7 +23,7 @@ const MusicUpdateButton = ({onClickSaveButton, ...props}) => {
 
   return (
     <>
-    <IconButton onClick={()=>{setTitle("");setDataUrl("");setIsDialogOpend(true);}} sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
+    <IconButton onClick={()=>{setTitle(defaultTitle);setDataUrl("");setIsDialogOpend(true);}} sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
         <EditIcon sx={{width: "15px", height: "15px", float: "left"}}/>
     </IconButton>
 

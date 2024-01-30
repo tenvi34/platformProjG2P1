@@ -60,8 +60,21 @@ const MusicInfo = ({musicId, sx, ...props}) => {
         alert(title + " / " + playListId);
     }
 
-    const onClickMusicUpdateButton = (title, dataUrl) => {
-        alert(title + " / " + dataUrl.length)
+    const onClickMusicUpdateButton = async (title, dataUrl) => {
+        try {
+
+            if((title.length > 0) && (musicInfo.title !== title))
+                await MusicProxy.updateMusicInfo(musicId, title, jwtTokenState)
+
+            if(dataUrl.length > 0)
+                await MusicProxy.updateMusicFile(musicId, dataUrl, jwtTokenState)
+
+            addAlertPopUp("음악 정보를 업데이트했습니다.", "success");
+
+        } catch (error) {
+            addAlertPopUp("음악 정보를 업데이트하는 과정에서 오류가 발생했습니다!", "error");
+            console.error("음악 정보를 업데이트하는 과정에서 오류가 발생했습니다!", error);
+        }
     }
 
 
@@ -96,7 +109,7 @@ const MusicInfo = ({musicId, sx, ...props}) => {
                                 <DeleteIcon sx={{width: "15px", height: "15px", float: "left"}}/>
                             </IconButton>
                         </YesNoButton>
-                        <MusicUpdateButton onClickSaveButton={onClickMusicUpdateButton}/>
+                        <MusicUpdateButton defaultTitle={musicInfo.title} onClickSaveButton={onClickMusicUpdateButton}/>
                     </Box>
                     </>) : null
                 }

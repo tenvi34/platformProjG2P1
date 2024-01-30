@@ -25,7 +25,34 @@ class MusicProxy {
         const response = await axios.put(`http://${window.location.host}/api/music/musics/likeMusic`, reqDto, requestHeader);
         
         console.log(response)
-    }   
+    }
+
+    static async updateMusicInfo(musicId, title, jwtTokenState) {
+        console.log(`[EFFECT] updateMusicInfo : <musicId:${musicId}, title:${title}>`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const reqDto = {
+            "musicId": musicId,
+            "title": title
+        }
+        const response = await axios.put(`http://${window.location.host}/api/music/musics/updateMusicInfo`, reqDto, requestHeader);
+        
+        console.log(response)
+    }
+
+    static async updateMusicFile(musicId, dataUrl, jwtTokenState) {
+        console.log(`[EFFECT] updateMusicInfo : <musicId:${musicId}, dataUrlLength:${dataUrl.length}>`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const reqDto = {
+            "musicId": musicId,
+            "dataUrl": dataUrl
+        }
+        const response = await axios.put(`http://${window.location.host}/api/music/musics/updateMusicFile`, reqDto, requestHeader);
+        
+        console.log(response)
+    }
+
 
     static async searchMusicOneByMusicId(musicId, jwtTokenState) {
         console.log(`[EFFECT] searchMusicOneByMusicId : <musicId:${musicId}>`)
