@@ -45,12 +45,12 @@ const MusicInfoPage = () => {
 
             <Stack>
                 <MusicInfo sx={{width: "95%", marginTop: "5px"}} musicId={musicId}/>
+                <Divider sx={{marginTop: "5px"}}/>
                 
                 <Box sx={{marginTop: "10px"}}>
                     <ChatBubbleIcon sx={{color: "gray", float: "left"}}/>
                     <BoldText sx={{color: "gray", float: "left", marginLeft: "5px", paddingTop: "3px"}}>댓글: 5개</BoldText>
                 </Box>
-                <Divider/>
 
 
                 <Paper sx={{marginTop: "3px", width: "100%", display: "flex"}}>
