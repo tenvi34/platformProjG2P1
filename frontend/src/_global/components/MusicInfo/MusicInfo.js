@@ -45,7 +45,7 @@ const MusicInfo = ({musicId, sx, ...props}) => {
                             <LinkIcon sx={{width: "15px", height: "15px", float: "left"}}/>
                         </IconButton>
                     </ShareLinkButton>
-                    <AddToPlayListButton onClickSaveButton={onClickAddToPlayListButton}/>
+                    <AddToPlayListButton onClickSaveButton={onClickAddToPlayListButton} defaultTitleValue={"testMusicTitle"}/>
                     
                     <YesNoButton onClickYes={()=>{alert("YES")}} title="정말로 삭제하시겠습니까?">
                         <IconButton sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>

@@ -6,9 +6,9 @@ import StyledTextField from '../textField/StyledTextField';
 
 import IconButton from '../../../_global/components/button/IconButton';
 
-const AddToPlayListButton = ({onClickSaveButton, ...props}) => {
+const AddToPlayListButton = ({onClickSaveButton, defaultTitleValue, ...props}) => {
   const [isDialogOpend, setIsDialogOpend] = useState(false);
-  const [title, setTitle] = useState("")
+  const [title, setTitle] = useState(defaultTitleValue)
   const [playListId, setPlayListId] = useState("")
 
   const onClickSaveButtonHandle = () => {
@@ -17,7 +17,7 @@ const AddToPlayListButton = ({onClickSaveButton, ...props}) => {
 
   return (
     <>
-    <IconButton onClick={()=>{setIsDialogOpend(true);setTitle("");setPlayListId("");}} sx={{float: "left", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
+    <IconButton onClick={()=>{setIsDialogOpend(true);setTitle(defaultTitleValue);setPlayListId("");}} sx={{float: "left", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
         <PlaylistAddIcon sx={{width: "15px", height: "15px", float: "left"}}/>
     </IconButton>
 
