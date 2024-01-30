@@ -59,7 +59,7 @@ const PlayListInfo = ({playListId, playListTitle, playListMusicCount, playListCr
                 </Box>
 
                 <Box>
-                    <ShareLinkButton title="음악 공유 링크" shareUrl={`http://${window.location.host}/playList/info/${playListId}`}>
+                    <ShareLinkButton title="플레이 리스트 공유 링크" shareUrl={`http://${window.location.host}/playList/info/${playListId}`}>
                         <IconButton sx={{float: "left"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
                             <LinkIcon sx={{width: "15px", height: "15px", float: "left"}}/>
                         </IconButton>
