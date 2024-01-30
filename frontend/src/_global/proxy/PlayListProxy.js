@@ -1,6 +1,19 @@
 import axios from 'axios';
 
 class PlayListProxy {
+    static async createPlayList(title, jwtTokenState) {
+        console.log(`[EFFECT] createPlayList : <title:${title}>`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const reqDto = {
+            "title": title
+        }
+        const response = await axios.put(`http://${window.location.host}/api/playList/playLists/createPlayList`, reqDto, requestHeader);
+        
+        console.log(response)
+    }
+
+
     static async searchPlayListAll(jwtTokenState) {
         console.log(`[EFFECT] searchPlayListAll`)
 
