@@ -1,7 +1,8 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useNavigate } from "react-router-dom";
 import { Stack } from '@mui/material';
 
+import { AlertPopupContext } from '../../_global/provider/alertPopUp/AlertPopUpContext';
 import { JwtTokenContext } from "../../_global/provider/jwtToken/JwtTokenContext";
 
 import MusicSearchForm from './components/MusicSearchForm';
@@ -9,7 +10,10 @@ import PlayListTopAppBar from './components/PlayListTopAppBar';
 
 import MusicInfo from '../../_global/components/MusicInfo/MusicInfo';
 
+import MusicProxy from '../../_global/proxy/MusicProxy';
+
 const MusicListPage = () => {
+    const {addAlertPopUp} = useContext(AlertPopupContext);
     const {jwtTokenState} = useContext(JwtTokenContext);
     const navigate = useNavigate();
 
@@ -25,6 +29,23 @@ const MusicListPage = () => {
     }
 
 
+    const [musicInfos, setMusicInfos] = useState([])
+
+    useEffect(() => {
+        (async () => {
+            try {
+
+                setMusicInfos(await MusicProxy.searchMusicAll(jwtTokenState));
+
+            } catch (error) {
+                addAlertPopUp("음악 정보들을 가져오는 과정에서 오류가 발생했습니다!", "error");
+                console.error("음악 정보들을 가져오는 과정에서 오류가 발생했습니다!", error);
+            }
+        })()
+    }, [addAlertPopUp, jwtTokenState])
+
+
+
     const onSubmitSearch = (searchText, searchType) => {
         console.log(searchText, searchType)
     }
@@ -38,7 +59,11 @@ const MusicListPage = () => {
                 <MusicSearchForm onSubmit={onSubmitSearch}/>
 
                 <Stack spacing={1} sx={{width: "100%", marginTop: "5px"}}>
-                    <MusicInfo sx={{width: "95%"}} musicId={1}/>
+                    {
+                        musicInfos.map((musicInfo)=>(
+                            <MusicInfo key={musicInfo.musicId} sx={{width: "95%"}} musicId={musicInfo.musicId}/>
+                        ))
+                    }
                 </Stack>
             </Stack>
         </>

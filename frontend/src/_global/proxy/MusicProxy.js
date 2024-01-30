@@ -25,6 +25,17 @@ class MusicProxy {
         console.log(response)
         return response.data
     }
+
+    static async searchMusicAll(jwtTokenState) {
+        console.log(`[EFFECT] searchMusicAll`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const response = await axios.get(`http://${window.location.host}/api/collectedData/musics`, requestHeader);
+        
+        console.log(response)
+        return response.data._embedded.musics
+
+    }
 }
 
 export default MusicProxy
