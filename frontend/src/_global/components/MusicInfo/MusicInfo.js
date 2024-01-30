@@ -1,7 +1,6 @@
 import React from 'react';
 import { Stack, Card, Box } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import LinkIcon from '@mui/icons-material/Link';
 import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
@@ -9,6 +8,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import MusicPlayer from './MusicPlayer';
 
 import IconButton from '../button/IconButton';
+import ShareLinkButton from '../button/ShareLinkButton';
 
 const MusicInfo = ({musicId, sx, ...props}) => {
 
@@ -28,9 +28,7 @@ const MusicInfo = ({musicId, sx, ...props}) => {
                     <IconButton sx={{float: "left"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "10px", paddingBottom: "5px"}}>
                         <FavoriteIcon sx={{width: "13px", height: "13px", float: "left"}}/>1
                     </IconButton>
-                    <IconButton sx={{float: "left", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
-                        <LinkIcon sx={{width: "15px", height: "15px", float: "left"}}/>
-                    </IconButton>
+                    <ShareLinkButton title="음악 공유 링크" shareUrl="http://localhost:8088/music/info/1"/>
                     <IconButton sx={{float: "left", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
                         <PlaylistAddIcon sx={{width: "15px", height: "15px", float: "left"}}/>
                     </IconButton>
