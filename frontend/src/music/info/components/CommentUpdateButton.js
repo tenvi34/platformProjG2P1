@@ -5,9 +5,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '../../../_global/components/button/IconButton';
 import StyledTextField from '../../../_global/components/textField/StyledTextField';
 
-const CommentUpdateButton = ({onClickSaveButton, ...props}) => {
+const CommentUpdateButton = ({onClickSaveButton, defaultComment, ...props}) => {
   const [isDialogOpend, setIsDialogOpend] = useState(false);
-  const [content, setContent] = useState("")
+  const [content, setContent] = useState(defaultComment)
 
   const onClickSaveButtonHandle = () => {
     onClickSaveButton(content);
@@ -15,7 +15,7 @@ const CommentUpdateButton = ({onClickSaveButton, ...props}) => {
 
   return (
     <>
-    <IconButton onClick={()=>{setContent("");setIsDialogOpend(true);}} sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "20px", minWidth: "20px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
+    <IconButton onClick={()=>{setContent(defaultComment);setIsDialogOpend(true);}} sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "20px", minWidth: "20px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
         <EditIcon sx={{width: "15px", height: "15px", float: "left"}}/>
     </IconButton>
 

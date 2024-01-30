@@ -1,18 +1,36 @@
-import React from 'react';
-import { Stack, Box} from '@mui/material';
+import React, { useContext } from 'react';
+import { Stack, Box } from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 
 import CommentUpdateButton from './CommentUpdateButton';
+
+import { AlertPopupContext } from '../../../_global/provider/alertPopUp/AlertPopUpContext';
+import { JwtTokenContext } from '../../../_global/provider/jwtToken/JwtTokenContext';
 
 import BoldText from '../../../_global/components/text/BoldText';
 import NormalText from '../../../_global/components/text/NormalText';
 import IconButton from '../../../_global/components/button/IconButton';
 import YesNoButton from '../../../_global/components/button/YesNoButton';
 
+import CommentProxy from '../../../_global/proxy/CommentProxy';
+
 const CommentInfo = ({commentId, userName, createdDate, content}) => {
-    const onClickCommentUpdateButton = (content) => {
-        alert(content)
+    const {addAlertPopUp} = useContext(AlertPopupContext);
+    const {jwtTokenState} = useContext(JwtTokenContext);
+
+
+    const onClickCommentUpdateButton = async (content) => {
+        try {
+
+            await CommentProxy.updateComment(commentId, content, jwtTokenState);
+            addAlertPopUp("댓글을 수정했습니다.", "success");
+
+        } catch (error) {
+            addAlertPopUp("댓글을 수정하는 과정에서 오류가 발생했습니다!", "error");
+            console.error("댓글을 수정하는 가져오는 과정에서 오류가 발생했습니다!", error);
+        }
     }
+
 
     return (
         <Stack>
@@ -26,7 +44,7 @@ const CommentInfo = ({commentId, userName, createdDate, content}) => {
                         <DeleteIcon sx={{width: "15px", height: "15px", float: "left"}}/>
                     </IconButton>
                 </YesNoButton>
-                <CommentUpdateButton onClickSaveButton={onClickCommentUpdateButton}/>
+                <CommentUpdateButton onClickSaveButton={onClickCommentUpdateButton} defaultComment={content}/>
             </Box>
             <NormalText style={{fontWeight: "1px"}}>
                 {content}

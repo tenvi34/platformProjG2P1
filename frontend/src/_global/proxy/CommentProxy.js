@@ -14,6 +14,19 @@ class CommentProxy {
         console.log(response)
     }
 
+    static async updateComment(commentId, content, jwtTokenState) {
+        console.log(`[EFFECT] updateComment : <commentId:${commentId}, content:${content}>`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const reqDto = {
+            "commentId": commentId,
+            "content": content
+        }
+        const response = await axios.put(`http://${window.location.host}/api/comment/comments/updateComment`, reqDto, requestHeader);
+        
+        console.log(response)
+    }
+
 
     static async searchCommentAllByMusicId(musicId, jwtTokenState) {
         console.log(`[EFFECT] searchCommentAllByMusicId : <musicId:${musicId}>`)
