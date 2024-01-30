@@ -10,6 +10,7 @@ import TopAppBar from '../../../_global/components/TopAppBar';
 import IconButton from '../../../_global/components/button/IconButton';
 import IconNavigationButton from '../../../_global/components/button/IconNavigationButton';
 import UserManageButton from '../../../_global/components/button/UserManageButton';
+import YesNoButton from '../../../_global/components/button/YesNoButton';
 
 const PlayListTopAppBar = () => {
     const {deleteTokenValue} = useContext(JwtTokenContext);
@@ -26,9 +27,11 @@ const PlayListTopAppBar = () => {
                 <PlaylistPlayIcon sx={{fontSize: 35, paddingTop: 0.3, paddingLeft: 0.3}}/>
             </IconNavigationButton>
             <UserManageButton sx={{marginRight: "5px"}}/>
-            <IconButton onClick={() => {deleteTokenValue();}}>
-                <LogoutIcon sx={{fontSize: 35, paddingTop: 0.3, paddingLeft: 0.3}}/>
-            </IconButton>
+            <YesNoButton onClickYes={() => {deleteTokenValue();}} title="정말로 로그아웃 하시겠습니까?">
+                <IconButton>
+                    <LogoutIcon sx={{fontSize: 35, paddingTop: 0.3, paddingLeft: 0.3}}/>
+                </IconButton>
+            </YesNoButton>
         </TopAppBar>
     )
 }
