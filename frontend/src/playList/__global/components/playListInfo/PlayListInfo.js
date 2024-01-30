@@ -3,7 +3,8 @@ import { Stack, Card, Box } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import LinkIcon from '@mui/icons-material/Link';
 import DeleteIcon from '@mui/icons-material/Delete';
-import EditIcon from '@mui/icons-material/Edit';
+
+import UpdatePlayListButton from './UpdatePlayListButton';
 
 import IconButton from '../../../../_global/components/button/IconButton';
 import BoldText from '../../../../_global/components/text/BoldText';
@@ -12,6 +13,10 @@ import ShareLinkButton from '../../../../_global/components/button/ShareLinkButt
 
 const PlayListInfo = ({playListId, sx, ...props}) => {
     const navigate = useNavigate();
+
+    const onClickUpdatePlayListButton = (title) => {
+        alert(title)
+    }
 
     return (
         <Card sx={{padding: 1.5, ...sx}} {...props} variant="outlined">
@@ -37,9 +42,7 @@ const PlayListInfo = ({playListId, sx, ...props}) => {
                             <DeleteIcon sx={{width: "15px", height: "15px", float: "left"}}/>
                         </IconButton>
                     </YesNoButton>
-                    <IconButton sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
-                        <EditIcon sx={{width: "15px", height: "15px", float: "left"}}/>
-                    </IconButton>
+                    <UpdatePlayListButton onClickSaveButton={onClickUpdatePlayListButton}/>
                 </Box>
             </Stack>
         </Card>
