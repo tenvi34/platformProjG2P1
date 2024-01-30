@@ -18,10 +18,17 @@ const UserManageButton = ({...props}) => {
   
 
   const onClickDialogOpenButton = async () => {
-    const userDate = await UserProxy.searchUserOneByUserId(jwtTokenState.jwtToken.id, jwtTokenState);
+    try {
 
-    setUserName(userDate.name);
-    setIsDialogOpend(true);
+        const userDate = await UserProxy.searchUserOneByUserId(jwtTokenState.jwtToken.id, jwtTokenState);
+
+        setUserName(userDate.name);
+        setIsDialogOpend(true);
+
+      } catch(error) {
+        addAlertPopUp("유저 정보를 불러오는 도중에 오류가 발생했습니다!", "error");
+        console.error("유저 정보를 불러오는 도중에 오류가 발생했습니다!", error);
+    }
   }
 
   const onClickSaveButton = async () => {
