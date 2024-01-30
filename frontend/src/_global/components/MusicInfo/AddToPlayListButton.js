@@ -8,7 +8,7 @@ import IconButton from '../../../_global/components/button/IconButton';
 
 const AddToPlayListButton = ({onClickSaveButton, ...props}) => {
   const [isDialogOpend, setIsDialogOpend] = useState(false);
-  const [title, setTitle] = useState("플레이 리스트 선택")
+  const [title, setTitle] = useState("")
   const [playListId, setPlayListId] = useState("")
 
   const onClickSaveButtonHandle = () => {
