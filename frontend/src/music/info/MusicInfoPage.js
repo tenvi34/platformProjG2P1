@@ -57,7 +57,7 @@ const MusicInfoPage = () => {
         (async () => {
             try {
 
-                let commentInfosToUpdate = (await CommentProxy.searchCommentAll(jwtTokenState)).filter((commentInfo)=>{
+                let commentInfosToUpdate = (await CommentProxy.searchCommentAllByMusicId(musicId, jwtTokenState)).filter((commentInfo)=>{
                     return commentInfo.status !== "CommentDeleted"
                 });
                 

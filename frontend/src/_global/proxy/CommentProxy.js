@@ -15,11 +15,11 @@ class CommentProxy {
     }
 
 
-    static async searchCommentAll(jwtTokenState) {
-        console.log(`[EFFECT] searchCommentAll`)
+    static async searchCommentAllByMusicId(musicId, jwtTokenState) {
+        console.log(`[EFFECT] searchCommentAllByMusicId : <musicId:${musicId}>`)
 
         const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
-        const response = await axios.get(`http://${window.location.host}/api/collectedData/comments`, requestHeader);
+        const response = await axios.get(`http://${window.location.host}/api/collectedData/comments/search/findByMusicId?musicId=${musicId}`, requestHeader);
         
         console.log(response)
         return response.data._embedded.comments
