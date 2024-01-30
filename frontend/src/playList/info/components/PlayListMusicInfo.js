@@ -17,6 +17,7 @@ const PlayListMusicInfo = ({playListMusicId, playListMusicMusicId, playListMusic
     const {addAlertPopUp} = useContext(AlertPopupContext);
     const {jwtTokenState} = useContext(JwtTokenContext);
 
+
     const onClickUpdatePlayListMusicButton = async (title) => {
         try {
 
@@ -29,6 +30,19 @@ const PlayListMusicInfo = ({playListMusicId, playListMusicMusicId, playListMusic
         }
     }
 
+    const onClickPlayListMusicDeleteButton = async () => {
+        try {
+
+            await PlayListMusicProxy.deletePlayListMusicByPlayListMusicId(playListMusicId, jwtTokenState);
+            addAlertPopUp("플레이 리스트 음악 정보를 삭제했습니다.", "success");
+
+        } catch (error) {
+            addAlertPopUp("플레이 리스트 음악 정보를 삭제하는 과정에서 오류가 발생했습니다!", "error");
+            console.error("플레이 리스트 음악 정보를 삭제하는 과정에서 오류가 발생했습니다!", error);
+        }
+    }
+
+
     return (
         <Card sx={{padding: 1.5, display: "flex", ...sx}} {...props} variant="outlined">
             <Box onClick={() => {onClickTitle(playListMusicMusicId)}} sx={{cursor: "pointer", width: "100%"}}>
@@ -36,7 +50,7 @@ const PlayListMusicInfo = ({playListMusicId, playListMusicMusicId, playListMusic
             </Box>
 
             <Box sx={{width: "200px"}}>
-                <YesNoButton onClickYes={()=>{alert("YES")}} title="정말로 삭제하시겠습니까?">
+                <YesNoButton onClickYes={onClickPlayListMusicDeleteButton} title="정말로 삭제하시겠습니까?">
                     <IconButton sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
                         <DeleteIcon sx={{width: "15px", height: "15px", float: "left"}}/>
                     </IconButton>

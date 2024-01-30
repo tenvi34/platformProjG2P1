@@ -38,6 +38,16 @@ class PlayListMusicProxy {
         console.log(response)
         return response.data._embedded.playListMusics
     }
+    
+
+    static async deletePlayListMusicByPlayListMusicId(playListMusicId, jwtTokenState) {
+        console.log(`[EFFECT] deletePlayListMusicByPlayListMusicId : <playListMusicId:${playListMusicId}>`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const response = await axios.delete(`http://${window.location.host}/api/playList/playListMusics/${playListMusicId}`, requestHeader);
+        
+        console.log(response)
+    }
 }
 
 export default PlayListMusicProxy
