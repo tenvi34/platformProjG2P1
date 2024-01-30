@@ -5,9 +5,9 @@ import EditIcon from '@mui/icons-material/Edit';
 import StyledTextField from '../../../_global/components/textField/StyledTextField';
 import IconButton from '../../../_global/components/button/IconButton';
 
-const UpdatePlayListMusicButton = ({onClickSaveButton, ...props}) => {
+const UpdatePlayListMusicButton = ({onClickSaveButton, defaultTitle, ...props}) => {
   const [isDialogOpend, setIsDialogOpend] = useState(false);
-  const [title, setTitle] = useState("")
+  const [title, setTitle] = useState(defaultTitle)
 
   const onClickSaveButtonHandle = () => {
     onClickSaveButton(title);
@@ -15,7 +15,7 @@ const UpdatePlayListMusicButton = ({onClickSaveButton, ...props}) => {
 
   return (
     <>
-    <IconButton onClick={()=>{setIsDialogOpend(true);setTitle("");}} sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
+    <IconButton onClick={()=>{setIsDialogOpend(true);setTitle(defaultTitle);}} sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
         <EditIcon sx={{width: "15px", height: "15px", float: "left"}}/>
     </IconButton>
 

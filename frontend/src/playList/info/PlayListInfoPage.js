@@ -97,7 +97,8 @@ const PlayListInfoPage = () => {
                     playListMusicInfos.map((playListMusicInfo) => (
                         <PlayListMusicInfo 
                             key={playListMusicInfo.playListMusicId}
-                            playListMusicId={playListMusicInfo.musicId}
+                            playListMusicId={playListMusicInfo.playListMusicId}
+                            playListMusicMusicId={playListMusicInfo.musicId}
                             playListMusicTitle={playListMusicInfo.title} 
                             playListMusicCreatedDate={TimeTool.prettyDateString(playListMusicInfo.createdDate)}
 
