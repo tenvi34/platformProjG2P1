@@ -63,9 +63,9 @@ const PlayListInfoPage = () => {
         })()
     }, [playListId, addAlertPopUp, jwtTokenState])
 
-
+    const [currentMusicId, setCurrentMusicId] = useState(null);
     const onClickPlayListMusicTitle = (musicId) => {
-        alert(musicId)
+        setCurrentMusicId(musicId)
     }
 
     return (
@@ -78,7 +78,11 @@ const PlayListInfoPage = () => {
             </TopAppBar>
 
             <Stack>
-                <MusicInfo sx={{width: "95%", marginTop: "5px"}} musicId={1}/>
+                {
+                    (currentMusicId) ? (<>
+                        <MusicInfo sx={{width: "95%", marginTop: "5px"}} musicId={currentMusicId}/>
+                    </>) : null
+                }
                 <Divider sx={{marginTop: "5px"}}/>
 
                 {
