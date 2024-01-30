@@ -2,6 +2,7 @@ import React, { useContext } from 'react';
 import LogoutIcon from '@mui/icons-material/Logout';
 import PlaylistPlayIcon from '@mui/icons-material/PlaylistPlay';
 
+import { AlertPopupContext } from '../../../_global/provider/alertPopUp/AlertPopUpContext';
 import { JwtTokenContext } from "../../../_global/provider/jwtToken/JwtTokenContext";
 
 import AddMusicButton from './AddMusicButton';
@@ -12,11 +13,22 @@ import IconNavigationButton from '../../../_global/components/button/IconNavigat
 import UserManageButton from '../../../_global/components/button/UserManageButton';
 import YesNoButton from '../../../_global/components/button/YesNoButton';
 
-const PlayListTopAppBar = () => {
-    const {deleteTokenValue} = useContext(JwtTokenContext);
+import MusicProxy from '../../../_global/proxy/MusicProxy';
 
-    const onClickMusicCreateButton = (title, creater, dataUrl) => {
-        alert(title + " / " + creater + " / " + dataUrl.length)
+const PlayListTopAppBar = () => {
+    const {addAlertPopUp} = useContext(AlertPopupContext);
+    const {jwtTokenState, deleteTokenValue} = useContext(JwtTokenContext);
+
+    const onClickMusicCreateButton = async (title, creater, dataUrl) => {
+        try {
+
+            await MusicProxy.createMusic(title, creater, dataUrl, jwtTokenState)
+            addAlertPopUp("음악 정보 추가가 정상적으로 수행되었습니다.", "success");
+    
+        } catch(error) {
+            addAlertPopUp("음악 정보 추가 도중에 오류가 발생했습니다!", "error");
+            console.error("음악 정보 추가 도중에 오류가 발생했습니다!", error);
+        }
     }
 
     return (
