@@ -51,9 +51,9 @@ const MusicPlayer = ({musicUrl, musicSecTime, musicTitle, musicCreater, musicCre
                 </Box>
             </Box>
 
-            <Box>
+            <Box sx={{display: "flex"}}>
                 <BoldText sx={{float: "left", fontSize: "10px", paddingTop: "9px", width:"30px"}}>{TimeTool.SecondToAudioTime(currentTimeSec)}</BoldText>
-                <StyledSlider sx={{float: "left", marginX: "15px", width: "82%"}}
+                <StyledSlider sx={{float: "left", marginX: "15px", width: "100%"}}
                             defaultValue={0} step={1} min={0} max={musicSecTime} value={currentTimeSec}
                             onChange={(e)=>{setCurrentTimeSec(e.target.value)}}
                             onMouseDown={()=>{audioPlayerRef.current.audioEl.current.pause()}}
