@@ -14,9 +14,13 @@ import UserManageButton from '../../../_global/components/button/UserManageButto
 const PlayListTopAppBar = () => {
     const {deleteTokenValue} = useContext(JwtTokenContext);
 
+    const onClickMusicCreateButton = (title, creater, dataUrl) => {
+        alert(title + " / " + creater + " / " + dataUrl.length)
+    }
+
     return (
         <TopAppBar title="음악 목록">  
-            <AddMusicButton sx={{marginRight: "5px"}}/>
+            <AddMusicButton onClickSaveButton={onClickMusicCreateButton} sx={{marginRight: "5px"}}/>
 
             <IconNavigationButton sx={{marginRight: "5px"}} url="/playList/list">
                 <PlaylistPlayIcon sx={{fontSize: 35, paddingTop: 0.3, paddingLeft: 0.3}}/>
