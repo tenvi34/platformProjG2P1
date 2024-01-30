@@ -16,6 +16,7 @@ import UserManageButton from '../../_global/components/button/UserManageButton';
 import MusicInfo from '../../_global/components/MusicInfo/MusicInfo';
 
 import PlayListProxy from '../../_global/proxy/PlayListProxy';
+import PlayListMusicProxy from '../../_global/proxy/PlayListMusicProxy';
 
 import TimeTool from '../../_global/tool/TimeTool';
 
@@ -45,10 +46,26 @@ const PlayListInfoPage = () => {
             }
         })()
     }, [playListId, addAlertPopUp, jwtTokenState])
+    
+    const [playListMusicInfos, setPlayListMusicInfos] = useState([])
+    useEffect(() => {
+        (async () => {
+            try {
+
+                setPlayListMusicInfos((await PlayListMusicProxy.searchPlayListMusicAllByPlayListId(playListId, jwtTokenState)).filter((playListMusicInfo)=>{
+                    return playListMusicInfo.status !== "PlayListMusicDeleted"
+                }))
+
+            } catch (error) {
+                addAlertPopUp("플레이 리스트 음악 정보들을 가져오는 과정에서 오류가 발생했습니다!", "error");
+                console.error("플레이 리스트 음악 정보들을 가져오는 과정에서 오류가 발생했습니다!", error);
+            }
+        })()
+    }, [playListId, addAlertPopUp, jwtTokenState])
 
 
-    const onClickPlayListMusicTitle = (playListMusicId) => {
-        alert(playListMusicId)
+    const onClickPlayListMusicTitle = (musicId) => {
+        alert(musicId)
     }
 
     return (
@@ -76,7 +93,17 @@ const PlayListInfoPage = () => {
                 <Divider sx={{marginTop: "5px"}}/>
 
                 <Stack spacing={1} sx={{marginTop: "5px", width: "100%"}}>
-                    <PlayListMusicInfo playListMusicId={1} onClickTitle={onClickPlayListMusicTitle}/>
+                {
+                    playListMusicInfos.map((playListMusicInfo) => (
+                        <PlayListMusicInfo 
+                            key={playListMusicInfo.playListMusicId}
+                            playListMusicId={playListMusicInfo.musicId}
+                            playListMusicTitle={playListMusicInfo.title} 
+                            playListMusicCreatedDate={TimeTool.prettyDateString(playListMusicInfo.createdDate)}
+
+                            onClickTitle={onClickPlayListMusicTitle}/>
+                    ))
+                }
                 </Stack>
             </Stack>
         </>

@@ -14,6 +14,17 @@ class PlayListMusicProxy {
         
         console.log(response)
     }
+
+
+    static async searchPlayListMusicAllByPlayListId(playListId, jwtTokenState) {
+        console.log(`[EFFECT] searchPlayListMusicAllByPlayListId : <playListId:${playListId}>`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const response = await axios.get(`http://${window.location.host}/api/collectedData/playListMusics/search/findByPlayListId?playListId=${playListId}`, requestHeader);
+        
+        console.log(response)
+        return response.data._embedded.playListMusics
+    }
 }
 
 export default PlayListMusicProxy

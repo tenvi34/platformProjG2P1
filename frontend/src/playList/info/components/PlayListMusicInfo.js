@@ -8,7 +8,7 @@ import YesNoButton from '../../../_global/components/button/YesNoButton';
 
 import UpdatePlayListMusicButton from './UpdatePlayListMusicButton';
 
-const PlayListMusicInfo = ({playListMusicId, onClickTitle, sx, ...props}) => {
+const PlayListMusicInfo = ({playListMusicId, playListMusicTitle, playListMusicCreatedDate, onClickTitle, sx, ...props}) => {
 
     const onClickUpdatePlayListMusicButton = (title) => {
         alert(title)
@@ -17,7 +17,7 @@ const PlayListMusicInfo = ({playListMusicId, onClickTitle, sx, ...props}) => {
     return (
         <Card sx={{padding: 1.5, display: "flex", ...sx}} {...props} variant="outlined">
             <Box onClick={() => {onClickTitle(playListMusicId)}} sx={{cursor: "pointer", width: "100%"}}>
-                <BoldText sx={{float: "left", marginTop: "3px"}}>Test Music Title</BoldText>
+                <BoldText sx={{float: "left", marginTop: "3px"}}>{playListMusicTitle}</BoldText>
             </Box>
 
             <Box sx={{width: "200px"}}>
@@ -28,7 +28,7 @@ const PlayListMusicInfo = ({playListMusicId, onClickTitle, sx, ...props}) => {
                 </YesNoButton>
                 <UpdatePlayListMusicButton onClickSaveButton={onClickUpdatePlayListMusicButton}/>
 
-                <BoldText sx={{float: "right", color: "lightgray", fontSize: "10px", marginTop: "7px"}}>2024-01-30</BoldText>
+                <BoldText sx={{float: "right", color: "lightgray", fontSize: "10px", marginTop: "7px"}}>{playListMusicCreatedDate}</BoldText>
             </Box>
         </Card>
     )
