@@ -7,15 +7,15 @@ import StyledTextField from '../../../_global/components/textField/StyledTextFie
 
 const CommentUpdateButton = ({onClickSaveButton, ...props}) => {
   const [isDialogOpend, setIsDialogOpend] = useState(false);
-  const [title, setTitle] = useState("")
+  const [content, setContent] = useState("")
 
   const onClickSaveButtonHandle = () => {
-    onClickSaveButton(title);
+    onClickSaveButton(content);
   }
 
   return (
     <>
-    <IconButton onClick={()=>{setTitle("");setIsDialogOpend(true);}} sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "20px", minWidth: "20px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
+    <IconButton onClick={()=>{setContent("");setIsDialogOpend(true);}} sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "20px", minWidth: "20px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
         <EditIcon sx={{width: "15px", height: "15px", float: "left"}}/>
     </IconButton>
 
@@ -24,16 +24,16 @@ const CommentUpdateButton = ({onClickSaveButton, ...props}) => {
       <DialogContent>
         <Stack>
             <StyledTextField
-                name="title"
-                label="제목"
+                name="content"
+                label="내용"
 
                 margin="normal"
                 fullWidth
 
                 sx={{width: 400}}
-                value={title}
+                value={content}
 
-                onChange={(e)=>{setTitle(e.target.value)}}
+                onChange={(e)=>{setContent(e.target.value)}}
             />
         </Stack>
       </DialogContent>

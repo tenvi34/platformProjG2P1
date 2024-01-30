@@ -11,8 +11,8 @@ import YesNoButton from '../../../_global/components/button/YesNoButton';
 
 const CommentInfo = () => {
 
-    const onClickCommentUpdateButton = (title) => {
-        alert(title)
+    const onClickCommentUpdateButton = (content) => {
+        alert(content)
     }
 
     return (
