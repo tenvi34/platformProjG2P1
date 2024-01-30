@@ -1,21 +1,29 @@
 import React, {useState} from 'react';
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Stack } from '@mui/material';
 import EditIcon from '@mui/icons-material/Edit';
+import MusicNoteIcon from '@mui/icons-material/MusicNote';
 
 import IconButton from '../button/IconButton';
 import StyledTextField from '../textField/StyledTextField';
+import FileUploadButton from '../button/FileUploadButton';
+import StyledTextButton from '../button/StyledTextButton';
 
 const MusicUpdateButton = ({onClickSaveButton, ...props}) => {
   const [isDialogOpend, setIsDialogOpend] = useState(false);
   const [title, setTitle] = useState("")
+  const [dataUrl, setDataUrl] = useState("")
 
   const onClickSaveButtonHandle = () => {
-    onClickSaveButton(title);
+    onClickSaveButton(title, dataUrl);
+  }
+
+  const onUploadMusicFile = (_, musicDataUrl) => {
+    setDataUrl(musicDataUrl);
   }
 
   return (
     <>
-    <IconButton onClick={()=>{setTitle("");setIsDialogOpend(true);}} sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
+    <IconButton onClick={()=>{setTitle("");setDataUrl("");setIsDialogOpend(true);}} sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
         <EditIcon sx={{width: "15px", height: "15px", float: "left"}}/>
     </IconButton>
 
@@ -35,6 +43,17 @@ const MusicUpdateButton = ({onClickSaveButton, ...props}) => {
 
                 onChange={(e)=>{setTitle(e.target.value)}}
             />
+
+            <FileUploadButton accept="*.mp3" onUploadFile={onUploadMusicFile}>
+              <StyledTextButton
+                  variant="text"
+                  color="primary"
+                  startIcon={<MusicNoteIcon />}
+                  sx={{"&&&": ((dataUrl.length > 0) ? {} : {"color": "gray"})}}
+              >
+                    음악 파일 수정
+              </StyledTextButton>
+            </FileUploadButton>
         </Stack>
       </DialogContent>
 

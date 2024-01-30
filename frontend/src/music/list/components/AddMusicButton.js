@@ -24,7 +24,7 @@ const AddMusicButton = ({onClickSaveButton, ...props}) => {
 
   return (
     <>
-    <IconButton onClick={()=>{setTitle("");setCreater("");setIsDialogOpend(true);}} {...props}>
+    <IconButton onClick={()=>{setTitle("");setCreater("");setDataUrl("");setIsDialogOpend(true);}} {...props}>
         <AddIcon sx={{fontSize: 35, paddingTop: 0.3, paddingLeft: 0.3}}/>
     </IconButton>
 

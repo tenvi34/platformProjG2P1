@@ -16,9 +16,11 @@ const MusicInfo = ({musicId, sx, ...props}) => {
         alert(playListId);
     }
 
-    const onClickMusicUpdateButton = (title) => {
-        alert(title)
+
+    const onClickMusicUpdateButton = (title, dataUrl) => {
+        alert(title + " / " + dataUrl.length)
     }
+
 
     return (
         <Card variant="outlined" sx={{padding: 1.5, height: 87, ...sx}} {...props}>
