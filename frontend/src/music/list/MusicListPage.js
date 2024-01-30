@@ -54,8 +54,8 @@ const MusicListPage = () => {
             <Stack sx={{marginTop: 3, alignItems: "center"}}>
                 <MusicSearchForm onSubmit={onSubmitSearch}/>
 
-                <Stack sx={{width: "100%"}}>
-                    <MusicInfo sx={{width: "95.5%", marginTop: "5px"}} musicId={1}/>
+                <Stack spacing={1} sx={{width: "100%", marginTop: "5px"}}>
+                    <MusicInfo sx={{width: "95.5%"}} musicId={1}/>
                 </Stack>
             </Stack>
         </>

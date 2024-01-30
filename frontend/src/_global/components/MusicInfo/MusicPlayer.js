@@ -36,12 +36,12 @@ const MusicPlayer = ({musicUrl, musicSecTime, musicTitle, musicCreater, musicCre
     return (
     <>
         <Stack {...props}>
-            <Box>
+            <Box sx={{width: "100%", display: "flex"}}>
                 <IconButton onClick={onPlayButtonClicked} sx={{float: "left"}} buttonSx={{width: "35px", minWidth: "35px", height: "35px", minHeight: "35px"}}>
                     {isPaused ? <PlayArrowIcon/> : <PauseIcon/>}
                 </IconButton>
 
-                <Box onClick={()=>{navigate(navigateUrl)}} sx={{cursor: "pointer"}}>
+                <Box onClick={()=>{navigate(navigateUrl)}} sx={{cursor: "pointer", width: "100%"}}>
                     <Box sx={{float: "left", marginLeft: "5px"}}>
                         <BoldText sx={{color: "lightgray", fontSize: "10px"}}>{musicCreater}</BoldText>
                         <BoldText>{musicTitle}</BoldText>
