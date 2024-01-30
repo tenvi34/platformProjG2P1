@@ -37,8 +37,8 @@ const MusicInfo = ({musicId, sx, ...props}) => {
                 setMusicInfo(musicInfoToUpdate)
 
             } catch (error) {
-                addAlertPopUp("그룹 채팅 정보를 가져오는 과정에서 오류가 발생했습니다!", "error");
-                console.error("그룹 채팅 정보를 가져오는 과정에서 오류가 발생했습니다!", error);
+                addAlertPopUp("단일 음악 정보를 가져오는 과정에서 오류가 발생했습니다!", "error");
+                console.error("단일 음악 정보를 가져오는 과정에서 오류가 발생했습니다!", error);
             }
         })()
     }, [musicId, addAlertPopUp, jwtTokenState])
