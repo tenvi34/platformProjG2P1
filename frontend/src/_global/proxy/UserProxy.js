@@ -42,7 +42,7 @@ class UserProxy {
 
 
     static async searchUserOneByUserId(userId, jwtTokenState) {
-        console.log(`[EFFECT] searchUserOne : <userId:${userId}>`)
+        console.log(`[EFFECT] searchUserOneByUserId : <userId:${userId}>`)
 
         const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
         const response = await axios.get(`http://${window.location.host}/api/collectedData/users/search/findByUserId?userId=${userId}`, requestHeader);
