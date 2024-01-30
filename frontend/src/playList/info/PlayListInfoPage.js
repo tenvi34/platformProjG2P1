@@ -5,13 +5,13 @@ import { Stack, Divider } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { JwtTokenContext } from "../../_global/provider/jwtToken/JwtTokenContext";
 
+import PlayListMusicInfo from './components/PlayListMusicInfo';
 import PlayListInfo from '../__global/components/PlayListInfo';
 
 import TopAppBar from '../../_global/components/TopAppBar';
 import IconNavigationButton from '../../_global/components/button/IconNavigationButton';
 import UserManageButton from '../../_global/components/button/UserManageButton';
 import MusicInfo from '../../_global/components/MusicInfo/MusicInfo';
-import PlayListMusicInfo from './PlayListMusicInfo';
 
 const PlayListInfoPage = () => {
     const {playListId} = useParams();

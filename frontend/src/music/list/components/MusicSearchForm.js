@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Paper, InputBase, MenuItem, Select } from '@mui/material';
 import SearchIcon from '@mui/icons-material/Search';
-import IconButton from '../../_global/components/button/IconButton';
+import IconButton from '../../../_global/components/button/IconButton';
 
 const MusicSearchForm = ({onSubmit, sx, ...props}) => {
     const [searchText, setSearchText] = useState("")

@@ -8,7 +8,7 @@ import SendIcon from '@mui/icons-material/Send';
 
 import { JwtTokenContext } from "../../_global/provider/jwtToken/JwtTokenContext";
 
-import CommentInfo from './CommentInfo';
+import CommentInfo from './components/CommentInfo';
 
 import TopAppBar from '../../_global/components/TopAppBar';
 import IconNavigationButton from '../../_global/components/button/IconNavigationButton';

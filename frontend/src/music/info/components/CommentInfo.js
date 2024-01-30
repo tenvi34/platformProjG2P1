@@ -3,9 +3,9 @@ import { Stack, Box} from '@mui/material';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
-import BoldText from '../../_global/components/text/BoldText';
-import NormalText from '../../_global/components/text/NormalText';
-import IconButton from '../../_global/components/button/IconButton';
+import BoldText from '../../../_global/components/text/BoldText';
+import NormalText from '../../../_global/components/text/NormalText';
+import IconButton from '../../../_global/components/button/IconButton';
 
 const CommentInfo = () => {
 

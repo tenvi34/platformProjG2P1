@@ -4,10 +4,10 @@ import { Stack } from '@mui/material';
 
 import { JwtTokenContext } from "../../_global/provider/jwtToken/JwtTokenContext";
 
-import MusicSearchForm from './MusicSearchForm';
+import MusicSearchForm from './components/MusicSearchForm';
+import PlayListTopAppBar from './components/PlayListTopAppBar';
 
 import MusicInfo from '../../_global/components/MusicInfo/MusicInfo';
-import PlayListTopAppBar from './PlayListTopAppBar';
 
 const MusicListPage = () => {
     const {jwtTokenState} = useContext(JwtTokenContext);

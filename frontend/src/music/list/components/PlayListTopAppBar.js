@@ -3,12 +3,12 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import PlaylistPlayIcon from '@mui/icons-material/PlaylistPlay';
 import AddIcon from '@mui/icons-material/Add';
 
-import { JwtTokenContext } from "../../_global/provider/jwtToken/JwtTokenContext";
+import { JwtTokenContext } from "../../../_global/provider/jwtToken/JwtTokenContext";
 
-import TopAppBar from '../../_global/components/TopAppBar';
-import IconButton from '../../_global/components/button/IconButton';
-import IconNavigationButton from '../../_global/components/button/IconNavigationButton';
-import UserManageButton from '../../_global/components/button/UserManageButton';
+import TopAppBar from '../../../_global/components/TopAppBar';
+import IconButton from '../../../_global/components/button/IconButton';
+import IconNavigationButton from '../../../_global/components/button/IconNavigationButton';
+import UserManageButton from '../../../_global/components/button/UserManageButton';
 
 const PlayListTopAppBar = () => {
     const {deleteTokenValue} = useContext(JwtTokenContext);
