@@ -6,7 +6,7 @@ import IconButton from '../../../_global/components/button/IconButton';
 
 const AddToPlayListButton = ({onClickSaveButton, ...props}) => {
   const [isDialogOpend, setIsDialogOpend] = useState(false);
-  const [playListId, setPlayListId] = useState(null)
+  const [playListId, setPlayListId] = useState("")
 
   const onClickSaveButtonHandle = () => {
     onClickSaveButton(playListId);
@@ -14,7 +14,7 @@ const AddToPlayListButton = ({onClickSaveButton, ...props}) => {
 
   return (
     <>
-    <IconButton onClick={()=>{setIsDialogOpend(true);}} sx={{float: "left", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
+    <IconButton onClick={()=>{setIsDialogOpend(true);setPlayListId("");}} sx={{float: "left", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
         <PlaylistAddIcon sx={{width: "15px", height: "15px", float: "left"}}/>
     </IconButton>
 
