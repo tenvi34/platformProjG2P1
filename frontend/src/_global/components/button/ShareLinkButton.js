@@ -1,7 +1,8 @@
 import React, {useState} from 'react';
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Stack, TextField } from '@mui/material';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Stack } from '@mui/material';
 import LinkIcon from '@mui/icons-material/Link';
 
+import StyledTextField from '../textField/StyledTextField';
 import IconButton from './IconButton';
 
 const ShareLinkButton = ({title, shareUrl, ...props}) => {
@@ -17,7 +18,7 @@ const ShareLinkButton = ({title, shareUrl, ...props}) => {
         <DialogTitle sx={{color: "black", fontWeight: "bolder", fontFamily: "BMDfont"}}>{title}</DialogTitle>
         <DialogContent>
             <Stack>
-                <TextField
+                <StyledTextField
                     name="sharedLink"
 
                     margin="normal"
