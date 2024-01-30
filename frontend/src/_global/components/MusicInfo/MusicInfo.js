@@ -9,6 +9,7 @@ import MusicUpdateButton from './MusicUpdateButton';
 
 import IconButton from '../button/IconButton';
 import ShareLinkButton from '../button/ShareLinkButton';
+import YesNoButton from '../button/YesNoButton';
 
 const MusicInfo = ({musicId, sx, ...props}) => {
 
@@ -40,10 +41,12 @@ const MusicInfo = ({musicId, sx, ...props}) => {
                     </IconButton>
                     <ShareLinkButton title="음악 공유 링크" shareUrl="http://localhost:8088/music/info/1"/>
                     <AddToPlayListButton onClickSaveButton={onClickAddToPlayListButton}/>
-
-                    <IconButton sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
-                        <DeleteIcon sx={{width: "15px", height: "15px", float: "left"}}/>
-                    </IconButton>
+                    
+                    <YesNoButton onClickYes={()=>{alert("YES")}} title="정말로 삭제하시겠습니까?">
+                        <IconButton sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
+                            <DeleteIcon sx={{width: "15px", height: "15px", float: "left"}}/>
+                        </IconButton>
+                    </YesNoButton>
                     <MusicUpdateButton onClickSaveButton={onClickMusicUpdateButton}/>
                 </Box>
             </Stack>
