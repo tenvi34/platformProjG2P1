@@ -1,18 +1,16 @@
 import React, {useState} from 'react';
-import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Stack } from '@mui/material';
-import LinkIcon from '@mui/icons-material/Link';
+import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Stack, Box } from '@mui/material';
 
 import StyledTextField from '../textField/StyledTextField';
-import IconButton from './IconButton';
 
-const ShareLinkButton = ({title, shareUrl, ...props}) => {
+const ShareLinkButton = ({children, title, shareUrl, ...props}) => {
     const [isSharedLinkDialogOpend, setIsSharedLinkDialogOpend] = useState(false);
 
     return (
     <>
-    <IconButton onClick={()=>{setIsSharedLinkDialogOpend(true);}} sx={{float: "left", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
-        <LinkIcon sx={{width: "15px", height: "15px", float: "left"}}/>
-    </IconButton>
+    <Box onClick={()=>{setIsSharedLinkDialogOpend(true);}}>
+        {children}
+    </Box>
 
     <Dialog open={isSharedLinkDialogOpend} onClose={()=>{setIsSharedLinkDialogOpend(false);}} {...props}>
         <DialogTitle sx={{color: "black", fontWeight: "bolder", fontFamily: "BMDfont"}}>{title}</DialogTitle>

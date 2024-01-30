@@ -2,6 +2,7 @@ import React from 'react';
 import { Stack, Card, Box } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import DeleteIcon from '@mui/icons-material/Delete';
+import LinkIcon from '@mui/icons-material/Link';
 
 import MusicPlayer from './MusicPlayer';
 import AddToPlayListButton from './AddToPlayListButton';
@@ -39,7 +40,11 @@ const MusicInfo = ({musicId, sx, ...props}) => {
                     <IconButton sx={{float: "left"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "10px", paddingBottom: "5px"}}>
                         <FavoriteIcon sx={{width: "13px", height: "13px", float: "left"}}/>1
                     </IconButton>
-                    <ShareLinkButton title="음악 공유 링크" shareUrl="http://localhost:8088/music/info/1"/>
+                    <ShareLinkButton title="음악 공유 링크" shareUrl="http://localhost:8088/music/info/1">
+                        <IconButton sx={{float: "left", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
+                            <LinkIcon sx={{width: "15px", height: "15px", float: "left"}}/>
+                        </IconButton>
+                    </ShareLinkButton>
                     <AddToPlayListButton onClickSaveButton={onClickAddToPlayListButton}/>
                     
                     <YesNoButton onClickYes={()=>{alert("YES")}} title="정말로 삭제하시겠습니까?">
