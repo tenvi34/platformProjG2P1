@@ -223,7 +223,7 @@ public class MusicViewHandler {
 
 
             Music musicToUpdate = optionalMusic.get();
-            musicToUpdate.setStatus("musicDeleted");
+            musicToUpdate.setStatus("MusicDeleted");
             Music savedMusic = this.musicRepository.save(musicToUpdate);
 
 
