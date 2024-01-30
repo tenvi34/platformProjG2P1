@@ -15,6 +15,17 @@ class MusicProxy {
         console.log(response)
     }
 
+    static async likeMusic(musicId, jwtTokenState) {
+        console.log(`[EFFECT] likeMusic : <musicId:${musicId}>`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const reqDto = {
+            "musicId": musicId
+        }
+        const response = await axios.put(`http://${window.location.host}/api/music/musics/likeMusic`, reqDto, requestHeader);
+        
+        console.log(response)
+    }   
 
     static async searchMusicOneByMusicId(musicId, jwtTokenState) {
         console.log(`[EFFECT] searchMusicOneByMusicId : <musicId:${musicId}>`)

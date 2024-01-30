@@ -44,6 +44,18 @@ const MusicInfo = ({musicId, sx, ...props}) => {
     }, [musicId, addAlertPopUp, jwtTokenState])
 
 
+    const onClickLikeMusicButton = async () => {
+        try {
+
+            await MusicProxy.likeMusic(musicId, jwtTokenState)
+            addAlertPopUp("좋아요를 눌렀습니다.", "success");
+
+        } catch (error) {
+            addAlertPopUp("좋아요를 누르는 과정에서 오류가 발생했습니다!", "error");
+            console.error("좋아요를 누르는 가져오는 과정에서 오류가 발생했습니다!", error);
+        }
+    }
+
     const onClickAddToPlayListButton = (title, playListId) => {
         alert(title + " / " + playListId);
     }
@@ -69,7 +81,7 @@ const MusicInfo = ({musicId, sx, ...props}) => {
                     />
 
                     <Box>
-                        <IconButton sx={{float: "left"}} buttonSx={{width: "40px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "10px", paddingBottom: "5px"}}>
+                        <IconButton onClick={onClickLikeMusicButton} sx={{float: "left"}} buttonSx={{width: "40px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "10px", paddingBottom: "5px"}}>
                             <FavoriteIcon sx={{width: "13px", height: "13px", float: "left"}}/>{musicInfo.likes}
                         </IconButton>
                         <ShareLinkButton title="음악 공유 링크" shareUrl={`http://${window.location.host}/music/info/${musicId}`}>
