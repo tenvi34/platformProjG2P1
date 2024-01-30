@@ -35,7 +35,9 @@ const MusicListPage = () => {
         (async () => {
             try {
 
-                setMusicInfos(await MusicProxy.searchMusicAll(jwtTokenState));
+                setMusicInfos((await MusicProxy.searchMusicAll(jwtTokenState)).filter((musicInfo)=>{
+                    return musicInfo.status !== "MusicDeleted"
+                }));
 
             } catch (error) {
                 addAlertPopUp("음악 정보들을 가져오는 과정에서 오류가 발생했습니다!", "error");
@@ -47,16 +49,22 @@ const MusicListPage = () => {
 
     const onSubmitSearch = async (searchType, searchText) => {
         if(searchText.length === 0) {
-            setMusicInfos(await MusicProxy.searchMusicAll(jwtTokenState));
+            setMusicInfos((await MusicProxy.searchMusicAll(jwtTokenState)).filter((musicInfo)=>{
+                return musicInfo.status !== "MusicDeleted"
+            }));
             return;
         }
         
         switch(searchType) {
             case "musicTitle":
-                setMusicInfos(await MusicProxy.searchMusicAllByTitle(searchText, jwtTokenState));
+                setMusicInfos((await MusicProxy.searchMusicAllByTitle(searchText, jwtTokenState)).filter((musicInfo)=>{
+                    return musicInfo.status !== "MusicDeleted"
+                }));
                 break;
             case "musicCreater":
-                setMusicInfos(await MusicProxy.searchMusicAllByCreater(searchText, jwtTokenState));
+                setMusicInfos((await MusicProxy.searchMusicAllByCreater(searchText, jwtTokenState)).filter((musicInfo)=>{
+                    return musicInfo.status !== "MusicDeleted"
+                }));
                 break;
             default:
                 break;

@@ -93,6 +93,16 @@ class MusicProxy {
         console.log(response)
         return response.data._embedded.musics
     }
+
+
+    static async deleteMusicByMusicId(musicId, jwtTokenState) {
+        console.log(`[EFFECT] deleteMusicByMusicId : <musicId:${musicId}>`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const response = await axios.delete(`http://${window.location.host}/api/music/musics/${musicId}`, requestHeader);
+        
+        console.log(response)
+    }
 }
 
 export default MusicProxy

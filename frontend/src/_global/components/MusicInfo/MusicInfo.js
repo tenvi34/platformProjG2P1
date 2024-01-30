@@ -78,6 +78,19 @@ const MusicInfo = ({musicId, sx, ...props}) => {
     }
 
 
+    const onClickDeleteMusic = async () => {
+        try {
+
+            await MusicProxy.deleteMusicByMusicId(musicId, jwtTokenState)
+            addAlertPopUp("음악 정보를 삭제했습니다.", "success");
+
+        } catch (error) {
+            addAlertPopUp("음악 정보를 삭제하는 과정에서 오류가 발생했습니다!", "error");
+            console.error("음악 정보를 삭제하는 과정에서 오류가 발생했습니다!", error);
+        }
+    }
+
+
     return (
         <Card variant="outlined" sx={{padding: 1.5, height: 87, ...sx}} {...props}>
             <Stack>
@@ -104,7 +117,7 @@ const MusicInfo = ({musicId, sx, ...props}) => {
                         </ShareLinkButton>
                         <AddToPlayListButton onClickSaveButton={onClickAddToPlayListButton} defaultTitleValue={musicInfo.title}/>
                         
-                        <YesNoButton onClickYes={()=>{alert("YES")}} title="정말로 삭제하시겠습니까?">
+                        <YesNoButton onClickYes={onClickDeleteMusic} title="정말로 삭제하시겠습니까?">
                             <IconButton sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
                                 <DeleteIcon sx={{width: "15px", height: "15px", float: "left"}}/>
                             </IconButton>
