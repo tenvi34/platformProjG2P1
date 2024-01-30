@@ -37,7 +37,7 @@ const PlayListListPage = () => {
             </TopAppBar>
 
             <Stack sx={{marginTop: 3}} spacing={1}>
-                <PlayListInfo musicId={1}/>
+                <PlayListInfo playListId={1}/>
             </Stack>
         </>
     )

@@ -8,13 +8,13 @@ import EditIcon from '@mui/icons-material/Edit';
 import IconButton from '../../../_global/components/button/IconButton';
 import BoldText from '../../../_global/components/text/BoldText';
 
-const PlayListInfo = ({musicId, sx, ...props}) => {
+const PlayListInfo = ({playListId, sx, ...props}) => {
     const navigate = useNavigate();
 
     return (
         <Card sx={{padding: 1.5, ...sx}} {...props}>
             <Stack>
-                <Box sx={{cursor: "pointer"}} onClick={()=>{navigate(`/playList/info/${musicId}`)}}>
+                <Box sx={{cursor: "pointer"}} onClick={()=>{navigate(`/playList/info/${playListId}`)}}>
                     <Box sx={{float: "left"}}>
                         <BoldText sx={{color: "lightgray", fontSize: "10px"}}>총 5개 음악</BoldText>
                         <BoldText>Test Music Play list</BoldText>
