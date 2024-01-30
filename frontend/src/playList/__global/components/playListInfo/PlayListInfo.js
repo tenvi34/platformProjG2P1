@@ -11,7 +11,7 @@ import BoldText from '../../../../_global/components/text/BoldText';
 import YesNoButton from '../../../../_global/components/button/YesNoButton';
 import ShareLinkButton from '../../../../_global/components/button/ShareLinkButton';
 
-const PlayListInfo = ({playListId, sx, ...props}) => {
+const PlayListInfo = ({playListId, playListTitle, playListMusicCount, playListCreatedDate, sx, ...props}) => {
     const navigate = useNavigate();
 
     const onClickUpdatePlayListButton = (title) => {
@@ -23,15 +23,15 @@ const PlayListInfo = ({playListId, sx, ...props}) => {
             <Stack>
                 <Box sx={{cursor: "pointer"}} onClick={()=>{navigate(`/playList/info/${playListId}`)}}>
                     <Box sx={{float: "left"}}>
-                        <BoldText sx={{color: "lightgray", fontSize: "10px"}}>총 5개 음악</BoldText>
-                        <BoldText>Test Music Play list</BoldText>
+                        <BoldText sx={{color: "lightgray", fontSize: "10px"}}>총 {playListMusicCount}개 음악</BoldText>
+                        <BoldText>{playListTitle}</BoldText>
                     </Box>
 
-                    <BoldText sx={{float: "right", color: "lightgray", fontSize: "10px"}}>2024-01-30</BoldText>
+                    <BoldText sx={{float: "right", color: "lightgray", fontSize: "10px"}}>{playListCreatedDate}</BoldText>
                 </Box>
 
                 <Box>
-                    <ShareLinkButton title="음악 공유 링크" shareUrl="http://localhost:8088/playList/info/1">
+                    <ShareLinkButton title="음악 공유 링크" shareUrl={`http://${window.location.host}/playList/info/${playListId}`}>
                         <IconButton sx={{float: "left"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
                             <LinkIcon sx={{width: "15px", height: "15px", float: "left"}}/>
                         </IconButton>
