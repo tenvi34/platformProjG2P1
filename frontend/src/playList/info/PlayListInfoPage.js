@@ -1,8 +1,10 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { Stack, Divider } from '@mui/material';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
+
+import { AlertPopupContext } from '../../_global/provider/alertPopUp/AlertPopUpContext';
 import { JwtTokenContext } from "../../_global/provider/jwtToken/JwtTokenContext";
 
 import PlayListMusicInfo from './components/PlayListMusicInfo';
@@ -13,8 +15,13 @@ import IconNavigationButton from '../../_global/components/button/IconNavigation
 import UserManageButton from '../../_global/components/button/UserManageButton';
 import MusicInfo from '../../_global/components/MusicInfo/MusicInfo';
 
+import PlayListProxy from '../../_global/proxy/PlayListProxy';
+
+import TimeTool from '../../_global/tool/TimeTool';
+
 const PlayListInfoPage = () => {
     const {playListId} = useParams();
+    const {addAlertPopUp} = useContext(AlertPopupContext);
     const {jwtTokenState} = useContext(JwtTokenContext);
     const navigate = useNavigate();
 
@@ -24,7 +31,21 @@ const PlayListInfoPage = () => {
         }
     }, [jwtTokenState.jwtToken, navigate])
 
-    console.log(playListId)
+
+    const [playListInfo, setPlayListInfo] = useState(null)
+    useEffect(() => {
+        (async () => {
+            try {
+
+                setPlayListInfo(await PlayListProxy.searchPlayListOneByPlayListId(playListId, jwtTokenState))
+
+            } catch (error) {
+                addAlertPopUp("플레이 리스트 정보를 가져오는 과정에서 오류가 발생했습니다!", "error");
+                console.error("플레이 리스트 정보를 가져오는 과정에서 오류가 발생했습니다!", error);
+            }
+        })()
+    }, [playListId, addAlertPopUp, jwtTokenState])
+
 
     const onClickPlayListMusicTitle = (playListMusicId) => {
         alert(playListMusicId)
@@ -43,7 +64,15 @@ const PlayListInfoPage = () => {
                 <MusicInfo sx={{width: "95%", marginTop: "5px"}} musicId={1}/>
                 <Divider sx={{marginTop: "5px"}}/>
 
-                <PlayListInfo sx={{marginTop: "5px"}} playListId={1}/>
+                {
+                    (playListInfo) ? (<>
+                        <PlayListInfo sx={{marginTop: "5px"}}
+                            playListId={playListInfo.playListId} playListTitle={playListInfo.title}
+                            playListMusicCount={playListInfo.musicCount} playListCreatedDate={TimeTool.prettyDateString(playListInfo.createdDate)}
+                            key={playListInfo.playListId}
+                        />   
+                    </>) : null
+                }
                 <Divider sx={{marginTop: "5px"}}/>
 
                 <Stack spacing={1} sx={{marginTop: "5px", width: "100%"}}>

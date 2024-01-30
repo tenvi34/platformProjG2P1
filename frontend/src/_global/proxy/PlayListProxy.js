@@ -37,6 +37,16 @@ class PlayListProxy {
         return response.data._embedded.playLists
     }
 
+    static async searchPlayListOneByPlayListId(playListId, jwtTokenState) {
+        console.log(`[EFFECT] searchPlayListOneByPlayListId : <playListId:${playListId}>`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const response = await axios.get(`http://${window.location.host}/api/collectedData/playLists/search/findByPlayListId?playListId=${playListId}`, requestHeader);
+        
+        console.log(response)
+        return response.data
+    }
+
 
     static async deletePlayListByPlayListId(playListId, jwtTokenState) {
         console.log(`[EFFECT] deletePlayListByPlayListId : <playListId:${playListId}>`)
