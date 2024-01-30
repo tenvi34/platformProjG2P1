@@ -1,16 +1,20 @@
 import React from 'react';
 import { Stack, Card, Box } from '@mui/material';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-import PlaylistAddIcon from '@mui/icons-material/PlaylistAdd';
 import DeleteIcon from '@mui/icons-material/Delete';
 import EditIcon from '@mui/icons-material/Edit';
 
 import MusicPlayer from './MusicPlayer';
+import AddToPlayListButton from './AddToPlayListButton';
 
 import IconButton from '../button/IconButton';
 import ShareLinkButton from '../button/ShareLinkButton';
 
 const MusicInfo = ({musicId, sx, ...props}) => {
+
+    const onClickAddToPlayListButton = (playListId) => {
+        alert(playListId);
+    }
 
     return (
         <Card variant="outlined" sx={{padding: 1.5, height: 87, ...sx}} {...props}>
@@ -29,9 +33,7 @@ const MusicInfo = ({musicId, sx, ...props}) => {
                         <FavoriteIcon sx={{width: "13px", height: "13px", float: "left"}}/>1
                     </IconButton>
                     <ShareLinkButton title="음악 공유 링크" shareUrl="http://localhost:8088/music/info/1"/>
-                    <IconButton sx={{float: "left", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
-                        <PlaylistAddIcon sx={{width: "15px", height: "15px", float: "left"}}/>
-                    </IconButton>
+                    <AddToPlayListButton onClickSaveButton={onClickAddToPlayListButton}/>
 
                     <IconButton sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "35px", minWidth: "35px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
                         <DeleteIcon sx={{width: "15px", height: "15px", float: "left"}}/>
