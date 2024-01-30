@@ -1,17 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { Stack } from '@mui/material';
 import { useNavigate } from "react-router-dom";
-import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import AddIcon from '@mui/icons-material/Add';
 
 import { JwtTokenContext } from "../../_global/provider/jwtToken/JwtTokenContext";
 
 import PlayListInfo from '../__global/components/playListInfo/PlayListInfo';
 
-import TopAppBar from '../../_global/components/TopAppBar';
-import IconButton from '../../_global/components/button/IconButton';
-import IconNavigationButton from '../../_global/components/button/IconNavigationButton';
-import UserManageButton from '../../_global/components/button/UserManageButton';
+import PlayListListTopAppBar from './components/PlayListListTopAppBar';
 
 const PlayListListPage = () => {
     const {jwtTokenState} = useContext(JwtTokenContext);
@@ -25,16 +20,7 @@ const PlayListListPage = () => {
 
     return (
         <>
-            <TopAppBar title="플레이 리스트 목록">
-                <IconButton sx={{marginRight: "5px"}} onClick={() => {}}>
-                    <AddIcon sx={{fontSize: 35, paddingTop: 0.3, paddingLeft: 0.3}}/>
-                </IconButton>
-            
-                <UserManageButton sx={{marginRight: "5px"}}/>
-                <IconNavigationButton url="/music/list">
-                    <ArrowBackIcon sx={{fontSize: 40}}/>
-                </IconNavigationButton>
-            </TopAppBar>
+            <PlayListListTopAppBar/>
 
             <Stack sx={{marginTop: "5px"}} spacing={1}>
                 <PlayListInfo playListId={1}/>
