@@ -10,3 +10,4 @@ spec:
       targetPort: $k8s_target_port
   selector:
     app: $k8s_service_name
+  type: LoadBalancer
