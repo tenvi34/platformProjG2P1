@@ -26,6 +26,18 @@ class UserProxy {
         console.log("jwtToken :" + jwtToken);
         return jwtToken;
     }
+
+    static async updateName(nameToUpdate, jwtTokenState) {
+        console.log(`[EFFECT] updateName : <nameToUpdate:${nameToUpdate}>`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const reqDto = {
+            "name": nameToUpdate
+        }
+        const response = await axios.put(`http://${window.location.host}/api/user/users/updateName`, reqDto, requestHeader);
+        
+        console.log(response)
+    }
 }
 
 export default UserProxy

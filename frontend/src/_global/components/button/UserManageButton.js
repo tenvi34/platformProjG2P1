@@ -1,17 +1,31 @@
-import React, {useState} from 'react';
+import React, { useState, useContext } from 'react';
 import { Button, Dialog, DialogTitle, DialogContent, DialogActions, Stack } from '@mui/material';
-
 import ManageAccountsIcon from '@mui/icons-material/ManageAccounts';
+
+import { AlertPopupContext } from '../../provider/alertPopUp/AlertPopUpContext';
+import { JwtTokenContext } from '../../provider/jwtToken/JwtTokenContext';
 
 import StyledTextField from '../textField/StyledTextField';
 import IconButton from './IconButton';
 
+import UserProxy from '../../proxy/UserProxy';
+
 const UserManageButton = ({...props}) => {
+  const {addAlertPopUp} = useContext(AlertPopupContext);
+  const {jwtTokenState} = useContext(JwtTokenContext);
   const [isDialogOpend, setIsDialogOpend] = useState(false);
   const [userName, setUserName] = useState("")
   
-  const onClickSaveButton = () => {
-    alert(userName);
+  const onClickSaveButton = async () => {
+    try {
+
+        await UserProxy.updateName(userName, jwtTokenState);
+        addAlertPopUp("유저 정보가 정상적으로 수행되었습니다.", "success");
+
+    } catch(error) {
+        addAlertPopUp("유저 정보 수정 도중에 오류가 발생했습니다!", "error");
+        console.error("유저 정보 수정 도중에 오류가 발생했습니다!", error);
+    }
   }
 
   return (
