@@ -44,7 +44,7 @@ const MusicInfoPage = () => {
             </TopAppBar>
 
             <Stack>
-                <MusicInfo sx={{width: "95.5%", marginTop: "5px"}} musicId={musicId}/>
+                <MusicInfo sx={{width: "95%", marginTop: "5px"}} musicId={musicId}/>
                 
                 <Box sx={{marginTop: "10px"}}>
                     <ChatBubbleIcon sx={{color: "gray", float: "left"}}/>
