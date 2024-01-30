@@ -27,6 +27,7 @@ class UserProxy {
         return jwtToken;
     }
 
+
     static async updateName(nameToUpdate, jwtTokenState) {
         console.log(`[EFFECT] updateName : <nameToUpdate:${nameToUpdate}>`)
 
@@ -37,6 +38,17 @@ class UserProxy {
         const response = await axios.put(`http://${window.location.host}/api/user/users/updateName`, reqDto, requestHeader);
         
         console.log(response)
+    }
+
+
+    static async searchUserOne(uesrId, jwtTokenState) {
+        console.log(`[EFFECT] searchUserOne : <uesrId:${uesrId}>`)
+
+        const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};
+        const response = await axios.get(`http://${window.location.host}/api/user/users/${uesrId}`, requestHeader);
+        
+        console.log(response)
+        return response.data
     }
 }
 

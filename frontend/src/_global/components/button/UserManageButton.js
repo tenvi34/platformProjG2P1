@@ -16,6 +16,14 @@ const UserManageButton = ({...props}) => {
   const [isDialogOpend, setIsDialogOpend] = useState(false);
   const [userName, setUserName] = useState("")
   
+
+  const onClickDialogOpenButton = async () => {
+    const userDate = await UserProxy.searchUserOne(2, jwtTokenState);
+
+    setUserName(userDate.name);
+    setIsDialogOpend(true);
+  }
+
   const onClickSaveButton = async () => {
     try {
 
@@ -28,9 +36,10 @@ const UserManageButton = ({...props}) => {
     }
   }
 
+
   return (
     <>
-    <IconButton onClick={()=>{setUserName("");setIsDialogOpend(true);}} {...props}>
+    <IconButton onClick={onClickDialogOpenButton} {...props}>
       <ManageAccountsIcon sx={{fontSize: 35, paddingTop: 0.3, paddingLeft: 0.3}}/>
     </IconButton>
 
