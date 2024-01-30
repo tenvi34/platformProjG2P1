@@ -1,9 +1,12 @@
 import React, { useContext, useEffect } from 'react';
+import { Stack } from '@mui/material';
 import { useNavigate } from "react-router-dom";
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import AddIcon from '@mui/icons-material/Add';
 
 import { JwtTokenContext } from "../../_global/provider/jwtToken/JwtTokenContext";
+
+import PlayListInfo from '../__global/components/PlayListInfo';
 
 import TopAppBar from '../../_global/components/TopAppBar';
 import IconButton from '../../_global/components/button/IconButton';
@@ -32,6 +35,10 @@ const PlayListListPage = () => {
                     <ArrowBackIcon sx={{fontSize: 40}}/>
                 </IconNavigationButton>
             </TopAppBar>
+
+            <Stack sx={{marginTop: 3}} spacing={1}>
+                <PlayListInfo musicId={1}/>
+            </Stack>
         </>
     )
 }
