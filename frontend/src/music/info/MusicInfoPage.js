@@ -19,6 +19,8 @@ import BoldText from '../../_global/components/text/BoldText';
 import IconButton from '../../_global/components/button/IconButton';
 
 import CommentProxy from '../../_global/proxy/CommentProxy';
+import UserProxy from '../../_global/proxy/UserProxy';
+import TimeTool from '../../_global/tool/TimeTool';
 
 const MusicInfoPage = () => {
     const {musicId} = useParams();
@@ -50,6 +52,33 @@ const MusicInfoPage = () => {
     }
 
 
+    const [commentInfos, setCommentInfos] = useState([])
+    useEffect(() => {
+        (async () => {
+            try {
+
+                let commentInfosToUpdate = (await CommentProxy.searchCommentAll(jwtTokenState)).filter((commentInfo)=>{
+                    return commentInfo.status !== "CommentDeleted"
+                });
+                
+                for(let searchIndex=0;searchIndex<commentInfosToUpdate.length;searchIndex++)
+                {
+                    let commentInfoToUpdate = commentInfosToUpdate[searchIndex];
+                    let userInfoToUpdate = await UserProxy.searchUserOneByUserId(commentInfoToUpdate.createrId, jwtTokenState);
+                    commentInfoToUpdate.userName = userInfoToUpdate.name;
+                    commentInfoToUpdate.prettyCreatedDate = TimeTool.prettyDateString(commentInfoToUpdate.createdDate);
+                }
+
+                setCommentInfos(commentInfosToUpdate)
+
+            } catch (error) {
+                addAlertPopUp("댓글 정보들을 가져오는 과정에서 오류가 발생했습니다!", "error");
+                console.error("댓글 정보들을 가져오는 과정에서 오류가 발생했습니다!", error);
+            }
+        })()
+    }, [musicId, addAlertPopUp, jwtTokenState])
+
+
     return (
         <>
             <TopAppBar title="음악 정보">  
@@ -65,7 +94,7 @@ const MusicInfoPage = () => {
                 
                 <Box sx={{marginTop: "10px"}}>
                     <ChatBubbleIcon sx={{color: "gray", float: "left"}}/>
-                    <BoldText sx={{color: "gray", float: "left", marginLeft: "5px", paddingTop: "3px"}}>댓글: 5개</BoldText>
+                    <BoldText sx={{color: "gray", float: "left", marginLeft: "5px", paddingTop: "3px"}}>댓글: {commentInfos.length}개</BoldText>
                 </Box>
 
 
@@ -79,7 +108,14 @@ const MusicInfoPage = () => {
 
 
                 <Stack spacing={1} sx={{marginTop: "10px"}} divider={<Divider flexItem />}>
-                    <CommentInfo/>
+                    {
+                        commentInfos.map((commentInfo) => (
+                            <CommentInfo commentId={commentInfo.commentId} userName={commentInfo.userName}
+                                createdDate={commentInfo.prettyCreatedDate} content={commentInfo.content}
+                                key={commentInfo.commentId}
+                            />
+                        ))
+                    }
                 </Stack>
             </Stack>
         </>

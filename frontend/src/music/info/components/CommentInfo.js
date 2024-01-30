@@ -9,8 +9,7 @@ import NormalText from '../../../_global/components/text/NormalText';
 import IconButton from '../../../_global/components/button/IconButton';
 import YesNoButton from '../../../_global/components/button/YesNoButton';
 
-const CommentInfo = () => {
-
+const CommentInfo = ({commentId, userName, createdDate, content}) => {
     const onClickCommentUpdateButton = (content) => {
         alert(content)
     }
@@ -18,9 +17,9 @@ const CommentInfo = () => {
     return (
         <Stack>
             <Box>
-                <BoldText sx={{float: "left"}}>TestUser</BoldText>
+                <BoldText sx={{float: "left"}}>{userName}</BoldText>
                 <BoldText sx={{float: "left", marginX: "5px"}}>·</BoldText>
-                <BoldText sx={{float: "left", color: "lightgray"}}>2023-01-01</BoldText>
+                <BoldText sx={{float: "left", color: "lightgray", fontSize: "10px", marginTop: "2px"}}>{createdDate}</BoldText>
 
                 <YesNoButton onClickYes={()=>{alert("YES")}} title="정말로 삭제하시겠습니까?">
                     <IconButton sx={{float: "right", marginLeft: "5px"}} buttonSx={{width: "20px", minWidth: "20px", height: "18px", minHeight: "18px"}} textSx={{fontSize: "12px", paddingBottom: "8px"}}>
@@ -30,7 +29,7 @@ const CommentInfo = () => {
                 <CommentUpdateButton onClickSaveButton={onClickCommentUpdateButton}/>
             </Box>
             <NormalText style={{fontWeight: "1px"}}>
-                Test Comment
+                {content}
             </NormalText>
         </Stack>
     )
