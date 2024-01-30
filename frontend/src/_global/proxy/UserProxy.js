@@ -41,7 +41,7 @@ class UserProxy {
     }
 
 
-    static async searchUserOne(uesrId, jwtTokenState) {
+    static async searchUserOneByUserId(uesrId, jwtTokenState) {
         console.log(`[EFFECT] searchUserOne : <uesrId:${uesrId}>`)
 
         const requestHeader = {headers: {Authorization: jwtTokenState.jwtToken.Authorization}};

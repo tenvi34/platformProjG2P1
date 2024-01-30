@@ -18,7 +18,7 @@ const UserManageButton = ({...props}) => {
   
 
   const onClickDialogOpenButton = async () => {
-    const userDate = await UserProxy.searchUserOne(jwtTokenState.jwtToken.id, jwtTokenState);
+    const userDate = await UserProxy.searchUserOneByUserId(jwtTokenState.jwtToken.id, jwtTokenState);
 
     setUserName(userDate.name);
     setIsDialogOpend(true);
