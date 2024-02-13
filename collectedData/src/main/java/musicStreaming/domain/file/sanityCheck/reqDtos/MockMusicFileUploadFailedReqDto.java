@@ -8,4 +8,5 @@ import lombok.ToString;
 public class MockMusicFileUploadFailedReqDto {
     private Long id;
     private Long musicId;
+    private String dataUrlCode;
 }

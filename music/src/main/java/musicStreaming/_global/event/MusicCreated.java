@@ -1,6 +1,7 @@
 package musicStreaming._global.event;
 
 import musicStreaming._global.infra.AbstractEvent;
+import musicStreaming.domain.Music;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -14,6 +15,11 @@ public class MusicCreated extends AbstractEvent {
     private Long id;
     private Long fileId;
     private Integer totalSeconds;
+
+    public MusicCreated(Music aggregate, Integer totalSeconds) {
+        super(aggregate);
+        this.totalSeconds = totalSeconds;
+    }
 
     public MusicCreated() {
         super();

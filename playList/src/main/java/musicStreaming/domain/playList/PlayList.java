@@ -60,6 +60,7 @@ public class PlayList {
 
     @PrePersist
     public void onPrePersist() {
+        this.musicCount = 0;
         this.createdDate = new Date();
         this.updatedDate = new Date();
 

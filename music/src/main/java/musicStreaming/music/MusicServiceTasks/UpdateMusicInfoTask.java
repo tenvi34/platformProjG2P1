@@ -1,7 +1,9 @@
 package musicStreaming.music.MusicServiceTasks;
 
-import musicStreaming._global.logger.CustomLogger;
-import musicStreaming._global.logger.CustomLoggerType;
+import java.util.Optional;
+
+import musicStreaming._global.event.MusicInfoUpdated;
+import musicStreaming._global.exceptions.MusicNotFoundException;
 
 import musicStreaming.domain.Music;
 import musicStreaming.domain.MusicRepository;
@@ -13,12 +15,19 @@ public class UpdateMusicInfoTask {
     // 음악 정보를 업데이트시키기 위해서
     public static UpdateMusicInfoResDto updateMusicInfoTask(UpdateMusicInfoReqDto updateMusicInfoReqDto,
             MusicRepository musicRepository) {
-        CustomLogger.debug(CustomLoggerType.EFFECT, "TODO: updateMusicInfo");
 
         // [1] updateMusicInfoReqDto에서 musicId를 얻어서 해당하는 Music 데이터 얻기
-        // [2] title을 업데이트하고, 저장하기
-        // [3] MusicInfoUpdated 이벤트 발생시키기 
+        Optional<Music> optionalMusic = musicRepository.findById(updateMusicInfoReqDto.getMusicId());
+        if(!optionalMusic.isPresent()) throw new MusicNotFoundException();
+        Music musicToUpate = optionalMusic.get();
 
-        return new UpdateMusicInfoResDto(new Music());
+        // [2] title을 업데이트하고, 저장하기
+        musicToUpate.setTitle(updateMusicInfoReqDto.getTitle());
+        Music savedMusic = musicRepository.save(musicToUpate);
+
+        // [3] MusicInfoUpdated 이벤트 발생시키기
+        (new MusicInfoUpdated(savedMusic)).publishAfterCommit();
+
+        return new UpdateMusicInfoResDto(savedMusic);
     }
 }

@@ -137,12 +137,12 @@ public class File {
 
 
     // 관련 음악 파일 DATA URL을 요청해서 얻고, 디코딩 후, 파일을 저장시키기 위해서
-    public static void uploadMusicFile(MusicFileUploadRequested musicFileUploadRequested) {
+    public static void uploadMusicFile(MusicFileUploadRequested musicFileUploadRequested) throws Exception {
         UploadMusicFileTask.uploadMusicFileTask(musicFileUploadRequested, File.repository(), File.resourcesService(), File.externalSystemProxyService());
     }
 
     // 이미 존재하는 파일 정보를 갱신하면서 관련 음악 파일 DATA URL을 요청해서 얻고, 디코딩 후, 파일을 저장시키기 위해서
-    public static void updateMusicFile(MusicFileUpdateRequested musicFileUpdateRequested) {
+    public static void updateMusicFile(MusicFileUpdateRequested musicFileUpdateRequested) throws Exception {
         UpdateMusicFileTask.updateMusicFileTask(musicFileUpdateRequested, File.repository(), File.resourcesService(), File.externalSystemProxyService());
     }
 

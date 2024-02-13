@@ -5,4 +5,5 @@ import lombok.Data;
 @Data
 public class MockPlayListMusicDeletedReqDto {
     private Long id;
+    private Long playListId;
 }

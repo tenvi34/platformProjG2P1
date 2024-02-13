@@ -70,7 +70,7 @@ spring:
         - id: musicNoAuth
           uri: http://localhost:8083
           predicates:
-            - Path=/api/music/sanityCheck
+            - Path=/api/music/sanityCheck,/api/music/sanityCheck/logs
             - Method=GET
           filters:
             - RewritePath=/api/music/(?<segment>.*), /${segment}
@@ -84,6 +84,14 @@ spring:
             - AuthorizationHeaderFilter
 
 
+        - id: fileSanityCheck
+          uri: http://localhost:8084
+          predicates:
+            - Path=/api/file/sanityCheck,/api/file/sanityCheck/logs
+            - Method=GET
+          filters:
+            - RewritePath=/api/file/(?<segment>.*), /${segment}
+
         - id: fileResource
           uri: http://localhost:8084
           predicates:
@@ -95,7 +103,7 @@ spring:
         - id: playListNoAuth
           uri: http://localhost:8085
           predicates:
-            - Path=/api/playList/sanityCheck
+            - Path=/api/playList/sanityCheck,/api/playList/sanityCheck/logs
             - Method=GET
           filters:
             - RewritePath=/api/playList/(?<segment>.*), /${segment}
@@ -112,7 +120,7 @@ spring:
         - id: commentNoAuth
           uri: http://localhost:8086
           predicates:
-            - Path=/api/comment/sanityCheck
+            - Path=/api/comment/sanityCheck,/api/comment/sanityCheck/logs
             - Method=GET
           filters:
             - RewritePath=/api/comment/(?<segment>.*), /${segment}
@@ -129,7 +137,7 @@ spring:
         - id: collectedDataNoAuth
           uri: http://localhost:8087
           predicates:
-            - Path=/api/collectedData/sanityCheck,/api/collectedData/users,/api/collectedData/musics,/api/collectedData/files,/api/collectedData/playLists,/api/collectedData/playListMusics,/api/collectedData/comments
+            - Path=/api/collectedData/sanityCheck,/api/collectedData/sanityCheck/logs,/api/collectedData/users,/api/collectedData/musics,/api/collectedData/files,/api/collectedData/playLists,/api/collectedData/playListMusics,/api/collectedData/comments
             - Method=GET
           filters:
             - RewritePath=/api/collectedData/(?<segment>.*), /${segment}
@@ -185,7 +193,7 @@ spring:
         - id: musicNoAuth
           uri: http://host.docker.internal:8083
           predicates:
-            - Path=/api/music/sanityCheck
+            - Path=/api/music/sanityCheck,/api/music/sanityCheck/logs
             - Method=GET
           filters:
             - RewritePath=/api/music/(?<segment>.*), /${segment}
@@ -199,6 +207,14 @@ spring:
             - AuthorizationHeaderFilter
 
 
+        - id: fileSanityCheck
+          uri: http://host.docker.internal:8084
+          predicates:
+            - Path=/api/file/sanityCheck,/api/file/sanityCheck/logs
+            - Method=GET
+          filters:
+            - RewritePath=/api/file/(?<segment>.*), /${segment}
+
         - id: fileResource
           uri: http://host.docker.internal:8084
           predicates:
@@ -210,7 +226,7 @@ spring:
         - id: playListNoAuth
           uri: http://host.docker.internal:8085
           predicates:
-            - Path=/api/playList/sanityCheck
+            - Path=/api/playList/sanityCheck,/api/playList/sanityCheck/logs
             - Method=GET
           filters:
             - RewritePath=/api/playList/(?<segment>.*), /${segment}
@@ -227,7 +243,7 @@ spring:
         - id: commentNoAuth
           uri: http://host.docker.internal:8086
           predicates:
-            - Path=/api/comment/sanityCheck
+            - Path=/api/comment/sanityCheck,/api/comment/sanityCheck/logs
             - Method=GET
           filters:
             - RewritePath=/api/comment/(?<segment>.*), /${segment}
@@ -244,7 +260,7 @@ spring:
         - id: collectedDataNoAuth
           uri: http://host.docker.internal:8087
           predicates:
-            - Path=/api/collectedData/sanityCheck,/api/collectedData/users,/api/collectedData/musics,/api/collectedData/files,/api/collectedData/playLists,/api/collectedData/playListMusics,/api/collectedData/comments
+            - Path=/api/collectedData/sanityCheck,/api/collectedData/sanityCheck/logs,/api/collectedData/users,/api/collectedData/musics,/api/collectedData/files,/api/collectedData/playLists,/api/collectedData/playListMusics,/api/collectedData/comments
             - Method=GET
           filters:
             - RewritePath=/api/collectedData/(?<segment>.*), /${segment}
@@ -300,7 +316,7 @@ spring:
         - id: musicNoAuth
           uri: http://music:8080
           predicates:
-            - Path=/api/music/sanityCheck
+            - Path=/api/music/sanityCheck,/api/music/sanityCheck/logs
             - Method=GET
           filters:
             - RewritePath=/api/music/(?<segment>.*), /${segment}
@@ -314,6 +330,14 @@ spring:
             - AuthorizationHeaderFilter
 
 
+        - id: fileSanityCheck
+          uri: http://file:8080
+          predicates:
+            - Path=/api/file/sanityCheck,/api/file/sanityCheck/logs
+            - Method=GET
+          filters:
+            - RewritePath=/api/file/(?<segment>.*), /${segment}
+
         - id: fileResource
           uri: http://file:8080
           predicates:
@@ -325,7 +349,7 @@ spring:
         - id: playListNoAuth
           uri: http://play-list:8080
           predicates:
-            - Path=/api/playList/sanityCheck
+            - Path=/api/playList/sanityCheck,/api/playList/sanityCheck/logs
             - Method=GET
           filters:
             - RewritePath=/api/playList/(?<segment>.*), /${segment}
@@ -342,7 +366,7 @@ spring:
         - id: commentNoAuth
           uri: http://comment:8080
           predicates:
-            - Path=/api/comment/sanityCheck
+            - Path=/api/comment/sanityCheck,/api/comment/sanityCheck/logs
             - Method=GET
           filters:
             - RewritePath=/api/comment/(?<segment>.*), /${segment}
@@ -359,7 +383,7 @@ spring:
         - id: collectedDataNoAuth
           uri: http://collected-data:8080
           predicates:
-            - Path=/api/collectedData/sanityCheck,/api/collectedData/users,/api/collectedData/musics,/api/collectedData/files,/api/collectedData/playLists,/api/collectedData/playListMusics,/api/collectedData/comments
+            - Path=/api/collectedData/sanityCheck,/api/collectedData/sanityCheck/logs,/api/collectedData/users,/api/collectedData/musics,/api/collectedData/files,/api/collectedData/playLists,/api/collectedData/playListMusics,/api/collectedData/comments
             - Method=GET
           filters:
             - RewritePath=/api/collectedData/(?<segment>.*), /${segment}

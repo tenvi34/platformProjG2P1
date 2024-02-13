@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import lombok.RequiredArgsConstructor;
 
 import musicStreaming._global.event.MusicFileDeleted;
+import musicStreaming._global.event.MusicFileUpdateFailed;
 import musicStreaming._global.event.MusicFileUpdated;
 import musicStreaming._global.event.MusicFileUploadFailed;
 import musicStreaming._global.event.MusicFileUploaded;
@@ -19,6 +20,7 @@ import musicStreaming._global.logger.CustomLoggerType;
 
 import musicStreaming.sanityCheck.reqDtos.LogsReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileDeletedReqDto;
+import musicStreaming.sanityCheck.reqDtos.MockMusicFileUpdateFailedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUpdatedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadFailedReqDto;
 import musicStreaming.sanityCheck.reqDtos.MockMusicFileUploadedReqDto;
@@ -75,5 +77,10 @@ public class SanityCheckService {
     // Policy 테스트용으로 MusicFileUploadFailed 이벤트를 강제로 발생시키기 위해서
     public void mockMusicFileDeleted(MockMusicFileDeletedReqDto mockData) {
         (new MusicFileDeleted(mockData)).publish();
+    }
+
+    // Policy 테스트용으로 MusicFileUpdateFailed 이벤트를 강제로 발생시키기 위해서
+    public void mockMusicFileUpdateFailed(MockMusicFileUpdateFailedReqDto mockData) {
+        (new MusicFileUpdateFailed(mockData)).publish();
     }
 }
